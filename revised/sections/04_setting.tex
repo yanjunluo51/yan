@@ -1,6 +1,6 @@
 \section{Decision setting and model inputs}
 
-The member-threshold vector answering these gaps is built from the gate decision and its inputs. These inputs are of two kinds: inputs shared by all members and one recorded weight per member. Each reported threshold combines the shared model inputs with the weight of one member.
+The member-threshold vector addressing the first two gaps is built from the gate decision and its inputs. These inputs are of two kinds: inputs shared by all members and one recorded weight per member. Each reported threshold combines the shared model inputs with the weight of one member.
 
 \subsection{The gate-level decision problem}
 
@@ -25,7 +25,7 @@ Figure~\ref{fig:architecture} organizes these inputs and outputs into an input l
 \node[dbox] (corpus) at (0,0) {Policy-Document\\Corpus};
 \node[dbox] (enc) at (3.0,0) {Text Encoder};
 \node[dbox] (emb) at (6.0,0) {Embedding\\Dispersion};
-\node[dbox, text width=3.3cm, minimum height=1.25cm] (psdi) at (9.3,0) {Policy-Semantic-Dispersion\\Index $\PSDI_t$\\Rolling Variability\\Signal $w_t=\mathrm{std}_4(\PSDI_{t:t-3})$};
+\node[dbox, text width=3.05cm, minimum height=1.25cm] (psdi) at (9.3,0) {Policy-Semantic-Dispersion\\Index $\PSDI_t$\\Rolling Variability\\Signal $w_t=\mathrm{std}_4(\PSDI_{t:t-3})$};
 \node[box, fill=blue!8] (radius) at (12.7,0) {Capped Ambiguity\\Radius $h_t$};
 \node[box, fill=blue!8] (price) at (15.8,0) {Prevailing\\Price $P_t$};
 \draw[darr] (corpus) -- (enc);
@@ -80,4 +80,4 @@ The ambiguity radius enters the model as a single number per gate. The forward-v
 \end{equation}
 where $\sigma_p$ denotes forward volatility. A committee may declare the gate radius $h_t$ directly or derive it from an auxiliary series, as in the application. Radii quoted as percentages are relative radii $h_t/\sbar$. The primary radius range covers relative radii up to 22\%, and the extended range adds a 33\% stress radius. Every numerical result is evaluated on a finite grid, and its scope is stated with the result.
 
-With these definitions, all members share the calibration, the project inputs, the ambiguity set, and the prevailing price, and each member carries one recorded weight. The remaining task is analytical: mapping each weight to a trigger, converting the triggers into price thresholds, and stating when the report may be released.
+These definitions complete the inputs of the gate. The remaining task is analytical: mapping each weight to a trigger, converting the triggers into price thresholds, and stating when the report may be released.
