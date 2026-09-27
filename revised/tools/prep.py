@@ -120,8 +120,8 @@ def algo(m):
     def cm(t):
         return re.sub(r'\\Comment\{(.*)\}$',r' $\\triangleright$ \\textit{\1}',t)
     for l in lines:
-        if l.startswith('\\Require'): out.append('\\noindent\\textbf{Require:} '+cm(l[8:].strip())+'\n'); continue
-        if l.startswith('\\Ensure'): out.append('\\noindent\\textbf{Ensure:} '+cm(l[7:].strip())+'\n'); continue
+        if l.startswith('\\Require'): out.append('\\noindent\\textbf{Input} '+cm(l[8:].strip())+'\n'); continue
+        if l.startswith('\\Ensure'): out.append('\\noindent\\textbf{Output} '+cm(l[7:].strip())+'\n'); continue
         kw=None
         mm=re.match(r'\\(State|If|Else|EndIf|Return)\b(.*)',l)
         if not mm: continue
@@ -138,7 +138,7 @@ def algo(m):
             txt='\\textbf{if} '+cond.group(1)+' \\textbf{then}'+cm(cond.group(2))
         elif typ=='Else': txt='\\textbf{else}'
         elif typ=='EndIf': txt='\\textbf{end if}'
-        out.append(f'\\noindent {n}: {ind}{txt}\n')
+        out.append(f'{n}. {ind}{txt}\n')
         if typ in('If','Else'): depth+=1
     return '\n'.join(out)
 s=re.sub(r'\\begin\{algorithm\*\}(?:\[[^\]]*\])?(.*?)\\end\{algorithm\*\}',algo,s,flags=re.S)
@@ -176,7 +176,7 @@ s=s.replace('\\\\[2pt]','\\\\')
 s=re.sub(r'\\paragraph\{([^}]*)\}',r'\\textit{\1.}',s)
 # frontmatter
 s=re.sub(r'\\begin\{frontmatter\}','',s); s=re.sub(r'\\end\{frontmatter\}','',s)
-s=re.sub(r'\\begin\{keyword\}(.*?)\\end\{keyword\}',lambda m:'\\noindent\\textit{Keywords:} '+m.group(1).replace('\\sep',';').strip()+'\n',s,flags=re.S)
+s=re.sub(r'\\begin\{keyword\}(.*?)\\end\{keyword\}',lambda m:'\\noindent\\textit{Keywords.} '+m.group(1).replace(' \\sep',',').strip()+'\n',s,flags=re.S)
 s=s.replace('\\linenumbers','')
 s=re.sub(r'\\journal\{[^}]*\}','',s)
 # preamble: replace with simple

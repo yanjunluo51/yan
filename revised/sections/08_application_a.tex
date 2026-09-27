@@ -1,6 +1,6 @@
 \section{Illustrative numerical application to a 600-MW CCUS retrofit}
 
-The model results hold under stated inputs, and their practical relevance depends on the project. A 600-MW coal-fired CCUS retrofit provides a concrete case. The application uses four inputs. The first is the economic calibration with the project inputs. The second is an ambiguity radius from a date-reconstructed policy-text signal. The third and fourth are a four-member reference profile of recorded weights and the archived price series. The construction returns member thresholds and quarterly contested-price intervals for a 600-MW coal-fired CCUS retrofit. Daily China Emission Allowance (CEA) prices are compared with the corresponding quarterly intervals, and each archived price is classified retrospectively. The anchor, corpus, and encoder are fixed ex post. For example, the volatility anchor estimated on 2024 and 2025 data applies to the entire historical signal path. Sensitivity checks examine alternative profiles, inputs, anchors, and scaling constants.
+A 600-MW coal-fired CCUS retrofit supplies such project inputs. The application uses four inputs. The first is the economic calibration with the project inputs. The second is an ambiguity radius from a date-reconstructed policy-text signal. The third and fourth are a four-member reference profile of recorded weights and the archived price series. The construction returns member thresholds and quarterly contested-price intervals. Daily China Emission Allowance (CEA) prices are compared with the corresponding quarterly intervals, and each archived price is classified retrospectively. The anchor, corpus, and encoder are fixed ex post. For example, the volatility anchor estimated on 2024 and 2025 data applies to the entire historical signal path. Sensitivity checks varied the profiles, inputs, anchors, and scaling constants.
 
 \subsection{Numerical setting and policy-text signal}
 
@@ -10,7 +10,7 @@ The corpus comprises 682 central-government energy and climate policy records. T
 
 The retrieval targeted the years 2016 to 2025. A thematic screen retained records classified under energy, climate, carbon markets, or emissions trading, based on source tags and a title keyword filter. A document-type screen kept substantive plans, notices, guidance, and formal responses. It excluded press releases, routine administrative notices without policy content, and non-Chinese texts.
 
-The dispersion signal is quarterly, so incorrect document dates distort its path. Dates in the database may differ from official issuance dates. An audit therefore matched each record to an official agency page where possible. It resolved such a page for 414 of the 682 records. Two date assignments were compared. The reference assignment uses the date printed in each archived record and is reproducible from the archive alone. The page-date assignment uses a verified agency page date where available and the printed date otherwise. The two assignments produce different paths for the quarterly signal and the interval width. Four records bear 2015 printed dates and fall outside the window, so they are excluded. Four other records carry month-only dates. A month identifies the quarter, and these four records lie inside the window and are retained.
+The dispersion signal is quarterly, so incorrect document dates distort its path. Dates in the database may differ from official issuance dates. An audit therefore matched each record to an official agency page where possible. It resolved such a page for 414 of the 682 records. Two date assignments were compared. The reference assignment uses the date printed in each archived record and is reproducible from the archive alone. The page-date assignment uses a verified agency page date where available and the printed date otherwise. The two assignments produced different paths for the quarterly signal and the interval width. Four records bear 2015 printed dates and fall outside the window, so they are excluded. Four other records carry month-only dates. A month identifies the quarter, and these four records lie inside the window and are retained.
 
 Each document is represented by precomputed layer-14 embeddings from the Qwen3-0.6B model \citep{Yang2025}. The embeddings are pooled across subword tokens with term frequency-inverse document frequency (TF-IDF) weights and normalized to unit length. This primary representation, Qwen3-L14, was fixed before the signal was compared with realized volatility. The policy-semantic-dispersion index is
 \begin{equation}
@@ -19,22 +19,22 @@ Each document is represented by precomputed layer-14 embeddings from the Qwen3-0
 \end{equation}
 where $\bar{c}_t$ is the centroid of all normalized document vectors in period $t$. A larger $\PSDI_t$ indicates greater dispersion around the period centroid. The signal tracks temporal variation in dispersion through the rolling four-quarter standard deviation
 \begin{equation}
-w_t=\mathrm{std}_4(\PSDI_t,\PSDI_{t-1},\PSDI_{t-2},\PSDI_{t-3}),
+w_t=\mathrm{std}_4(\PSDI_t,\PSDI_{t-1},\PSDI_{t-2},\PSDI_{t-3}).
 \label{eq:wt}
 \end{equation}
-where $\mathrm{std}_4$ is the population standard deviation, with divisor four, over the current and previous three quarters. Figure~\ref{fig:architecture} writes this window as $\PSDI_{t:t-3}$.
+Here $\mathrm{std}_4$ is the population standard deviation, with divisor four, over the current and previous three quarters. Figure~\ref{fig:architecture} writes this window as $\PSDI_{t:t-3}$.
 
 Six alternative dispersion statistics on the same vectors moved the peak quarter in two cases. None of them changed the gate outcome. One corpus-composition check moved both the peak quarter and the peak width. Excluding documents longer than 2,000 characters before truncation retained 384 of the 678 records. The peak quarter shifted from 2024Q4 to 2023Q1, and the peak interval width rose from 6.63 to 8.59\,CNY/t. The Spearman rank correlation between this length-filtered path and the reference path was 0.61. One of two replacement encoders also moved the peak. MacBERT-base placed the peak in 2019Q2 at a width of 5.42\,CNY/t. Its quarterly signal had a Spearman rank correlation of 0.305 with the reference.
 
 \subsubsection{Screening procedure and input diagnostics}
 
-Algorithm~\ref{alg:gate} summarizes the gate update from the registered radius source through the release rule to the reported object. Its cost depends on the radius source. With a declared radius, the affine branch is $O(m)$ in the panel size $m$. With the text-derived radius, it is $O(\lvert D_t\rvert+m)$ once the embeddings exist, where $\lvert D_t\rvert$ is the number of documents in period $t$. This count assumes a fixed embedding dimension and a four-quarter history. Token-level encoding is an upstream step outside this count. The fallback adds one benchmark optimization per member. At committee scale, this cost is negligible. One release envelope on the 2,001-point weight grid took about 0.2 seconds per calibration-radius cell. This wall-clock figure varies with machine load.
+Algorithm~\ref{alg:gate} summarizes the gate update from the registered radius source through the release rule to the reported object. Its cost depends on the radius source. With a declared radius, the affine branch is $O(m)$ in the panel size $m$. With the text-derived radius, it is $O(\lvert D_t\rvert+m)$ once the embeddings exist, where $\lvert D_t\rvert$ is the number of documents in period $t$. This count assumes a fixed embedding dimension and a four-quarter history. The fallback adds one benchmark optimization per member. One release envelope on the 2,001-point weight grid took about 0.2 seconds per calibration-radius cell. This wall-clock figure varies with machine load.
 
-The proportional map $h_t=c_w w_t$ requires a nonnegative signal, since $h_t$ is a radius. The rolling standard deviation is nonnegative by construction. The reference configuration sets the scaling constant $c_w$ to one. The ambiguity radius then equals the signal before the admissibility cap. This setting is a convention, and the record supplied no estimate to replace it. Before the national emissions trading scheme (ETS), the lagged signal showed a positive but imprecise association with realized volatility. During the national ETS period, the estimated slope changed sign. Over the 18 quarters of this period, the slope was $-18.07$, with a 95\% confidence interval of $[-34.57,-1.57]$. The interval for the shorter estimation window spanned zero. Neither subsample identified a stable value for $c_w$. Five further diagnostics covered directional association, temporal-order permutation, construct validity, an event-style check, and national ETS stability. None of them supported a stable mapping, and none enters the threshold calculations. The series therefore serves as a scenario input configuring the radius. With 18 quarterly observations in the national ETS window and 17 before it, any association is estimated imprecisely.
+The proportional map $h_t=c_w w_t$ requires a nonnegative signal, since $h_t$ is a radius. The rolling standard deviation is nonnegative by construction. The reference configuration sets the scaling constant $c_w$ to one. The ambiguity radius then equals the signal before the admissibility cap. Before the national emissions trading scheme (ETS), the lagged signal showed a positive but imprecise association with realized volatility. During the national ETS period, the estimated slope changed sign. Over the 18 quarters of this period, the slope was $-18.07$, with a 95\% confidence interval of $[-34.57,-1.57]$. The interval for the shorter estimation window spanned zero. Neither subsample identified a stable value for $c_w$. Five further diagnostics covered directional association, temporal-order permutation, construct validity, an event-style check, and national ETS stability. None of them supported a stable mapping. The series therefore serves as a scenario input configuring the radius. With 18 quarterly observations in the national ETS window and 17 before it, any association was estimated imprecisely.
 
-The signal was also compared with an established policy-uncertainty measure, the log China Economic Policy Uncertainty (EPU) index of \citet{Baker2016}. Over 2017 to 2024, the Pearson correlation was 0.265 ($n=32$), with a four-lag heteroskedasticity and autocorrelation consistent (HAC) $p$-value of 0.036. Over the 14 national ETS quarters covered by the EPU sample, it was 0.264. Slope estimates distinguishable from zero still left the scale open. Propagating the pre-ETS slope to the thresholds gave a width envelope of up to 19.2\,CNY/t. This value is about 2.9 times the configured peak width of 6.63\,CNY/t. The pre-ETS slope and the national ETS slope differed by 61.08, with a standard error of 30.94. The 95\% interval for this difference, based on the $t$ distribution with 23 Welch degrees of freedom, contained zero. The data therefore did not fix even the direction of a rescaling. A mapping re-estimated on the national ETS window explained none of the out-of-sample variation in 2024 and 2025.
+The signal was also compared with an established policy-uncertainty measure, the log China Economic Policy Uncertainty (EPU) index of \citet{Baker2016}. Over 2017 to 2024, the Pearson correlation was 0.265 ($n=32$), with a four-lag heteroskedasticity and autocorrelation consistent (HAC) $p$-value of 0.036. Over the 14 national ETS quarters covered by the EPU sample, it was 0.264. Slope estimates distinguishable from zero still left the scale open. Propagating the pre-ETS slope to the thresholds gave a width envelope of up to 19.2\,CNY/t. This value was about 2.9 times the configured peak width of 6.63\,CNY/t. The pre-ETS slope and the national ETS slope differed by 61.08, with a standard error of 30.94. The 95\% interval for this difference, based on the $t$ distribution with 23 Welch degrees of freedom, contained zero. The data therefore did not fix even the direction of a rescaling. A mapping re-estimated on the national ETS window explained none of the out-of-sample variation in 2024 and 2025.
 
-Three properties suit this series to its illustrative role. First, an institution can archive and re-encode the documents. With the corpus, encoding pipeline, and scaling convention recorded, a past radius can be recomputed without re-eliciting any judgment. Second, the documents come from the same regulatory process whose ambiguity the gate considers. Third, the series satisfies the nonnegativity required by the proportional map. The signal is the most readily replaceable part of the application.
+Two properties suit this series to its illustrative role. First, an institution can archive and re-encode the documents. With the corpus, encoding pipeline, and scaling convention recorded, a past radius can be recomputed without re-eliciting any judgment. Second, the documents come from the same regulatory process whose ambiguity the gate considers.
 
 Two calibration routes could replace the convention with an estimate. A forward-looking route would set the endpoints from option-implied volatility bounds. This route requires a traded allowance option, and the national market had none over the sample period. A survey route would use the forecast dispersion elicited from allowance-price forecasters with a documented track record. Each source would need its own validation and an explicit mapping to the declared radius. Combining the two would need an aggregation rule for their overlapping information.
 
@@ -48,29 +48,31 @@ For prospective use, an institution should set a calibration cutoff and use only
 \Require One registered radius source, either a declared radius $h_t$ (or $\rho_t$) or the application-specific text construction with its registered pipeline identifiers
 \Require Dated deployment record for $\sbar$, $c_w$, $\epsilon$, the registered price-recording buffer $b$, and registry-versioning requirements
 \Require Recorded weights $\{\alpha_i\}_{i=1}^{m}\in[0,1]^{m}$ passing the prespecified input-acceptance checks \Comment{reporting inputs}
-\Require $r>\mu_c>0$, $I,Q>0$, prevailing price $P_t$, benchmark reference $V_0$ inside the benchmark domain, and a versioned finite registry snapshot $\mathcal{R}^{(\nu)}$ with frozen canonical serialized configuration identifiers
+\Require $r>\mu_c>0$, $I,Q>0$, prevailing price $P_t$, and benchmark reference $V_0$ inside the benchmark domain
+\Require Versioned finite registry snapshot $\mathcal{R}^{(\nu)}$ with frozen canonical serialized configuration identifiers
 \Require Direct-benchmark request flag $b_{\mathrm{direct}}\in\{0,1\}$
-\Ensure Affine member table, $\tilde{\alpha}$, $C_t$, $B_t$, released classification, registry and audit identifiers, flags, reporting mode, and the benchmark table on fallback or direct request
-\State initialize $\eR$, $\ER$, both proximity flags, and both certification flags to \emph{not evaluated}; each is populated only when its registry lookup or benchmark check runs
+\Ensure Affine member table, $\tilde{\alpha}$, $C_t$, $B_t$, released classification, audit record, and reporting mode
+\Ensure Benchmark table on fallback or direct request
+\State initialize $\eR$, $\ER$, both proximity flags, and both certification flags to \emph{not evaluated} \Comment{filled when the lookup or check runs}
 \If{the deployment record, economic, or recorded-weight checks fail}
   \State \Return input review required; issue no threshold report
 \EndIf
 \If{the registered radius source is a declared radius}
-  \State read the registered $h_t$ or $\rho_t$ \Comment{the generic method requires only this}
+  \State read the registered $h_t$ or $\rho_t$
 \Else
   \State obtain $h_t$ by the application-specific text construction; Eqs.~(\ref{eq:psdi}) and (\ref{eq:wt}) give $\PSDI_t$ and $w_t$, and the admissibility cap gives $h_t$ \Comment{application-specific step}
 \EndIf
-\State \textbf{Analytical layer:} $\rho_t\gets h_t/\sbar$; $(\sigma_{-},\sigma_0,\sigma_{+})\gets(\sbar-h_t,\sbar,\sbar+h_t)$
+\State \textbf{Analytical layer.} $\rho_t\gets h_t/\sbar$; $(\sigma_{-},\sigma_0,\sigma_{+})\gets(\sbar-h_t,\sbar,\sbar+h_t)$
 \State solve Eq.~(\ref{eq:char}) at $(\sigma_{-},\sigma_0,\sigma_{+})$ and compute $(\Vlow,\Vzero,\Vhigh)$
 \If{$V_0\ge\Vlow$}
   \State \Return input review required; issue no threshold report \Comment{benchmark-domain check}
 \EndIf
 \State $V^{*}_{i}\gets\alpha_i\Vlow+(1-\alpha_i)\Vhigh$ for all $i$
 \State $\tilde{\alpha}\gets1/2$ if $h_t=0$; otherwise $\tilde{\alpha}\gets(\Vhigh-\Vzero)/(\Vhigh-\Vlow)$
-\State \textbf{Interface layer:} $P^{*}_{0}\gets\Vzero(r-\mu_c)/Q$; $P^{*}_{i}\gets V^{*}_{i}(r-\mu_c)/Q$ for all $i$; $C_t\gets[\min_iP^{*}_{i},\max_iP^{*}_{i})$; $B_t\gets\max_iP^{*}_{i}-\min_iP^{*}_{i}$
+\State \textbf{Interface layer.} $P^{*}_{0}\gets\Vzero(r-\mu_c)/Q$; $P^{*}_{i}\gets V^{*}_{i}(r-\mu_c)/Q$ for all $i$; $C_t\gets[\min_iP^{*}_{i},\max_iP^{*}_{i})$; $B_t\gets\max_iP^{*}_{i}-\min_iP^{*}_{i}$
 \State affine summary $\gets\textsc{classify}(P_t,\{P^{*}_{i}\})$ \Comment{three-state gate summary}
 \State $\dedge\gets\min\{\lvert P_t-\min_iP^{*}_{i}\rvert,\lvert P_t-\max_iP^{*}_{i}\rvert\}$; $\dmember\gets\min_i\lvert P_t-P^{*}_{i}\rvert$
-\State buffer-flag $\gets[\min\{\dedge,\dmember\}<b]$ \Comment{price-input diagnostic, reported beside the classification and never a release condition}
+\State buffer-flag $\gets[\min\{\dedge,\dmember\}<b]$ \Comment{price-input diagnostic reported beside the classification}
 \State $(k_{\theta},k_{\rho},k_{V})\gets\textsc{canonical\_ids}(r,\mu_c,\sbar,\rho_t,V_0/I)$
 \State registered $\gets\textsc{registry\_lookup}(k_{\theta},k_{\rho},k_{V};\mathcal{R}^{(\nu)})$ \Comment{exact values; no rounded match or interpolation}
 \If{registered}
@@ -101,6 +103,7 @@ For prospective use, an institution should set a calibration cutoff and use only
 \Else
   \State released classification $\gets$ affine summary; mode $\gets$ affine-only report
 \EndIf
-\State \Return affine member table, $C_t$, $B_t$, $\tilde{\alpha}$, released classification, $(\nu,k_{\theta},k_{\rho},k_{V})$, the audit fields $I/Q$, $P^{*}_{0}$, $\eR$, and $\ER$, the radius source, the two certification flags, the mode, and the benchmark table on fallback or direct request
+\State record the audit fields $I/Q$, $P^{*}_{0}$, $\eR$, and $\ER$, the radius source, the two certification flags, and the mode
+\State \Return affine member table, $C_t$, $B_t$, $\tilde{\alpha}$, released classification, $(\nu,k_{\theta},k_{\rho},k_{V})$, the audit record, and the benchmark table on fallback or direct request
 \end{algorithmic}
 \end{algorithm*}

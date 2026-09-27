@@ -1,6 +1,6 @@
 \section{Decision setting and model inputs}
 
-The literature review identified a missing reporting object, a vector of member thresholds computed before any vote. Defining this object requires a precise gate decision. It also requires a clear split between the inputs members share and the single input varying across members.
+The gate decision and its inputs come first, because every reported threshold depends on them. Some inputs are shared by all members, and one input varies across members.
 
 \subsection{The gate-level decision problem}
 
@@ -32,7 +32,7 @@ Figure~\ref{fig:architecture} organizes these inputs and outputs into three laye
 \draw[darr] (enc) -- (emb);
 \draw[darr] (emb) -- (psdi);
 \draw[darr] (psdi) -- (radius);
-\node[font=\scriptsize\itshape, anchor=south] (optlab) at (4.6,0.8) {Optional application-specific preprocessing; the method requires only $h_t$};
+\node[font=\scriptsize\itshape, anchor=south] (optlab) at (4.6,0.8) {Optional application-specific preprocessing};
 % Analytical layer
 \node[box, fill=orange!10, text width=3.4cm] (weight) at (1.2,-2.5) {Recorded Weight on the\\Adverse Endpoint\\\mbox{$\alpha\in[0,1]$}};
 \node[box, fill=orange!10] (affine) at (5.0,-2.5) {Affine Member\\Triggers $V^{*}(\alpha,t)$};
@@ -63,21 +63,21 @@ Figure~\ref{fig:architecture} organizes these inputs and outputs into three laye
 \node[anchor=east, font=\small\itshape] at ($(L2.west)+(-0.1,0)$) {Analytical};
 \node[anchor=east, font=\small\itshape] at ($(L3.west)+(-0.1,0)$) {Interface};
 \end{tikzpicture}}
-\caption{Architecture of the screening method in three layers. The input layer supplies the capped ambiguity radius $h_t$ and the prevailing price $P_t$. Only $h_t$ enters the member thresholds and the interval, and $P_t$ enters at the classification step. The dashed block shows the derivation of $h_t$ in the application, from a policy-text corpus through the dispersion index $\PSDI_t$ and the rolling variability signal $w_t$. A committee declaring its radius directly omits this block. The analytical layer maps each recorded weight on the adverse endpoint to a member trigger and locates the curvature-based critical weight. The interface layer converts the triggers into trigger-to-cost ratios and marginal carbon-price thresholds. It reports the contested-price interval, its width $B_t$, the classification, and the release or fallback status.}
+\caption{Architecture of the screening method in three layers. The input layer supplies the capped ambiguity radius $h_t$ and the prevailing price $P_t$. Only $h_t$ enters the member thresholds and the interval, and $P_t$ enters at the classification step. The dashed block shows the derivation of $h_t$ in the application. It runs from a policy-text corpus through the dispersion index $\PSDI_t$ and the rolling variability signal $w_t$. A committee declaring its radius directly omits this block. The analytical layer maps each recorded weight on the adverse endpoint to a member trigger and locates the curvature-based critical weight. The interface layer converts the triggers into trigger-to-cost ratios and marginal carbon-price thresholds. It reports the contested-price interval, its width $B_t$, the classification, and the release or fallback status.}
 \label{fig:architecture}
 \end{figure*}
 
 \subsection{Model inputs and assumptions}
 
-The analysis rests on three maintained model assumptions, one reporting convention, and one application-side input. The three model assumptions are as follows. (i) Forward volatility carries the ambiguity, and drift is held fixed. (ii) Standard deviation parameterizes the ambiguity set. (iii) The carbon-price process follows a GBM with $r>\mu_c>0$. The reporting convention is the affine endpoint rule, which defines the member triggers. The application-side input is the ambiguity radius. The model takes this radius as given, and its construction depends on the deployment setting. The common information set and the recorded weights remain fixed within a gate, and each member is classified separately. The weights are reporting inputs registered in advance.
+The analysis rests on three maintained model assumptions, one reporting convention, and one application-side input. The three model assumptions are as follows. (i) Forward volatility carries the ambiguity, and drift is held fixed. (ii) Standard deviation parameterizes the ambiguity set. (iii) The carbon-price process follows a GBM with $r>\mu_c>0$. The reporting convention is the affine endpoint rule, which defines the member triggers. The application-side input is the ambiguity radius. The common information set and the recorded weights remain fixed within a gate, and each member is classified separately. The weights are reporting inputs registered in advance.
 
-The volatility channel carries ambiguity as a maintained modeling assumption. Ambiguity concerns the width of the forward distribution and leaves its mean unaffected. The policy-text signal of the application fits this reading. It records variation in semantic dispersion and carries no directional information about the course of policy. The signal therefore configures the ambiguity radius, and the growth scenario $\mu_c$ stays fixed. The available record left the scale of this mapping unsettled, so the signal-to-radius map is treated as a convention. Forward volatility enters as a single parameter. The choice of standard deviation over variance fixes the coordinate for evaluating trigger curvature. This choice therefore also fixes the sign of the critical-weight displacement.
+The volatility channel carries ambiguity as a maintained modeling assumption. Ambiguity concerns the width of the forward distribution and leaves its mean unaffected. The policy-text signal of the application fits this reading. It records variation in semantic dispersion and carries no directional information about the course of policy. The signal therefore configures the ambiguity radius, and the growth scenario $\mu_c$ stays fixed. The available record left the scale of this mapping unsettled, so the signal-to-radius map is treated as a convention. Forward volatility enters as a single parameter. Declaring the ambiguity set in standard-deviation units fixes the coordinate for evaluating trigger curvature. This declaration therefore also fixes the sign of the critical-weight displacement.
 
 The application-side input enters the model as a single number. The forward-volatility anchor $\sbar$ and an admissibility margin $\epsilon\in(0,1)$ fix its admissible range. The anchor stays fixed across review gates within an application. The radius of each gate is capped at $(1-\epsilon)\sbar$, which keeps the lower volatility endpoint strictly positive. The ambiguity set is
 \begin{equation}
 \sigma_p\in\Sigma_t=[\sbar-h_t,\;\sbar+h_t],
 \label{eq:ambset}
 \end{equation}
-where $\sigma_p$ denotes forward volatility and $h_t$ denotes the ambiguity radius. Radii quoted as percentages are relative radii $h_t/\sbar$. Every numerical result is evaluated on a finite grid, and its scope is stated with the result. The primary radius range covers relative radii up to 22\%. The extended range adds a 33\% stress radius. The method requires only a registered radius $h_t$ satisfying the cap. A committee may declare this radius directly or derive it from an auxiliary series, as in the application.
+where $\sigma_p$ denotes forward volatility and $h_t$ denotes the ambiguity radius. Radii quoted as percentages are relative radii $h_t/\sbar$. Every numerical result is evaluated on a finite grid, and its scope is stated with the result. The primary radius range covers relative radii up to 22\%. The extended range adds a 33\% stress radius. A committee may declare this radius directly or derive it from an auxiliary series, as in the application.
 
-These definitions fix the setting of the report. The committee shares the calibration, the project inputs, the ambiguity set, and the prevailing price. Members differ only in one recorded weight. Every member-level difference in the report therefore traces back to this weight. The remaining task is analytical. It maps each weight to a trigger, converts the triggers into prices, and states when the resulting report may be released.
+These definitions fix the setting of the report. The committee shares the calibration, the project inputs, the ambiguity set, and the prevailing price. Members differ only in one recorded weight. The remaining task is analytical. It maps each weight to a trigger, converts the triggers into prices, and states when the resulting report may be released.
