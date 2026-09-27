@@ -1,0 +1,86 @@
+\subsection{Further robustness and implementation requirements}
+
+The economic-parameter perturbations also moved the critical weight. Table~\ref{tab:critsens} summarizes them with the historical volatility anchors. Across all positive-radius cases, the critical weight stayed above one half, and its value moved with the volatility anchor and the economic primitives. The member-threshold ordering stayed unchanged throughout.
+
+\begin{table}[!t]
+\caption{Sensitivity of the critical weight within the volatility-channel model.}
+\label{tab:critsens}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\multicolumn{5}{@{}l}{\emph{Panel A. Economic-parameter sensitivity at a 10\% relative radius}}\\
+Perturbation & \multicolumn{4}{r}{$\tilde{\alpha}$ at 10\%}\\
+\midrule
+Baseline analytical calibration & \multicolumn{4}{r}{0.517}\\
+$r=0.06$ ($-25\%$) & \multicolumn{4}{r}{0.520}\\
+$r=0.12$ ($+50\%$) & \multicolumn{4}{r}{0.514}\\
+$\mu_c=0.06$ ($+50\%$) & \multicolumn{4}{r}{0.521}\\
+$\sbar=0.199$ ($-20\%$) & \multicolumn{4}{r}{0.517}\\
+$\sbar=0.299$ ($+20\%$) & \multicolumn{4}{r}{0.518}\\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Panel B. Historical-anchor sensitivity across three relative radii}}\\
+Historical anchor regime & Anchor estimate & 10\% & 22\% & 33\%\\
+\midrule
+\makecell[l]{Shanghai Emission Allowance\\(SHEA) pilot, 2016 to 2021Q1} & $\sbar=0.953$ & 0.524 & 0.553 & 0.580\\
+Early CEA, 2021Q3 to 2023Q4 & $\sbar=0.299$ & 0.518 & 0.540 & 0.560\\
+\makecell[l]{Current CEA, 2024 to 2025\\(baseline)} & $\sbar=0.249$ & 0.517 & 0.538 & 0.557\\
+\makecell[l]{Pooled national,\\2021Q3 to 2025Q4} & $\sbar=0.278$ & 0.518 & 0.539 & 0.558\\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\parbox{\columnwidth}{\scriptsize\emph{Notes.} The $\sbar=0.299$ perturbation of Panel A coincides numerically with the early CEA anchor regime of Panel B.}
+\end{table}
+
+\paragraph{Implementation safeguards} The reference weights are illustrative, and no committee pilot or repeated-response data were collected. The requirements below are proposals for prospective use. A prospective implementation should prespecify standardized administration and checks of attention and comprehension. It should also prespecify a test-retest assessment of rank-order reliability and an assessment of scale comparability across cycles. The choice of instrument is open. The Supplementary Material works through a matching-probability task in the style of \citet{Dimmock2016}. A discrete-choice format such as best-worst scaling could also serve, with its output mapped onto $[0,1]$ by a rule fixed in advance. The instrument version, acceptance rule, and recorded weights should be frozen before later gate outcomes are observed. Extreme weights setting interval edges should prompt a documented review before any exclusion. Two further choices belong to institutional policy. The first is reporting granularity. The edges, the width, and the three-state summary are symmetric functions of the member thresholds. They stay unchanged if the thresholds circulate as a sorted list without member labels. A sorted list, however, removes the member-level reading. An identified table makes the most divergent member visible in the minutes. The second choice is the elicitation schedule. The extreme recorded weights alone determine both edges. A member aware of this mapping could move the reported interval through the choice of weight. The method assumes weights recorded in advance. Collection before project materials circulate establishes a pre-disclosure reference. The elicitation should name the common information behind the weights. A project-specific adjustment would require a second elicitation under a documented information set.
+
+The model yields one acceptance threshold for elicitation precision. Under the classical error model, consider a member whose recorded weight lies a distance $d$ from the critical weight. This member receives the opposite directional label with probability $\Phi(-d/\sigma_{\alpha})$. Holding this probability at or below $p$ requires $\sigma_{\alpha}\le d/\Phi^{-1}(1-p)$. At the illustrative review band, this gives $\sigma_{\alpha}\le0.039$ for a 10\% flip probability and $\sigma_{\alpha}\le0.030$ for 5\%. These values serve as design targets for the ordinal use of the weights. Members closer than $d$ to the critical weight remain subject to the review band. No instrument precision can secure a stable label arbitrarily close to this weight.
+
+Table~\ref{tab:config} collects the configuration decisions a prospective gate must record, organized by the three layers of Figure~\ref{fig:architecture}. The text items of the input layer are needed only for a radius derived from documents. These items are the encoder, layer, pooling, normalization, truncation, corpus screen, and the constant $c_w$. A committee declaring its radii directly drops all of them. Its threshold report stays reproducible from the recorded radius. The judgment behind this radius, however, cannot be regenerated from a text pipeline. The registry snapshot authorizes affine-only release. An institution always issuing the dual report therefore needs no registry. It then loses the option to omit the benchmark and the record of the configuration authorizing a past release. It can still retain and replay the inputs and outputs of each gate.
+
+The irreducible configuration is shorter than the table. A prospective configuration fixes four items. These are the economic primitives, the volatility anchor, the declared coordinate, and the weight-recording protocol. Each gate then supplies its declared radius, the recorded member weights, and the prevailing price. Benchmark recomputation also requires the registered reference project value. The declared coordinate belongs to this core, because the directional labels are unreadable without it. Weights assigned to a hypothetical profile still yield a well-defined interval, which acts as a sensitivity band over a stipulated grid. An approximation-release registry becomes unnecessary only when both formulations are computed at every gate.
+
+\begin{table*}[!t]
+\caption{Configuration record required before a prospective gate, organized by the three layers of Figure~\ref{fig:architecture}.}
+\label{tab:config}
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}L{0.16\textwidth}L{0.3\textwidth}L{0.2\textwidth}L{0.26\textwidth}@{}}
+\toprule
+Configuration item & Registered before the gate & Opens a new dated cell & Left to the deploying institution\\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Input layer}}\\
+Volatility anchor $\sbar$ & Estimation window, market, and estimator & New window, market boundary, or estimator & An option-implied or otherwise forward-looking anchor\\
+Signal-to-radius constant $c_w$ & Target radius $h_{\mathrm{ref}}$, reference signal $w_{\mathrm{ref}}$, and $c_w=h_{\mathrm{ref}}/w_{\mathrm{ref}}$ & Any change to either input, or to the encoder & An empirical calibration, unidentified by the available price record\\
+Text pipeline & Encoder, layer, pooling, normalization, truncation, corpus screen & Any change to any of these items & Evidence of semantic dispersion predicting realized volatility\\
+Recorded weights $\{\alpha_i\}$ & Instrument version, mapping interval, review band, and an acceptance rule meeting the derived precision target, $\sigma_{\alpha}\le0.039$ at the illustrative review distance $d=0.05$ and tolerance $p=0.10$ & New instrument or mapping interval & Universal acceptance cutoffs and a committee pilot\\
+\multicolumn{4}{@{}l}{\emph{Analytical layer}}\\
+Economic primitives & $r$, $\mu_c$, $I$, $Q$, and the admissibility margin $\epsilon$ & Any change & Audited full-cost components for a viability appraisal\\
+Reference value $V_0/I$ & The value at which the benchmark is evaluated & Any change & Release authorization at $V_0/I\neq1$\\
+Declared coordinate & Standard deviation or variance, named explicitly & Any change & None\\
+\multicolumn{4}{@{}l}{\emph{Interface layer}}\\
+Registry snapshot & Version $\nu$, canonical serialized keys, envelope version, solver version & Any change to any identifier & A continuous-radius or global error certificate\\
+Release and reporting & Review cadence, dual-report format, directional-label conventions & Schedule or format change & A voting rule, a consensus procedure, or a full project appraisal\\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\parbox{0.97\textwidth}{\footnotesize\emph{Notes.} Every item is frozen before later gate outcomes are observed. Release matching uses the frozen serialized key from the registered pipeline and never a rounded display value. The fourth column lists the items a deploying institution supplies. In a prospective implementation, the registry should be append-only.}
+\end{table*}
+
+\subsection{Preconditions on the reported basis}
+
+Five preconditions govern whether the interval rests on a basis the gate accepts. They differ from the four registered conditions of Figure~\ref{fig:release}, which govern only the omission of the benchmark. Each precondition names an accounting choice, a model assumption, or an input-validity question. Each is documented before the report is interpreted.
+
+The first precondition is the cost basis. The reported threshold is marginal. A committee comparing it with a figure including operating costs first applies the common adjustment. Across the 18 national ETS gates with archived prices, no net cost changed the reported classification, because these prices already lay below the interval. A net subsidy changed it only at scale. One gate turned mixed at $\Delta=-10$\,CNY/t. At $\Delta=-50$\,CNY/t, ten of the 18 gates read unanimous invest, and eight remained unanimous wait. At $\Delta=-80$\,CNY/t, all 18 read invest. In this sweep, the classification changed only for adjustments of tens of CNY/t, a scale specific to the reference configuration. The reported thresholds also carry basis risk against the realized carbon cost of a plant. Two common components deserve mention. A per-tonne transport and storage charge is the additive adjustment $\Delta$. An energy penalty scales the captured volume by a common factor at fixed utilization, so it is a multiplicative adjustment.
+
+The second precondition is the horizon. Replacing the perpetuity with a finite-horizon annuity multiplies every member threshold, the interval width, and every price-unit envelope by one common factor. The member ordering, the directional labels, and the relative spread survive, while the classification of a given price may change. Solving the stopping problem on a finite horizon moved the critical weight by less than 0.03 at every examined radius. This bound held between a five-year horizon and the perpetuity. A gate reporting on an annuity basis rescales the envelope with the thresholds.
+
+The third precondition is the ambiguity channel. Adding drift ambiguity of the same relative size multiplied the interval width by 2.41. At a 10\% volatility radius, it also raised the maximum relative trigger error from 0.26\% to 1.48\% (\SM{S11}). This joint value exceeded the 1.26\% maximum of the volatility-only declaration at any radius up to 22\%. A gate under a joint declaration therefore re-evaluates accuracy before release.
+
+The fourth precondition is the price process. On the log of the 1,073 archived observations, an augmented Dickey-Fuller regression did not reject a unit root, with or without a trend. The Lo-MacKinlay variance ratio did not reject a random walk at two, five, ten, or twenty days. These tests agree with the persistence assumed by the geometric Brownian motion for the price level (\SM{S6.9.3}). The same returns rejected Gaussian increments, so the specification serves as a tractable reference. The implied mean-reversion speed was 0.818 per year, with an interval containing zero. The series therefore did not identify a speed. The point estimate still lay above the largest speed in the departure check. On this grid, a positive speed moved the anchor threshold from 116.88\,CNY/t to between 97.16 and 99.81\,CNY/t. The level shift alone exceeded the 7.73\,CNY/t reference margin. The figure of 116.88\,CNY/t is the anchor threshold recomputed on the same Crank-Nicolson grid. This comparison isolates mean reversion from the level bias of the solver. A gate expecting mean reversion should therefore recalibrate. Moving half the declared variance into jumps, at the same total, had a smaller effect. The anchor threshold moved from 116.88 to 115.41\,CNY/t, and the interval width moved by at most 1.04\%. The critical weight moved up. On the evaluated grids, the reported object moved under mean reversion and stayed nearly in place under the specified jumps.
+
+The fifth precondition is the radius input. The policy-text series is an application input. Its mapping to realized volatility was unstable in the available record. Its peak quarter and peak width moved under the corpus-composition and encoder-substitution checks. A registered constant sets the radius scale, and the reference result changes with this constant. A radius based on the sampling uncertainty of the volatility anchor was 6.37\%, close to the 6.057\% peak of the reference path. It left the archived price outside the interval. A radius based on the dispersion of quarterly realized volatility was about seven times wider and made the gate mixed. Every evaluated input alternative changing the classification lay outside the 10\% cap (\SM{S6.9.1}).
+
+A transfer to a new application takes six steps. Three steps rebuild the theory. The first defines a common ordered uncertainty set and the meaning of the recorded weight on its adverse endpoint. The second derives the stopping object and verifies the existence of a unique scalar boundary. The third identifies the adverse endpoint as the endpoint with the lower trigger. It then rederives trigger monotonicity, curvature, and the critical weight. Three further steps rebuild the reporting apparatus. The fourth maps the member objects to a common operational scale. The fifth reconstructs the finite benchmark comparison and the versioned release registry. The sixth validates the input, the elicitation, and the scale before deployment. The workflow carries over across applications, and the formulas and signs obtained here need rederivation or checking.

@@ -1,0 +1,61 @@
+% Material relocated from the main text under rule 12 (standard, non-original background).
+% This file does not modify the existing Supplementary Material. The section below can be
+% appended to it later as a new section (numbered S12 here as a suggestion).
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{natbib}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\sbar}{\bar{\sigma}_0}
+\newcommand{\slow}{\sigma_{\mathrm{low}}}
+\newcommand{\shigh}{\sigma_{\mathrm{high}}}
+\begin{document}
+
+\section*{S12. Background material relocated from the main text}
+
+The main text keeps only the results needed for its argument. This section collects standard background results used there. Equation numbers without the prefix S refer to the main text.
+
+\subsection*{S12.1. Admissibility of the condition $r>\mu_c>0$}
+
+Let $f(\beta)=\tfrac{1}{2}\sigma_p^{2}\beta(\beta-1)+\mu_c\beta-r$ denote the left side of Eq.~(3). The function $f$ is a convex quadratic with $f(0)=-r<0$. Its value at $\beta=1$ is $f(1)=\mu_c-r$. The positive root $\beta_1$ therefore exceeds one exactly when $r>\mu_c$, at every positive volatility. As $r$ falls toward $\mu_c$, the root approaches one from above, and the trigger $V^{*}=I\beta_1/(\beta_1-1)$ diverges. For $r<\mu_c$, the root satisfies $\beta_1<1$, and the expression turns negative. Waiting then dominates at every project value, and no finite threshold exists \citep{DixitPindyck1994}. In this regime, no member thresholds exist, and the reporting object of the paper is undefined. A committee facing such a calibration records the absence of a finite trigger under the stated process.
+
+\subsection*{S12.2. Discount factor of the first hitting time}
+
+Let $V$ follow a geometric Brownian motion with drift $\mu_c$ and volatility $\sigma$, starting at $V_0<V^{*}$. Let $\tau$ be the first hitting time of $V^{*}$. The expected discount factor is $\mathbb{E}_{\sigma}[e^{-r\tau}]=(V_0/V^{*})^{\beta_1(\sigma)}$, where $\beta_1(\sigma)$ is the positive root of Eq.~(3) \citep{DixitPindyck1994}. The payoff $V_{\tau}-I$ equals $V^{*}-I$ at the hitting time, which gives Eq.~(12). The factor $(V_0/V^{*})^{\beta_1}$ lies in $(0,1)$ and decreases in $\beta_1$. The root $\beta_1(\sigma)$ decreases in $\sigma$. The lower volatility endpoint $\slow$ therefore gives the smallest value of Eq.~(12) for a fixed trigger, and the upper endpoint $\shigh$ gives the largest.
+
+\subsection*{S12.3. Perpetuity mapping from triggers to prices}
+
+A perpetual cash flow $P\,Q\,e^{\mu_c t}$, discounted at rate $r>\mu_c$, has present value
+\begin{equation*}
+\int_{0}^{\infty}P\,Q\,e^{(\mu_c-r)t}\,dt=\frac{P\,Q}{r-\mu_c}=\frac{P\,Q}{\delta}.
+\end{equation*}
+Equating this value with a trigger $V^{*}$ gives $P^{*}=V^{*}\delta/Q$, the conversion in Eq.~(8). A finite payoff horizon $T$ replaces $1/\delta$ with the annuity factor $(1-e^{-\delta T})/\delta$. All member thresholds then scale by one common factor.
+
+\subsection*{S12.4. Annualization of the volatility anchor}
+
+The volatility anchor uses daily log returns. Under independent increments, the variance of the annual log return is the sum of the daily variances. The annualized standard deviation is therefore the daily standard deviation multiplied by $\sqrt{252}$, the conventional number of trading days per year. The daily estimate from the 474 within-market log returns of 2024 and 2025, multiplied by $\sqrt{252}$, gives the anchor $\sbar=0.249$.
+
+\subsection*{S12.5. Median property of the absolute-distance loss}
+
+For real numbers $x_1,\dots,x_m$, the sum $\sum_{i}\lvert x_i-c\rvert$ attains its minimum at any median of the $x_i$. For an odd $m$, the median is unique. The member thresholds are a strictly decreasing function of the recorded weights at a positive radius. The median member threshold therefore equals the benchmark threshold at the median recorded weight. Among the four single-trigger candidates of the information-retention experiment, the median-weight threshold thus minimizes the absolute-distance loss for odd panel sizes. The comparator selected this candidate in every tested panel.
+
+\subsection*{S12.6. Collapse of the recursive generator under convexity}
+
+Let $W(V)$ denote the continuation value. Volatility enters the generator only through the term $\tfrac{1}{2}\sigma_p^{2}V^{2}W_{VV}$. Over the constant-volatility set $\{\slow,\shigh\}$, the sign of $V^{2}W_{VV}$ therefore selects the minimizing and maximizing priors. The minimizing prior is $\slow$ when $W_{VV}>0$, and the maximizing prior is $\shigh$. A convex continuation value holds this sign constant, so the selection never switches with the state. The $\alpha$-mixture of the two generators then equals the generator at the effective variance $\sigma_{\mathrm{eff}}^{2}(\alpha)=\alpha\slow^{2}+(1-\alpha)\shigh^{2}$ of Eq.~(16). The recursive problem reduces to the ordinary stopping problem at this variance, and its stopping region is bounded by a single threshold \citep{Peng2019}.
+
+\subsection*{S12.7. Label-flip probability under the classical error model}
+
+Under the classical error model, the recorded weight equals the true weight plus an independent error $\varepsilon\sim N(0,\sigma_{\alpha}^{2})$. Consider a true weight at distance $d>0$ from the critical weight. Its directional label flips when the error exceeds $d$ in the direction of the critical weight. This event has probability $\Phi(-d/\sigma_{\alpha})$, where $\Phi$ is the standard normal distribution function. Requiring $\Phi(-d/\sigma_{\alpha})\le p$ gives $\sigma_{\alpha}\le d/\Phi^{-1}(1-p)$. At $d=0.05$, this bound equals 0.039 for $p=0.10$ and 0.030 for $p=0.05$.
+
+\subsection*{S12.8. Details of the document-date audit}
+
+The audit resolved an official issuing-body page for 414 of the 682 records. The remaining 268 records have no verified page date. The page-date assignment draws on sources outside the archive. It cannot be re-verified from the archive alone, so it serves as a comparison and the printed date serves as the reference. The retrieval targeted 2016 to 2025, and four records nonetheless bear 2015 printed dates. These four fall outside the analysis window and are excluded. Four further records carry month-only dates. A month identifies the quarter, and all four lie inside the window (S1).
+
+\begin{thebibliography}{9}
+\bibitem[{Dixit and Pindyck(1994)}]{DixitPindyck1994}
+Dixit, A. K., \& Pindyck, R. S. (1994). \emph{Investment under uncertainty}. Princeton University Press.
+\bibitem[{Peng(2019)}]{Peng2019}
+Peng, S. (2019). \emph{Nonlinear expectations and stochastic calculus under uncertainty}. Springer. \url{https://doi.org/10.1007/978-3-662-59903-7}
+\end{thebibliography}
+
+\end{document}

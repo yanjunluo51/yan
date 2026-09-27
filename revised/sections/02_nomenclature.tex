@@ -1,0 +1,70 @@
+\begin{table*}[!t]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.05}
+\textbf{Nomenclature}\\[2pt]
+\begin{tabular}{@{}L{0.2\textwidth}L{0.77\textwidth}@{}}
+\toprule
+\multicolumn{2}{@{}l}{\textbf{Decision and valuation variables}}\\
+$I$ & Investment (retrofit) cost\\
+$V^{*}$ & Investment trigger value\\
+$\Vlow$, $\Vhigh$ & Trigger at the lower and upper endpoints of the ambiguity set $\Sigma_t$\\
+$\Vlin$, $\VMEU$ & Member trigger under the affine rule and under the pre-commitment benchmark, at the same recorded weight\\
+$\Vzero$ & Trigger at the volatility anchor $\sbar$\\
+$V_0$ & Pre-commitment benchmark reference value\\
+$V^{*}(\alpha,t)$ & Member-specific trigger under the affine rule, Eq.~(\ref{eq:affine})\\
+$P^{*}$ & Marginal carbon-price threshold, Eq.~(\ref{eq:price})\\
+$P^{*}_{i}$ & Marginal carbon-price threshold of member $i$, equal to $P^{*}$ evaluated at $\alpha_i$\\
+$P^{*}_{i,\mathrm{lin}}$ & Marginal carbon-price threshold of member $i$ under the affine rule, used by the safeguard distances\\
+$P^{*}_{0}$ & No-ambiguity marginal carbon-price threshold, called the anchor threshold\\
+$P_t$ & Prevailing effective carbon price at gate $t$\\
+$C_t$ & Contested-price interval, $[\min_i P^{*}_i,\max_i P^{*}_i)$. When all member thresholds coincide, this half-open interval is empty and $B_t=0$\\
+$B_t$ & Width of the contested-price interval, Eq.~(\ref{eq:interval})\\
+$\tau$ & First hitting time of a candidate trigger in the benchmark problem\\
+$V_{\tau}$ & Project value at the first hitting time $\tau$\\
+$J^{\alpha}$ & Pre-commitment $\aMEU$ benchmark objective, Eq.~(\ref{eq:Jalpha})\\
+$c$, $s$, $\Delta$ & Common per-tonne accounting adjustments, with $\Delta=c-s$\\
+$L_{\mathrm{lin}}$, $U_{\mathrm{lin}}$ & Lower and upper edges of the affine contested-price interval $C_t$\\[2pt]
+\multicolumn{2}{@{}l}{\textbf{Stochastic process and economic parameters}}\\
+$\sbar$ & Positive forward-volatility anchor, $\sbar>0$, estimated from history in the application\\
+$\sigma_p$ & Carbon-price volatility, forward parameter of the GBM process\\
+$\slow$, $\shigh$ & Lower and upper volatility endpoints of $\Sigma_t$\\
+$\mu_c$ & Annual carbon-price growth scenario, declared as a decision input\\
+$r$ & Discount rate\\
+$\delta$ & Net discount margin, $\delta=r-\mu_c$\\
+$Q$ & Annual captured emissions (t/yr), net of the capture rate\\
+$\blo$, $\bhi$ & Positive roots of the characteristic equation at the low-volatility and high-volatility endpoints of the declared ambiguity set\\
+$\beta_1$ & Positive root of the characteristic equation, Eq.~(\ref{eq:char}), as a function of $\sigma_p$\\
+$\beta_0$ & Shorthand for $\beta_1(\sbar)$, the root at the volatility anchor\\
+$\Db$ & Spread between the roots at the two volatility endpoints, $\Db:=\blo-\bhi\ge 0$, strictly positive at a positive radius (Proposition~\ref{prop:benchmark}). Distinct from the weight distance $d$ of the elicitation-precision target\\
+$D_0$, $E_0$ & Auxiliary curvature terms in the closed-form $\tilde{\kappa}$, Eq.~(\ref{eq:kappa})\\[2pt]
+\multicolumn{2}{@{}l}{\textbf{Ambiguity-radius and recorded-weight parameters}}\\
+$\alpha$ & Recorded weight on the adverse endpoint under the $\alpha$-maxmin parameterization. It is elicited or configured before the gate and serves as a reporting input. At $\alpha=1$, the benchmark objective reduces to MEU\\
+$\Sigma_t$ & Volatility ambiguity set, Eq.~(\ref{eq:ambset})\\
+$h_t$ & Admissible ambiguity radius at gate $t$; in the application, $h_t=\min\{c_w w_t,(1-\epsilon)\sbar\}$\\
+$c_w$ & Signal-to-radius scaling constant in the pre-cap map $h_t=c_w w_t$, $c_w\ge 0$\\
+$\epsilon$ & Admissibility margin for the ambiguity-radius cap, $0<\epsilon<1$\\
+$\rho$ & Relative ambiguity radius, $h/\sbar$. Marked variants denote other quantities, namely $\hat{\rho}_k$ (sample autocorrelation), Spearman $\rho$ (rank correlation), and $\rho_{\mathrm{retest}}$ (reliability)\\
+$\tilde{\alpha}(h)$ & Critical weight at which the member trigger crosses the anchor trigger, for $h>0$, Eq.~(\ref{eq:critical}); $\tilde{\alpha}(0):=1/2$ by continuous extension\\
+$\tilde{\alpha}_{\mathrm{lin}}$, $\tilde{\alpha}_{\mathrm{rec}}$, $\tilde{\alpha}_{\alpha\text{-MEU}}$ & Critical weight under the affine rule, the recursive rule, and the pre-commitment benchmark\\
+$\sigma_{\mathrm{eff}}(\alpha)$ & Effective volatility of the recursive rule, $\sqrt{\alpha\slow^{2}+(1-\alpha)\shigh^{2}}$\\
+$\alpha_{\min}$, $\alpha_{\max}$ & Smallest and largest recorded weights on a panel, which set the two interval edges\\
+$\tilde{\kappa}(\sbar)$ & Volatility-channel curvature ratio, $V^{*\prime\prime}/(4V^{*\prime})$, Eq.~(\ref{eq:kappa})\\[2pt]
+\multicolumn{2}{@{}l}{\textbf{Approximation and safeguard quantities}}\\
+$\theta$ & Registered economic-calibration tuple $(r,\mu_c,\sbar)$\\
+$\eR(\theta,\rho)$ & Registered refined-grid maximum of the normalized error between affine and benchmark member triggers, Eq.~(\ref{eq:safeguard})\\
+$\ER(\theta,\rho)$ & Price-unit release envelope specific to a calibration and a radius, Eq.~(\ref{eq:safeguard})\\
+$\dedge$, $\dmember$ & Price-edge and nearest-member distances used by the safeguard, Eq.~(\ref{eq:safeguard})\\
+$\varepsilon_{\mathrm{num}}$ & Numerical tolerance added to the registered maximum error\\[2pt]
+\multicolumn{2}{@{}l}{\textbf{Policy-text input quantities}}\\
+$w_t$ & Quarterly rolling variability signal, the four-quarter population standard deviation of PSDI, Eq.~(\ref{eq:wt})\\
+$\PSDI_t$ & Policy-semantic-dispersion index, Eq.~(\ref{eq:psdi})\\
+$\bar{c}_t$ & Centroid of normalized document embeddings in period $t$\\[2pt]
+\multicolumn{2}{@{}l}{\textbf{Abbreviations}}\\
+$\aMEU$ & Alpha-maxmin expected utility\\
+PSDI & Policy-semantic-dispersion index\\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\parbox{0.97\textwidth}{\emph{Notes.} Symbols appearing in at least one numbered equation or at least six times in the mathematics are listed. The Supplementary Material contains the complete list of 93 entries.}
+\end{table*}

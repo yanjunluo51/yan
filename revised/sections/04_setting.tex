@@ -1,0 +1,79 @@
+\section{Decision setting and model inputs}
+
+\subsection{The gate-level decision problem}
+
+Consider a sequence of review gates. At each gate, a project receives a binary invest-or-wait classification before the committee makes its collective decision. The committee also specifies an interval of forward volatilities, called the ambiguity set of the gate. Eq.~(\ref{eq:ambset}) parameterizes this set by a single radius around an anchor. Members share a common regulatory information set. Heterogeneity enters only through the weight $\alpha_i\in[0,1]$ recorded for member $i$ on the adverse endpoint of the ambiguity set.
+
+The method takes a calibration $\theta=(r,\mu_c,\sbar)$ and the project inputs $I$ and $Q$. It also takes the declared ambiguity radius $h_t$, the recorded weights $\{\alpha_i\}_{i=1}^{m}$, and the prevailing price $P_t$. It returns the member-specific price thresholds and a classification of $P_t$ as unanimous wait, mixed, or unanimous invest. It also states whether the affine report may be released alone or requires a benchmark recomputation.
+
+Figure~\ref{fig:architecture} organizes these inputs and outputs into three layers. The input layer supplies the radius and the prevailing price. The analytical layer produces the member triggers and the critical weight. The interface layer converts the triggers into price-axis thresholds and applies the release rule. It then issues either an affine-only report or a dual report containing both the affine and the benchmark results.
+
+\begin{figure*}[!t]
+\centering
+\resizebox{0.97\textwidth}{!}{%
+\begin{tikzpicture}[
+  font=\footnotesize,
+  box/.style={draw, rounded corners=2pt, align=center, minimum height=0.95cm, text width=2.35cm, fill=white},
+  dbox/.style={box, dashed},
+  arr/.style={-{Stealth[length=2mm]}, thick},
+  darr/.style={-{Stealth[length=2mm]}, thick, dashed},
+  layer/.style={draw, dashed, rounded corners=4pt, inner sep=6pt}
+]
+% Input layer
+\node[dbox] (corpus) at (0,0) {Policy-Document\\Corpus};
+\node[dbox] (enc) at (3.0,0) {Text Encoder};
+\node[dbox] (emb) at (6.0,0) {Embedding\\Dispersion};
+\node[dbox, text width=2.9cm, minimum height=1.25cm] (psdi) at (9.3,0) {Policy-Semantic Dispersion $\PSDI_t$\\Rolling Variability\\$w_t=\mathrm{std}_4(\PSDI_{t:t-3})$};
+\node[box, fill=blue!8] (radius) at (12.7,0) {Capped Ambiguity\\Radius $h_t$};
+\node[box, fill=blue!8] (price) at (15.8,0) {Prevailing\\Price $P_t$};
+\draw[darr] (corpus) -- (enc);
+\draw[darr] (enc) -- (emb);
+\draw[darr] (emb) -- (psdi);
+\draw[darr] (psdi) -- (radius);
+\node[font=\scriptsize\itshape, anchor=south] (optlab) at (4.6,0.8) {Optional application-specific preprocessing; the method requires only $h_t$};
+% Analytical layer
+\node[box, fill=orange!10, text width=3.4cm] (weight) at (1.2,-2.5) {Recorded Weight on the\\Adverse Endpoint\\\mbox{$\alpha\in[0,1]$}};
+\node[box, fill=orange!10] (affine) at (5.0,-2.5) {Affine Member\\Triggers $V^{*}(\alpha,t)$};
+\node[box, fill=orange!10, text width=2.7cm] (anchor) at (8.6,-2.5) {Anchor and\\Endpoint Triggers};
+\node[box, fill=orange!10] (crit) at (12.0,-2.5) {Curvature-based\\Critical Weight};
+\draw[arr] (weight) -- (affine);
+\draw[arr] (anchor) -- (affine);
+\draw[arr] (anchor) -- (crit);
+\draw[arr] (radius.south) -- ++(0,-0.95) -| (anchor.north);
+\node[font=\scriptsize, right] at ($(radius.south)+(0,-0.45)$) {$h_t$};
+% Interface layer
+\node[box, fill=teal!10] (ratio) at (1.2,-4.8) {Trigger Ratio\\$V^{*}/I$};
+\node[box, fill=teal!10, text width=2.9cm] (thr) at (5.0,-4.8) {Marginal Carbon-Price\\Thresholds $P^{*}(\alpha,t)$};
+\node[box, fill=teal!25, text width=2.9cm] (int) at (9.6,-4.8) {Contested-Price Interval\\and Width $B_t$};
+\node[box, fill=teal!25, text width=2.9cm] (rel) at (14.8,-4.8) {Released Classification\\and Fallback Status};
+\draw[arr] (affine.south) -- ++(0,-0.7) -| (ratio.north);
+\draw[arr] (affine.south) -- (thr.north);
+\draw[arr] (thr) -- (int);
+\draw[arr] (int) -- (rel);
+\draw[arr] (price.south) -- (rel.north -| price.south);
+% Layer frames
+\begin{scope}[on background layer]
+\node[layer, fill=blue!3, fit=(corpus)(psdi)(radius)(price)(optlab)] (L1) {};
+\node[layer, fill=orange!4, fit=(weight)(crit)(anchor)] (L2) {};
+\node[layer, fill=teal!4, fit=(ratio)(rel)] (L3) {};
+\end{scope}
+\node[anchor=east, font=\small\itshape] at ($(L1.west)+(-0.1,0)$) {Input};
+\node[anchor=east, font=\small\itshape] at ($(L2.west)+(-0.1,0)$) {Analytical};
+\node[anchor=east, font=\small\itshape] at ($(L3.west)+(-0.1,0)$) {Interface};
+\end{tikzpicture}}
+\caption{Architecture of the screening method in three layers. The input layer supplies the capped ambiguity radius $h_t$ and the prevailing price $P_t$. Only $h_t$ enters the member thresholds and the interval, and $P_t$ enters at the classification step. The dashed block shows the derivation of $h_t$ in the application, from a policy-text corpus through the dispersion index $\PSDI_t$ and the rolling variability signal $w_t$. A committee declaring its radius directly omits this block. The analytical layer maps each recorded weight on the adverse endpoint to a member trigger and locates the curvature-based critical weight. The interface layer converts the triggers into trigger-to-cost ratios and marginal carbon-price thresholds. It reports the contested-price interval, its width $B_t$, the classification, and the release or fallback status.}
+\label{fig:architecture}
+\end{figure*}
+
+\subsection{Model inputs and assumptions}
+
+The analysis rests on three maintained model assumptions, one reporting convention, and one application-side input. The three model assumptions are as follows. (i) Forward volatility carries the ambiguity, and drift is held fixed. (ii) Standard deviation parameterizes the ambiguity set. (iii) The carbon-price process follows a GBM with $r>\mu_c>0$. The reporting convention is the affine endpoint rule, which defines the member triggers. The application-side input is the ambiguity radius. The model takes this radius as given, and its construction depends on the deployment setting. The common information set and the recorded weights remain fixed within a gate, and each member is classified separately. The weights are reporting inputs registered in advance.
+
+The volatility channel carries ambiguity as a maintained modeling assumption. Ambiguity widens the forward distribution and leaves its mean unaffected. The policy-text signal of the application fits this reading. It records variation in semantic dispersion and carries no directional information about the course of policy. The signal therefore configures the ambiguity radius, and the growth scenario $\mu_c$ stays fixed. The available record left the scale of this mapping unsettled, so the signal-to-radius map is treated as a convention. Forward volatility enters as a single parameter. The choice of standard deviation over variance fixes the coordinate for evaluating trigger curvature. This choice therefore also fixes the sign of the critical-weight displacement.
+
+The application-side input enters the model as a single number. The forward-volatility anchor $\sbar$ and an admissibility margin $\epsilon\in(0,1)$ fix its admissible range. The anchor stays fixed across review gates within an application. The radius of each gate is capped at $(1-\epsilon)\sbar$, which keeps the lower volatility endpoint strictly positive. The ambiguity set is
+\begin{equation}
+\sigma_p\in\Sigma_t=[\sbar-h_t,\;\sbar+h_t],
+\label{eq:ambset}
+\end{equation}
+where $\sigma_p$ denotes forward volatility and $h_t$ denotes the ambiguity radius. Radii quoted as percentages are relative radii $h_t/\sbar$. Every numerical result is evaluated on a finite grid, and its scope is stated with the result. The primary radius range covers relative radii up to 22\%. The extended range adds a 33\% stress radius. The method requires only a registered radius $h_t$ satisfying the cap. A committee may declare this radius directly or derive it from an auxiliary series, as in the application.

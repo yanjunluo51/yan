@@ -1,0 +1,208 @@
+\subsection{Baseline setting}
+
+Table~\ref{tab:calibration} lists the baseline calibration for the 600-MW retrofit. The investment cost and annual captured emissions follow \citet{Sun2024}. The discount rate follows the Chinese national appraisal standard \citep{NDRC2006}. The annual carbon-price growth scenario is set to 0.04. The volatility anchor is the annualized standard deviation of 474 within-market log returns. These returns come from 475 daily national CEA closing prices in 2024 and 2025. The Shanghai pilot and national CEA data are separate series, so no return spans the market boundary. The annualized estimate was 0.249. No liquid CEA options market existed over the sample period, so this historical estimate serves as the forward-volatility anchor.
+
+Table~\ref{tab:costcontext} places the anchor threshold beside external capture-cost references for context. The anchor threshold was 117.7\,CNY/t, and a demonstration reference lies near 250\,CNY/t. The two figures rest on different bases. $P^{*}$ is a marginal threshold, and the references are technology costs. The common-adjustment identity gives the amount a committee adds to the reported basis before comparing the two. Table~\ref{tab:translation} evaluates this identity at illustrative values of $\Delta$ spanning these references. In a hypothetical accounting scenario, the common net adjustment is $\Delta=250$\,CNY/t. The interval then moves to $[363.38,\,370.01)$\,CNY/t. A committee comparing against a figure with these components reads the gate at this adjusted level. The value of $\Delta$ is stipulated for illustration.
+
+The cost adjustment enters the thresholds additively, and the calibrated inputs $I$ and $Q$ enter multiplicatively. By Eqs.~(\ref{eq:trigger}) and (\ref{eq:price}), every $P^{*}_{i}$ is proportional to $I$ and inversely proportional to $Q$. A different cost or captured-volume assumption is therefore a common-factor adjustment. The trigger-to-cost ratios stay unchanged, because $V^{*}$ is proportional to $I$ and independent of $Q$. The threshold levels, the interval width, and the price-unit envelope rescale with the common factor. The classification at a fixed prevailing price may move with them. Both inputs carry substantial appraisal uncertainty, so this movement matters. The reconstructed reference path peaked in 2024Q4 at a radius of 6.057\% of the volatility anchor. At this radius, the baseline lower interval edge was 113.38\,CNY/t. This edge lay above the highest archived price of 105.65\,CNY/t. A 10\% reduction in $I/Q$ moved the edge to 102.04\,CNY/t. The same archived price then entered the interval, and the gate became mixed. A 20\% reduction moved the edge to 90.70\,CNY/t and placed the price above the whole interval. The critical weight and the member ordering stayed unchanged in all these cases.
+
+\begin{table*}[!t]
+\caption{Baseline calibration for the 600-MW CCUS numerical application.}
+\label{tab:calibration}
+\centering
+\footnotesize
+\begin{tabular}{@{}L{0.26\textwidth}L{0.07\textwidth}L{0.16\textwidth}L{0.42\textwidth}@{}}
+\toprule
+Parameter & Symbol & Value & Source or basis\\
+\midrule
+Investment cost & $I$ & $1.585\times10^{9}$\,CNY & \citet{Sun2024}\\
+Discount rate & $r$ & 0.08 & NDRC and Ministry of Construction (2006)\\
+Annual carbon-price growth scenario & $\mu_c$ & 0.04 & Decision-analysis input, varied in the sensitivity analysis\\
+Carbon-price volatility anchor & $\sbar$ & 0.249 & National CEA daily closing prices traded on the Shanghai Environment and Energy Exchange, 2024 to 2025 (475 prices)\\
+Annual captured emissions & $Q$ & $1.69\times10^{6}$\,t/yr & \citet{Sun2024}\\
+Admissibility margin & $\epsilon$ & 0.5 & Fixed cap parameter, nonbinding in the reference application\\
+Signal-to-radius scaling constant & $c_w$ & 1.0 & Fixed reference convention\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[!t]
+\caption{External cost context for the marginal carbon-price threshold $P^{*}$.}
+\label{tab:costcontext}
+\centering
+\footnotesize
+\begin{tabular}{@{}L{0.26\textwidth}L{0.2\textwidth}L{0.47\textwidth}@{}}
+\toprule
+Reference quantity & Reported value & Interpretation\\
+\midrule
+This paper, no-ambiguity marginal carbon-price threshold & $\approx117.7$\,CNY/t & Marginal carbon-price threshold implied by the option trigger. It excludes capture OPEX, the energy penalty, transport, storage, and subsidies.\\
+China coal-power CCUS demonstration reference & $\approx250$\,CNY/t & Reported capture-cost reference for the Taizhou coal-fired carbon-capture facility of China Energy \citep{YangX2023}. A technology-cost figure on a different basis from $P^{*}$.\\
+IEA dilute-stream capture-cost reference & More than USD 40/t, and more than USD 100/t in some cases & Capture-cost range reported by \citet{IEA2020} for dilute CO$_2$ streams in power generation and blast-furnace steelmaking. External cost context.\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[!t]
+\caption{Common per-tonne cost translation of the member thresholds at the reference-peak radius.}
+\label{tab:translation}
+\centering
+\footnotesize
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Scenario & \makecell{$\Delta$\\(CNY/t)} & \makecell{Lower edge\\(CNY/t)} & \makecell{Upper edge\\(CNY/t)} & \makecell{$B_t$\\(CNY/t)} & \makecell{Margin to $P_{\max}$\\(CNY/t)}\\
+\midrule
+No common adjustment (reported basis) & 0 & 113.38 & 120.01 & 6.63 & $+7.73$\\
+Illustrative low common cost & 150 & 263.38 & 270.01 & 6.63 & $+157.73$\\
+Illustrative cost at the Taizhou reference level & 250 & 363.38 & 370.01 & 6.63 & $+257.73$\\
+Illustrative high common cost & 350 & 463.38 & 470.01 & 6.63 & $+357.73$\\
+Illustrative cost at the Taizhou level, net of an 80\,CNY/t subsidy & 170 & 283.38 & 290.01 & 6.63 & $+177.73$\\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\parbox{0.95\textwidth}{\footnotesize\emph{Notes.} The first row is the basis of every other result in this paper. The remaining rows apply the common-adjustment identity. The $\Delta$ values are illustrative settings spanning the external references of Table~\ref{tab:costcontext}. $P_{\max}$ is the highest archived national CEA closing price, 105.65\,CNY/t. The final column is the lower edge minus $P_{\max}$, and a positive value means every member classifies this price as wait. The identity holds for adjustments common across members and constant per tonne.}
+\end{table*}
+
+\subsection{Screening outputs under alternative component configurations}
+
+Table~\ref{tab:components} compares four component configurations under a common economic calibration. Consecutive rows differ in more than one component, so a difference between two rows reflects several components. The first two configurations yield a single trigger and no member-level dispersion. The third introduces member-level dispersion with the relative radius fixed at 10\% of the volatility anchor. Its interval width is therefore the same at every gate. The full method updates the interval at every gate. Its quarterly widths ranged from 1.67 to 6.63\,CNY/t under the reference scaling convention.
+
+\begin{table*}[!t]
+\caption{Screening outputs under alternative component configurations.}
+\label{tab:components}
+\centering
+\footnotesize
+\begin{tabular}{@{}L{0.27\textwidth}L{0.11\textwidth}L{0.15\textwidth}L{0.1\textwidth}L{0.25\textwidth}@{}}
+\toprule
+Configuration & Text-derived radius & Heterogeneous recorded weights & $B_t$ (CNY/t) & Output at each gate\\
+\midrule
+Conventional real-options baseline ($h=0$) & No & No & 0 & Single trigger\\
+Homogeneous $\alpha=0.5$ & Yes & No & 0 & Single trigger\\
+Fixed $h$ ($h/\sbar=10\%$, static) & No & Yes & 10.945 & Fixed interval; classification evaluated at each gate\\
+Full method ($c_w=1.0$, time-varying) & Yes & Yes & 1.67 to 6.63 & Time-varying interval and classification summary\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Member-level interpretability at a review gate}
+
+The reconstructed path stayed below the 10\% release cap, so its intervals were narrower than at the cap. Across the 37 quarterly gates, the relative radius ran from 1.524\% to 6.057\%. The cap bound at none of them. Exact key matching bound here. The 2024Q4 peak radius is a registered key, and the other 36 gate radii are not. The release rule therefore sends these 36 gates to benchmark recomputation. With a radius discretization registered in advance, an institution rounds all 37 radii to registered keys at or below the cap. Table~\ref{tab:members} fixes the relative radius at the cap, the upper limit of affine-only eligibility, and reports member triggers and thresholds. The reference profile contains four equally spaced recorded weights from 0.25 to 1.00. Its weight range of 0.750 is the widest among five profiles compared at a common radius in the Supplementary Material. Under the affine, strictly decreasing map, it therefore produces the largest interval width among the five. The weight $\alpha=0.50$ lies just below the critical weight. The affine rule labels this weight delay-oriented by a narrow margin, and the benchmark labels it acceleration-oriented. The thresholds barely moved across formulations. At the reference-peak radius, the affine, recursive, and pre-commitment widths were 6.630, 6.660, and 6.545\,CNY/t. The latter two differed from the reported width by $+0.46\%$ and $-1.27\%$. A gate should therefore read the thresholds first and treat the directional label as secondary.
+
+\begin{table}[!t]
+\caption{Member-specific trigger values and ambiguity premiums at the baseline economic calibration with $h_t/\sbar=10\%$.}
+\label{tab:members}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcccl@{}}
+\toprule
+Case & $V^{*}/I$ & $P^{*}$ (CNY/t) & AP$/I$ & Shift relative to anchor\\
+\midrule
+No-ambiguity anchor & 3.138 & 117.7 & 0 & Baseline\\
+$\alpha=0.25$ & 3.241 & 121.6 & $+0.104$ & Delay-oriented\\
+$\alpha=0.50$ & 3.144 & 118.0 & $+0.007$ & Delay-oriented\\
+$\alpha=0.75$ & 3.047 & 114.3 & $-0.091$ & Acceleration-oriented\\
+$\alpha=1.00$ & 2.950 & 110.7 & $-0.188$ & Acceleration-oriented\\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\parbox{\columnwidth}{\scriptsize\emph{Notes.} AP$/I$ is the ambiguity premium divided by the investment cost. The final column labels the shift of each trigger relative to the anchor trigger. The ambiguity premium changes sign at the critical weight, 0.517 at this radius and calibration. The reconstructed radius stayed below 10\%, and the lower interval edge decreases with the radius. The value 110.7\,CNY/t is therefore a lower bound for the lower edge along the reconstructed reference path.}
+\end{table}
+
+\subsection{Dynamic intervals and archived-price classification under the reference configuration}
+
+Figure~\ref{fig:dynamic} lets the radius vary across review gates and shows the contested-price interval under the reference configuration. The volatility anchor stays fixed at its estimated value, so all width variation comes from the reconstructed radius path. The shaded band lies between the two extreme member thresholds. The width reached 6.63\,CNY/t in 2024Q4. The lower panel compares the observed daily CEA price with the lower interval edge on the same time axis.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/fig5_dynamic_interval.pdf}
+\caption{Retrospective fixed-anchor reconstruction of the contested-price interval for the four-member reference profile. Dashed threshold segments mark the period before the national ETS, and solid segments mark the national ETS period. The vertical dashed line marks the ETS launch, and the horizontal dotted line marks the anchor threshold. The lower panel plots archived daily prices from two markets. The dotted series is the Shanghai pilot price before the national market, and the solid series is the national CEA price. The closest-approach annotation compares the lower edge with the national CEA observations only. On the reported path, the lowest lower edge and the highest archived price both fall in 2024Q4. This difference is therefore the contemporaneous closest approach.}
+\label{fig:dynamic}
+\end{figure*}
+
+\subsubsection{Archived-price classification}
+
+Under the reference configuration, $\Delta=0$, and the prevailing price equals the archived CEA price. Across the 1,073 daily CEA observations from 2021Q3 to 2025Q4, both the affine rule and the $\aMEU$ benchmark returned unanimous wait. The two rules share the lower interval edge by construction, since the reference profile includes the endpoint weight $\alpha=1$. The highest archived price, 105.65\,CNY/t, lay 7.73\,CNY/t below the lowest member threshold along the reconstructed path. The reference configuration is therefore a nonbinding baseline. Along this price path, the member-threshold vector and its interval left the three-state classification unchanged. Changing the radius alone, or one economic primitive alone, produced binding configurations. Of 32 sensitivity configurations evaluated against the same price record, 15 placed the highest archived price at or above the lower edge. Ten of these were released as mixed and four as unanimous invest. The remaining one went to benchmark-model review because the two rules disagreed.
+
+\subsection{Calibration sensitivity and safeguard behavior}
+
+The configurations below perturb the baseline calibration, and the archived price history is the same in each. Any change in classification therefore comes from the threshold side.
+
+\subsubsection{Worked gate reports}
+
+Table~\ref{tab:worked} renders two cells of the 32-cell design as complete gate reports. These two cells exercise the two branches of the release rule. Both use the lower volatility anchor $\sbar=0.199$, the four-member reference profile, and $V_0=I$. They differ only in the evaluated radius.
+
+In Configuration A, the radius is the frozen reference peak, and the interval is 4.56\,CNY/t wide. Its upper edge lay 0.002\,CNY/t below the prevailing price. All four members classified this price as invest, and the gate was unanimous. The member with the smallest recorded weight holds the upper edge, so the edge margin equals the nearest-member distance. This distance of 0.002\,CNY/t was far below the registered envelope of 0.059\,CNY/t. The proximity conditions failed, and the gate issued a dual report after benchmark recomputation. The recomputation kept the gate state. The benchmark placed the upper threshold at 105.60\,CNY/t, against an affine value of 105.65\,CNY/t, and the price cleared both. The conservative proximity rule fired, although the recomputation confirmed unanimous investment. This example shows a fallback without classification disagreement. In Configuration B, at the 10\% radius, the interval widened to 7.53\,CNY/t and contained the unchanged prevailing price. Three members classified the price as invest. The member with the smallest recorded weight classified it as wait, so the gate was mixed. Both proximity distances rose to 1.092\,CNY/t, against an envelope of 0.160\,CNY/t. The affine-only report was released.
+
+In this pair, the wider interval eased release. The test depends on the distance from the prevailing price to the nearest threshold. Widening carried the upper threshold past the price.
+
+\begin{table*}[!t]
+\caption{Worked reports for two cells of the 32-cell robustness design, both at the $\sbar=0.199$ calibration.}
+\label{tab:worked}
+\centering
+\footnotesize
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+ & \multicolumn{2}{c}{Configuration A: $\rho=6.057\%$} & \multicolumn{2}{c}{Configuration B: $\rho=10\%$}\\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+Report field & Affine & Benchmark & Affine & Benchmark\\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Member-specific marginal carbon-price thresholds $P^{*}_{i}$ (CNY/t)}}\\
+$\alpha_i=0.25$ & 105.65 & 105.60 & 106.74 & 106.62\\
+$\alpha_i=0.50$ & 104.13 & 104.07 & 104.23 & 104.07\\
+$\alpha_i=0.75$ & 102.61 & 102.56 & 101.73 & 101.60\\
+$\alpha_i=1.00$ & 101.09 & 101.09 & 99.22 & 99.22\\
+\multicolumn{5}{@{}l}{\emph{Interval, prevailing price, and classification}}\\
+Critical weight $\tilde{\alpha}$ (affine) & \multicolumn{2}{c}{0.510} & \multicolumn{2}{c}{0.517}\\
+Lower edge of $C_t$ (CNY/t) & 101.09 & 101.09 & 99.22 & 99.22\\
+Upper edge of $C_t$ (CNY/t) & 105.65 & 105.60 & 106.74 & 106.62\\
+Width $B_t$ (CNY/t) & 4.56 & 4.51 & 7.53 & 7.41\\
+Prevailing price $P_t$ (CNY/t) & \multicolumn{2}{c}{105.65} & \multicolumn{2}{c}{105.65}\\
+Members classified invest & 4 of 4 & 4 of 4 & 3 of 4 & 3 of 4\\
+Gate state & unanimous invest & unanimous invest & mixed & mixed\\
+\multicolumn{5}{@{}l}{\emph{Release rule of Eq.~(\ref{eq:safeguard}), evaluated on the affine report}}\\
+$\dedge$ (CNY/t) & \multicolumn{2}{c}{0.002} & \multicolumn{2}{c}{1.092}\\
+$\dmember$ (CNY/t) & \multicolumn{2}{c}{0.002} & \multicolumn{2}{c}{1.092}\\
+Registered envelope $\ER$ (CNY/t) & \multicolumn{2}{c}{0.059} & \multicolumn{2}{c}{0.160}\\
+\makecell[l]{Price-date sensitivity flag, margin below\\the 1.97\,CNY/t buffer (not a release condition)} & \multicolumn{2}{c}{unresolved by price record} & \multicolumn{2}{c}{unresolved by price record}\\
+Proximity flags & \multicolumn{2}{c}{edge, member} & \multicolumn{2}{c}{none}\\
+Reporting mode & \multicolumn{2}{c}{dual report} & \multicolumn{2}{c}{affine-only}\\
+Released classification & \multicolumn{2}{c}{unanimous invest} & \multicolumn{2}{c}{mixed}\\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\parbox{0.95\textwidth}{\footnotesize\emph{Notes.} The calibration is $r=0.08$, $\mu_c=0.04$, and $\sbar=0.199$, at the reference value $V_0=I$ and the four-member reference profile. $P_t$ is the highest archived national CEA closing price over 2021Q3 to 2025Q4. Configuration A uses the frozen archived canonical serialized radius key, and its displayed value is rounded for this table only. The upper edge of Configuration A is 105.6481\,CNY/t before rounding, and the prevailing price is 105.65\,CNY/t. The edge therefore lies below the price, although both display as the same rounded value. Edges and widths are rounded independently, so differences of displayed edges can deviate from the displayed width in the last digit. Affine and benchmark thresholds coincide at $\alpha_i=1.00$ by construction. In dual mode, a classification is released only where the two rules agree. In affine-only mode, the benchmark column is computed for this comparison alone, since a live gate clearing the release rule would skip it.}
+\end{table*}
+
+\subsubsection{Margins across the evaluated configurations}
+
+Table~\ref{tab:margins} evaluates the baseline calibration, five economic-parameter perturbations, and two additional volatility anchors from Table~\ref{tab:critsens}. Each configuration is compared with the highest of the 1,073 archived observations, which minimizes both signed margins. The release test uses absolute distances, and the highest price need not minimize them. For each cell, the table reports the signed margin of each interval edge, defined as the edge minus the price. A non-positive lower-edge margin means at least one member classifies the price as invest. Unanimous investment also requires a non-positive upper-edge margin, with the whole interval at or below the price.
+
+The lower-edge margin was negative in 15 of the 32 cells. Both margins were negative in four cells across two rows. Three of these lay in the $r=0.06$ row. At this discount rate, the upper edge fell below the highest archived price at radii up to 22\%. At the 33\% stress radius, the interval widened enough to contain this price again. Two opposing channels drive the level shift. The smaller characteristic root raises the project-value trigger, and the thinner net discount margin shrinks the price conversion. The margin channel dominated, so every threshold fell. The fourth cell is the lower volatility anchor at the frozen reference-peak radius. There, the upper edge fell 0.002\,CNY/t below the price. This cell is Configuration A of Table~\ref{tab:worked}, routed by the safeguard to benchmark recomputation. The upper-edge margin also depends on the estimation window of the volatility anchor. The thresholds were recomputed at the reference-peak radius under five national and two pilot windows. Either the relative or the absolute radius was held fixed across anchors. The archived price stayed outside the interval in every window. The two pilot windows gave a volatility anchor of about 0.95 and thresholds above 500\,CNY/t.
+
+Under the baseline calibration, the highest archived price entered the interval at the 22\% radius, the upper bound of the primary range. The operational rule of Eq.~(\ref{eq:safeguard}) raised an edge or member proximity flag in five cells. Four of these lay at the 22\% and 33\% radii, where the mandatory wide-radius branch already covers all 16 cells. The fifth was the narrow-radius cell of Table~\ref{tab:worked}. The 16 mandatory cells and this flag gave 17 benchmark fallbacks across the 32 cells. These fallbacks captured every disagreement on the fixed cells. One gate-state disagreement occurred at the 33\% radius under $r=0.06$. There, the affine rule reported a mixed gate, and the benchmark reported unanimous invest. Two member-label disagreements also occurred. Six of the 32 cells placed the highest archived price within 1.97\,CNY/t of an interval edge. This buffer represents the recording granularity of the archived price series (\SM{S6.5.7}). Three of these six cells were among the five flagged cells. The unanimous-wait outcome of the reference configuration therefore did not extend to the whole design.
+
+\begin{table*}[!t]
+\caption{Distance from the highest archived carbon price to each edge of the contested-price interval, across the economic perturbations and volatility anchors of the sensitivity analysis. SHEA denotes the Shanghai Emission Allowance pilot market.}
+\label{tab:margins}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+ & \multicolumn{4}{c}{Margin to the lower edge (CNY/t)} & \multicolumn{4}{c}{Margin to the upper edge (CNY/t)}\\
+\cmidrule(lr){2-5}\cmidrule(l){6-9}
+Configuration at $h/\sbar$ & 6.057\% & 10\% & 22\% & 33\% & 6.057\% & 10\% & 22\% & 33\%\\
+\midrule
+Baseline calibration & $+7.7$ & $+5.0$ & $-2.8$ & $-9.3$ & $+14.4$ & $+16.0$ & $+21.3$ & $+26.8$\\
+$r=0.06$ ($-25\%$) & $-16.8$ & $-19.3$ & $-26.2$ & $-31.9$ & $-10.8$ & $-9.4$ & $-4.4$ & $+0.9$\\
+$r=0.12$ ($+50\%$) & $+55.0$ & $+51.9$ & $+42.7$ & $+34.9$ & $+62.7$ & $+64.5$ & $+70.4$ & $+76.4$\\
+$\mu_c=0.06$ ($+50\%$) & $+0.5$ & $-1.9$ & $-8.7$ & $-14.2$ & $+6.5$ & $+8.0$ & $+13.0$ & $+18.3$\\
+$\sbar=0.199$ ($-20\%$) & $-4.6$ & $-6.4$ & $-11.8$ & $-16.3$ & $-0.0019$ & $+1.1$ & $+4.7$ & $+8.5$\\
+$\sbar=0.299$ ($+20\%$; early CEA anchor regime) & $+21.8$ & $+18.1$ & $+7.5$ & $-1.2$ & $+30.9$ & $+33.1$ & $+40.4$ & $+48.1$\\
+Pooled national, 2021Q3 to 2025Q4 ($\sbar=0.278$) & $+15.7$ & $+12.4$ & $+3.0$ & $-4.7$ & $+23.7$ & $+25.6$ & $+32.1$ & $+38.8$\\
+SHEA pilot, 2016 to 2021Q1 ($\sbar=0.953$) & $+376.9$ & $+345.6$ & $+258.3$ & $+188.5$ & $+455.1$ & $+474.7$ & $+542.3$ & $+614.9$\\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\parbox{0.97\textwidth}{\footnotesize\emph{Notes.} Each margin is the stated interval edge minus the highest archived national CEA closing price over 2021Q3 to 2025Q4 (105.65\,CNY/t, 1,073 observations). A positive lower-edge margin means every member classifies every archived price as wait. A negative lower-edge margin with a positive upper-edge margin means a mixed gate. When both margins are negative, every member classifies the price as invest. The radius is fixed within each column. The 6.057\% value is the displayed peak of the reconstructed signal path. The 10\% and 22\% radii bracket the primary radius range, and 33\% is the stress radius. The first radius uses the frozen archived canonical serialized key, and its displayed value is rounded for the table only. Classifications and release decisions use unrounded values. A margin below 0.05\,CNY/t in absolute value is shown at four decimals, so its sign remains legible. The difference between the two margin columns equals the interval width up to rounding. It equals 6.63\,CNY/t only in the baseline row at the reference-peak radius. Each configuration matches the corresponding row of Table~\ref{tab:critsens}. The underlying edge values are in data/observed\_margin\_both\_edges.csv of the replication archive.}
+\end{table*}

@@ -1,0 +1,126 @@
+\section{Model}
+
+\subsection{Baseline screening trigger}
+
+For a given $\sigma_p\in\Sigma_t$, the baseline trigger of \citet{McDonaldSiegel1986} is
+\begin{equation}
+V^{*}(\sigma_p)=\frac{\beta_1}{\beta_1-1}\,I,
+\label{eq:trigger}
+\end{equation}
+where $I$ is the investment cost and $\beta_1>1$ is the positive root of the characteristic equation
+\begin{equation}
+\tfrac{1}{2}\sigma_p^{2}\,\beta(\beta-1)+\mu_c\,\beta-r=0.
+\label{eq:char}
+\end{equation}
+Here $\mu_c$ is the annual carbon-price growth scenario declared by the committee as a decision input, and $r$ is the discount rate. We impose $r>\mu_c>0$. This condition guarantees $\beta_1>1$ and a finite trigger at every positive volatility \citep{DixitPindyck1994}. It defines the admissible parameter domain. For a calibration outside this domain, the committee records the absence of a finite trigger. The trigger in Eq.~(\ref{eq:trigger}) is strictly increasing in $\sigma_p$ \citep{DixitPindyck1994}. With endpoint volatilities $\slow:=\sbar-h_t$ and $\shigh:=\sbar+h_t$, the minimum and maximum triggers are
+\begin{equation}
+\Vlow=V^{*}(\slow),\qquad \Vhigh=V^{*}(\shigh).
+\label{eq:endpoints}
+\end{equation}
+
+\begin{proposition}[Strict convexity]\label{prop:convex}
+For all $r>\mu_c>0$, the investment trigger $V^{*}(\sigma_p)$ is strictly convex in $\sigma_p$ on the ambiguity set $\Sigma_t$.
+\end{proposition}
+
+The proof writes $V^{*\prime\prime}(\sigma_p)$ as a positive prefactor times the bracket $\sigma_p^{4}(4\beta_1-3)+4\mu_c\sigma_p^{2}+4\mu_c^{2}$. Each of the three terms is positive when $\beta_1>1$ and $\mu_c>0$ (\SM{S10}).
+
+Define the anchor trigger $\Vzero:=V^{*}(\sbar)$. At any positive radius $h_t$, strict convexity implies $\Vhigh-\Vzero>\Vzero-\Vlow$. The odd-order terms of the two expansions cancel. The difference between these endpoint gaps is therefore $V^{*\prime\prime}(\sbar)h_t^{2}+O(h_t^{4})$. This asymmetry displaces the critical weight away from one half.
+
+\subsection{Member-specific screening triggers}
+
+The baseline trigger is common to all members. Member heterogeneity enters through a recorded weight $\alpha\in[0,1]$ on the adverse endpoint, written in the $\aMEU$ parameterization \citep{Ghirardato2004}. The weight recorded for member $i$ is $\alpha_i$. An elicitation instrument produces the response, and a stated normalization maps it onto $[0,1]$ (\SM{S5}). In this GBM timing problem, the adverse endpoint is the low-volatility endpoint. Lower volatility reduces the value of the option to wait \citep{DixitPindyck1994}. More weight on this endpoint therefore lowers the member trigger and the corresponding member threshold. Here $\alpha_i$ enters only as the recorded weight of the member. The affine endpoint rule defines the member trigger as a convex combination of the two endpoint triggers:
+\begin{equation}
+V^{*}(\alpha,t)=\alpha\,\Vlow+(1-\alpha)\,\Vhigh.
+\label{eq:affine}
+\end{equation}
+The two endpoint triggers carry the time subscript through $h_t$. The ordering of member triggers follows from $\Vlow<\Vhigh$ alone. The benchmark objective yields the same ordering at every admissible calibration.
+
+Three properties motivate the affine choice. First, it preserves a monotone correspondence between recorded weights and member thresholds. A larger adverse-endpoint weight yields a lower threshold, so the member-threshold vector stays interpretable. Second, it has a closed form, which keeps the critical-weight derivation transparent. Third, it reproduces both endpoint triggers without an arbitrary reference project value. The pre-commitment benchmark requires such a value. A nonlinear reporting rule would need its own member-trigger map and critical-weight derivation. One such alternative is a one-parameter family of rules with a smaller trigger error against the benchmark (\SM{S6.4.1}). This family loses the above-one-half location of the critical weight. It also needs a radius-specific fit to align the directional labels, and it adds one item to the registered configuration.
+
+Observed choices alone need not identify a unique interior $\alpha$ \citep{Eichberger2011}. This paper therefore treats $\alpha$ as a gate input, elicited or configured institutionally. A smooth-ambiguity member map \citep{Klibanoff2005} would also index each member by a second-order belief over priors and an ambiguity-aversion function. \citet{ChenA2025} derived optimal payoffs under these preferences in a one-period market. A review gate records neither input. The present design requires one recorded weight per member.
+
+The rule also supports a directional reading of each member trigger. At a positive radius, a member trigger below the anchor is acceleration-oriented, and a trigger above the anchor is delay-oriented. These directional labels differ from the invest-or-wait classifications. Their direction agrees with the drift-ambiguity literature. \citet{NishimuraOzaki2007} placed ambiguity on drift. At $\alpha=1$ and a positive radius, the shift here runs in the same qualitative direction as their maxmin result.
+
+\subsection{Curvature-based critical-weight mechanism}
+
+In this subsection, $h$ denotes a generic positive admissible value of $h_t$. Under the affine rule, the member trigger is strictly decreasing in the recorded weight. At a positive radius, the anchor trigger lies strictly between the two endpoint triggers. Exactly one weight, called the critical weight, therefore places the member trigger at the anchor trigger. The two endpoint gaps determine its location. It equals one half only if these gaps are equal. The curvature ratio $\tilde{\kappa}$ in Eq.~(\ref{eq:critical}) gives its leading-order displacement from one half as the radius approaches zero. Corollary~\ref{cor:global} establishes a positive displacement at every admissible radius.
+
+\begin{proposition}[Critical weight, exact expression and local expansion]\label{prop:critical}
+For $0<h\le(1-\epsilon)\sbar$, define the ambiguity premium as $\mathrm{AP}(\alpha):=V^{*}(\alpha,t)-\Vzero$. The premium has a unique zero
+\begin{equation}
+\begin{aligned}
+\tilde{\alpha}(h)&=\frac{\Vhigh-\Vzero}{\Vhigh-\Vlow}=\frac{1}{2}+\tilde{\kappa}(\sbar)\,h+O(h^{2}),\\
+\tilde{\kappa}(\sbar)&:=\frac{V^{*\prime\prime}(\sbar)}{4\,V^{*\prime}(\sbar)}>0.
+\end{aligned}
+\label{eq:critical}
+\end{equation}
+\end{proposition}
+
+Primes denote derivatives of $V^{*}(\sigma_p)$ with respect to $\sigma_p$ at the anchor volatility. The expansion follows from the two endpoint gaps. In the denominator, the $O(h)$ terms of the two endpoint expansions add, and their $O(h^{2})$ terms cancel. In the numerator $\Vhigh-\Vzero$, the curvature term survives. To first order, the quotient is therefore $1/2+\tilde{\kappa}(\sbar)h$. At $h=0$, $\mathrm{AP}(\alpha)=0$ for every $\alpha\in[0,1]$, and no unique critical weight exists. The continuous extension $\tilde{\alpha}(0):=1/2$ serves reporting purposes only. All numerical results use the exact expression in Eq.~(\ref{eq:critical}). The local expansion only interprets behavior near $h=0$.
+
+The curvature ratio $\tilde{\kappa}$ has a closed form (\SM{S8}):
+\begin{equation}
+\tilde{\kappa}(\sbar)=\frac{1}{4\sbar}-\frac{\sbar(\beta_0-1)E_0}{D_0^{2}},
+\label{eq:kappa}
+\end{equation}
+where $\beta_0:=\beta_1(\sbar)$, $D_0:=\sbar^{2}(2\beta_0-1)+2\mu_c$, and $E_0:=\sbar^{2}(\beta_0-1)+2\mu_c$. The first term of Eq.~(\ref{eq:kappa}) comes from reparameterizing variance as standard deviation. It pushes the critical weight above one half. The second term reflects concavity with respect to variance and works in the opposite direction. The first term dominates on the admissible domain $r>\mu_c>0$. This dominance is the algebraic counterpart of Proposition~\ref{prop:convex} and makes $\tilde{\kappa}$ strictly positive. The same derivation establishes strict concavity of the trigger in $\sigma_p^{2}$.
+
+\begin{corollary}[Global location of the critical weight]\label{cor:global}
+For all $0<h\le(1-\epsilon)\sbar$, the exact critical weight satisfies $\tilde{\alpha}(h)>1/2$.
+\end{corollary}
+
+\begin{corollary}[Monotonicity of the critical weight]\label{cor:mono}
+The continuous extension of the positive-radius critical weight, defined by $\tilde{\alpha}(0):=1/2$, is strictly increasing for $0\le h\le(1-\epsilon)\sbar$, with right derivative $\tilde{\alpha}'(0+)=\tilde{\kappa}(\sbar)>0$.
+\end{corollary}
+
+The proofs of Proposition~\ref{prop:critical} and both corollaries are given in \SM{S10}. A recorded weight below the critical weight gives a positive ambiguity premium, and a weight above it gives a negative premium. A single condition on the trigger locates this sign change relative to one half. The condition holds beyond the present model. Take any increasing scalar trigger $G(x)$ at the symmetric ordered endpoints $x_0-h$ and $x_0+h$, with the adverse weight on the lower endpoint. The affine critical weight exceeds one half if and only if the midpoint Jensen gap $G(x_0+h)+G(x_0-h)-2G(x_0)$ is positive. Locally, the displacement of the critical weight from one half has the sign of $G''(x_0)/G'(x_0)$. Convexity and the affine form therefore deliver the above-one-half result, with no role for ambiguity aversion. A vanishing Jensen gap places the critical weight exactly at one half.
+
+The trigger is strictly convex in $\sigma_p$ and strictly concave in $\sigma_p^{2}$. A declaration of the same relative radius in variance units therefore reverses the Jensen gap. It places the critical weight below one half. The location of the critical weight thus depends on the coordinate of the declared ambiguity set. Figure~\ref{fig:ratio} plots $V^{*}/I$ against $\alpha$ under both declarations. Each curve crosses the anchor level $\Vzero/I$ at its own critical weight, and the dispersion of the ratio widens with the radius. At a 10\% relative radius, the critical weight was 0.517 in standard-deviation units and 0.496 in variance units. The gap between the two grew with the radius. At a matched relative radius, the two coordinates select different pairs of endpoint volatilities. They therefore describe two different ambiguity sets. The choice between them is a modeling declaration, fixed by the second model assumption. The committee declares the ambiguity set in the units of its scenarios, and the directional labels are read against this declaration.
+
+Under the pre-commitment $\aMEU$ rule, the critical weight also moves with the reference project value. A directional label from this rule is therefore readable only with both the declared coordinate and the declared reference value. For a given calibration and radius, the affine label depends on the declared coordinate alone.
+
+The above-one-half result requires the Jensen-gap criterion to apply. Joint ambiguity over several channels has no natural pair of scalar ordered endpoints. The criterion then requires a declared path or ordering and a rederived trigger. \SM{S11} carries out this construction for one diagonal ordering over drift and volatility.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/fig2_trigger_ratio.pdf}
+\caption{Trigger ratio $V^{*}/I$ across recorded weights at three ambiguity radii. Directional labels indicate shifts from the no-ambiguity anchor. Panel (a) declares the ambiguity set in standard-deviation units. Panel (b) declares the same relative radius in variance units. Markers show the critical weight of each curve. The trigger is convex in $\sigma_p$ and concave in $\sigma_p^{2}$, so the critical weight lies above one half in panel (a) and below one half in panel (b).}
+\label{fig:ratio}
+\end{figure*}
+
+\subsection{Price relevance of the contested-price interval}
+
+The classification implied by the member triggers is read on the price axis. Converting each member trigger $V^{*}(\alpha_i,t)$ to the carbon-price scale gives the marginal carbon-price threshold
+\begin{equation}
+P^{*}_{i}=\frac{V^{*}(\alpha_i,t)\,\delta}{Q},\qquad \delta=r-\mu_c,
+\label{eq:price}
+\end{equation}
+where $\delta$ is the net discount margin. $Q$ denotes annual captured emissions, equal to the annual CO$_2$ output of the plant multiplied by the capture rate assumed by \citet{Sun2024}. Eq.~(\ref{eq:price}) equates the trigger with the present value $P^{*}Q/\delta$ of perpetual carbon-price-linked cash flows. The no-ambiguity threshold $P^{*}_{0}:=\Vzero\delta/Q$ is called the anchor threshold. Eq.~(\ref{eq:price}) applies a positive common factor, so the thresholds inherit the critical weight defined on triggers. Define the contested-price interval and its width as
+\begin{equation}
+\begin{aligned}
+C_t&:=\Bigl[\min_i P^{*}_{i},\;\max_i P^{*}_{i}\Bigr),\\
+B_t&:=\mathrm{width}(C_t)=\max_i P^{*}_{i}-\min_i P^{*}_{i}.
+\end{aligned}
+\label{eq:interval}
+\end{equation}
+The recorded weight vector $\{\alpha_i\}$ is the weight profile of the gate. For $h_t>0$, $P^{*}(\alpha)$ is affine and strictly decreasing. Two profiles with the same extreme weights therefore yield the same interval at a fixed positive radius. The gap between the two endpoint triggers is $2V^{*\prime}(\sbar)h_t+O(h_t^{3})$. To leading order, the width factorizes as
+\begin{equation}
+B_t\approx 2\,(\alpha_{\max}-\alpha_{\min})\,V^{*\prime}(\sbar)\,h_t\,\frac{\delta}{Q}.
+\label{eq:width}
+\end{equation}
+This approximation reproduced the exact width within 0.06\% over the primary radius range (\SM{S6.4}). The width is thus approximately the product of three factors. These are the recorded-weight range, the ambiguity radius, and the local trigger sensitivity in price units, $2V^{*\prime}(\sbar)\delta/Q$. At $h_t=0$, the width is zero, and no price produces a mixed classification. At a positive radius, the smallest and largest recorded weights set the two edges. A change in the weight of one member moves an edge, and the width, only when it changes one of these two values. The price-relevance condition uses the full min-max interval of Eq.~(\ref{eq:interval}).
+
+\paragraph{Price-relevance condition} At a gate, let $P_t$ denote the prevailing effective carbon price, called the prevailing price. The classification rule assigns member $i$ an invest classification when $P_t\ge P^{*}_{i}$ and a wait classification otherwise. Both classifications occur among members if and only if
+\begin{equation}
+P_t\in C_t\iff \min_i P^{*}_{i}\le P_t<\max_i P^{*}_{i}.
+\label{eq:relevance}
+\end{equation}
+Outside $C_t$, all members receive the same classification, even with distinct thresholds. The interval refers to a single point in time.
+
+\paragraph{Basis of the threshold} The comparison between the prevailing price and the member thresholds is meaningful only on a stated threshold basis. $P^{*}$ is a marginal carbon-price threshold under the stated cash-flow mapping. It excludes operating costs, the energy penalty, transport and storage costs, and subsidies. Excluded costs are properties of the project, and members differ only in their recorded weights. An excluded cost expressible as a common per-tonne adjustment therefore shifts every member threshold by the same amount. The member ordering and the interval width stay unchanged, and the classification at a fixed prevailing price may still move.
+
+\paragraph{Common adjustments} Two adjustments of practical interest act identically on every member threshold through different operations. A common per-tonne cost or subsidy shifts all thresholds by the same amount. With the perpetual trigger ratios held fixed, replacing the perpetuity with a common finite-horizon annuity multiplies all thresholds by the same factor. This accounting conversion differs from solving an option with a finite exercise horizon. Both adjustments are monotone and preserve the equality between a member threshold and the anchor threshold. The member ordering and the critical weight therefore stay unchanged, while the classification at a fixed prevailing price may move. The shift leaves the interval width and the absolute threshold error of the affine rule unchanged. The factor rescales both, so the error stays unchanged only in relative terms.
+
+Let $s$ denote a common per-tonne subsidy and $c$ a common per-tonne cost, both constant across members, and define $\Delta=c-s$. Every member threshold becomes $P^{*}_{i,\mathrm{obs}}=P^{*}_{i}+\Delta$, and the interval $C_t=[L,U)$ becomes $[L+\Delta,\,U+\Delta)$. In a sweep over $\Delta$, no net cost changed the classification at the gates of the application. The first change occurred at $\Delta\approx-10$\,CNY/t (\SM{S6.4.1}). A state-dependent or quantity-dependent component requires a different project-value specification.
+
+\paragraph{Member-specific adjustments} An adjustment varying across members changes the interval width by at most the spread of the adjustments. It can also reverse the member ordering and break the single equality defining the critical weight. The bound and the ordering-preserving spread are derived in \SM{S6.4.3}.
