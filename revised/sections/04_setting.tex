@@ -1,5 +1,7 @@
 \section{Decision setting and model inputs}
 
+The literature review identified a missing reporting object, a vector of member thresholds computed before any vote. Defining this object requires a precise gate decision. It also requires a clear split between the inputs members share and the single input varying across members.
+
 \subsection{The gate-level decision problem}
 
 Consider a sequence of review gates. At each gate, a project receives a binary invest-or-wait classification before the committee makes its collective decision. The committee also specifies an interval of forward volatilities, called the ambiguity set of the gate. Eq.~(\ref{eq:ambset}) parameterizes this set by a single radius around an anchor. Members share a common regulatory information set. Heterogeneity enters only through the weight $\alpha_i\in[0,1]$ recorded for member $i$ on the adverse endpoint of the ambiguity set.
@@ -77,3 +79,5 @@ The application-side input enters the model as a single number. The forward-vola
 \label{eq:ambset}
 \end{equation}
 where $\sigma_p$ denotes forward volatility and $h_t$ denotes the ambiguity radius. Radii quoted as percentages are relative radii $h_t/\sbar$. Every numerical result is evaluated on a finite grid, and its scope is stated with the result. The primary radius range covers relative radii up to 22\%. The extended range adds a 33\% stress radius. The method requires only a registered radius $h_t$ satisfying the cap. A committee may declare this radius directly or derive it from an auxiliary series, as in the application.
+
+These definitions fix the setting of the report. The committee shares the calibration, the project inputs, the ambiguity set, and the prevailing price. Members differ only in one recorded weight. Every member-level difference in the report therefore traces back to this weight. The remaining task is analytical. It maps each weight to a trigger, converts the triggers into prices, and states when the resulting report may be released.
