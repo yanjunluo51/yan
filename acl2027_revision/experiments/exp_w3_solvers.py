@@ -130,20 +130,21 @@ def instances():
                 yield dict(src="uniform-grid", N=N, M=Mb, T=T), inst
 
 
-rows = []
-for meta, inst in instances():
-    if inst.m == 0:
-        continue
-    L = true_optimum(inst)
-    Mdl = build_exact_model(inst)
-    rec = dict(meta, m=inst.m, L=L, full=L == inst.m, nvar=len(Mdl.lb), ncon=len(Mdl.rows),
-               G=sum(len(g) for g in _groups(inst)))
-    rec["highs-p1"] = solve_scipy(Mdl, True)
-    rec["highs-p0"] = solve_scipy(Mdl, False)
-    rec["highs-s1"] = solve_highspy(Mdl, 1)
-    rec["highs-s2"] = solve_highspy(Mdl, 2)
-    rec["cbc"] = solve_cbc(Mdl)
-    rec["cpsat"] = solve_cpsat(Mdl)
-    rows.append(rec)
-    print(json.dumps(rec, default=str), flush=True)
-json.dump(rows, open(OUT, "w"), indent=1, default=str)
+if __name__ == "__main__":
+    rows = []
+    for meta, inst in instances():
+        if inst.m == 0:
+            continue
+        L = true_optimum(inst)
+        Mdl = build_exact_model(inst)
+        rec = dict(meta, m=inst.m, L=L, full=L == inst.m, nvar=len(Mdl.lb), ncon=len(Mdl.rows),
+                   G=sum(len(g) for g in _groups(inst)))
+        rec["highs-p1"] = solve_scipy(Mdl, True)
+        rec["highs-p0"] = solve_scipy(Mdl, False)
+        rec["highs-s1"] = solve_highspy(Mdl, 1)
+        rec["highs-s2"] = solve_highspy(Mdl, 2)
+        rec["cbc"] = solve_cbc(Mdl)
+        rec["cpsat"] = solve_cpsat(Mdl)
+        rows.append(rec)
+        print(json.dumps(rec, default=str), flush=True)
+    json.dump(rows, open(OUT, "w"), indent=1, default=str)

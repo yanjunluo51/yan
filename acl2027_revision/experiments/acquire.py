@@ -13,7 +13,7 @@ def _cap_sorted(w, b):
     return capacity(w, b)
 
 
-def run_policy(inst, pred, policy, eps, seed=0, max_queries=None, oracle=False, record=None):
+def run_policy(inst, pred, policy, eps, seed=0, max_queries=None, oracle=False, record=None, rank=None, return_obs=False):
     """Runs an entry policy until V+ - V- <= eps. Returns number of queries.
     pred: (m,T) predicted contributions in [0, c]. With oracle=True the policy
     receives true contributions as predictions (diagnostic only)."""
@@ -24,9 +24,12 @@ def run_policy(inst, pred, policy, eps, seed=0, max_queries=None, oracle=False, 
     lo = np.where(obs, v, 0).sum(1).astype(np.int64)
     up = lo + np.where(obs, 0, c).sum(1)
     rng = np.random.default_rng(seed)
-    tie = rng.permutation(m)                     # seeded label-blind row priority
-    rank = np.empty(m, int)
-    rank[tie] = np.arange(m)
+    if rank is None:
+        tie = rng.permutation(m)                 # seeded label-blind row priority
+        rank = np.empty(m, int)
+        rank[tie] = np.arange(m)
+    else:
+        rank = np.asarray(rank)
     rand_order = [(i, r) for i in range(m) for r in range(T) if not obs[i, r]]
     rng.shuffle(rand_order)
     rptr = 0
@@ -37,7 +40,7 @@ def run_policy(inst, pred, policy, eps, seed=0, max_queries=None, oracle=False, 
         if record is not None:
             record.append((nq, vm, vp))
         if vp - vm <= eps:
-            return nq
+            return (nq, obs) if return_obs else nq
         if max_queries is not None and nq >= max_queries:
             return None
         unq = ~obs
