@@ -1,0 +1,412 @@
+\begin{thebibliography}{55}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Afrin and Shihab(2026)}]{afrin2026ensembles}
+Fariya Afrin and Ibne~Farabi Shihab. 2026.
+\newblock Evaluator ensembles under reward hacking: Covariance geometry and
+  finite-search guarantees.
+\newblock Preprint, arXiv:2608.08002.
+
+\bibitem[{Amarilli et~al.(2017)Amarilli, Amsterdamer, Milo, and
+  Senellart}]{amarilli2017topk}
+Antoine Amarilli, Yael Amsterdamer, Tova Milo, and Pierre Senellart. 2017.
+\newblock Top-k querying of unknown values under order constraints.
+\newblock In \emph{20th International Conference on Database Theory (ICDT
+  2017)}, volume~68 of \emph{Leibniz International Proceedings in Informatics
+  (LIPIcs)}, pages 5:1--5:18. Schloss Dagstuhl -- Leibniz-Zentrum f{\"u}r
+  Informatik.
+
+\bibitem[{Angelopoulos et~al.(2024)Angelopoulos, Bates, Fisch, Lei, and
+  Schuster}]{angelopoulos2024crc}
+Anastasios~N. Angelopoulos, Stephen Bates, Adam Fisch, Lihua Lei, and Tal
+  Schuster. 2024.
+\newblock Conformal risk control.
+\newblock In \emph{The Twelfth International Conference on Learning
+  Representations}, Vienna, Austria. OpenReview.net.
+
+\bibitem[{Asudeh et~al.(2018)Asudeh, Jagadish, Miklau, and
+  Stoyanovich}]{asudeh2018stable}
+Abolfazl Asudeh, H.~V. Jagadish, Gerome Miklau, and Julia Stoyanovich. 2018.
+\newblock On obtaining stable rankings.
+\newblock \emph{Proceedings of the VLDB Endowment}, 12(3):237--250.
+
+\bibitem[{Badshah et~al.(2026)Badshah, Emami, and Sajjad}]{badshah2026scope}
+Sher Badshah, Ali Emami, and Hassan Sajjad. 2026.
+\newblock {SCOPE}: Selective conformal optimized pairwise {LLM} judging.
+\newblock In \emph{Proceedings of the 43rd International Conference on Machine
+  Learning}, volume 306, pages 4894--4916. PMLR.
+
+\bibitem[{Bai and Jin(2026)}]{bai2026score}
+Tian Bai and Ying Jin. 2026.
+\newblock Conformal selective prediction with general risk control.
+\newblock Preprint, arXiv:2603.24704.
+
+\bibitem[{Bates et~al.(2021)Bates, Angelopoulos, Lei, Malik, and
+  Jordan}]{bates2021rcps}
+Stephen Bates, Anastasios~N. Angelopoulos, Lihua Lei, Jitendra Malik, and
+  Michael~I. Jordan. 2021.
+\newblock Distribution-free, risk-controlling prediction sets.
+\newblock \emph{Journal of the ACM}, 68(6):43:1--43:34.
+
+\bibitem[{Bertsimas and Sim(2004)}]{bertsimas2004price}
+Dimitris Bertsimas and Melvyn Sim. 2004.
+\newblock The price of robustness.
+\newblock \emph{Operations Research}, 52(1):35--53.
+
+\bibitem[{Black et~al.(2022)Black, Leino, and Fredrikson}]{black2022selective}
+Emily Black, Klas Leino, and Matt Fredrikson. 2022.
+\newblock Selective ensembles for consistent predictions.
+\newblock In \emph{The Tenth International Conference on Learning
+  Representations}. OpenReview.net.
+
+\bibitem[{Blanc et~al.(2022)Blanc, Koch, Lange, and
+  Tan}]{blanc2022certification}
+Guy Blanc, Caleb Koch, Jane Lange, and Li-Yang Tan. 2022.
+\newblock The query complexity of certification.
+\newblock In \emph{Proceedings of the 54th Annual ACM SIGACT Symposium on
+  Theory of Computing}, STOC '22, pages 623--636. ACM.
+
+\bibitem[{Busolin et~al.(2021)Busolin, Lucchese, Nardini, Orlando, Perego, and
+  Trani}]{busolin2021earlyexit}
+Francesco Busolin, Claudio Lucchese, Franco~Maria Nardini, Salvatore Orlando,
+  Raffaele Perego, and Salvatore Trani. 2021.
+\newblock Learning early exit strategies for additive ranking ensembles.
+\newblock In \emph{Proceedings of the 44th International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}, pages 2217--2221.
+  Association for Computing Machinery.
+
+\bibitem[{Charikar et~al.(2002)Charikar, Fagin, Guruswami, Kleinberg, Raghavan,
+  and Sahai}]{charikar2002priced}
+Moses Charikar, Ronald Fagin, Venkatesan Guruswami, Jon Kleinberg, Prabhakar
+  Raghavan, and Amit Sahai. 2002.
+\newblock Query strategies for priced information.
+\newblock \emph{Journal of Computer and System Sciences}, 64(4):785--819.
+
+\bibitem[{Chassein et~al.(2018)Chassein, Goerigk, Kasperski, and
+  Zieli{\'n}ski}]{chassein2018recoverable}
+Andr{\'e} Chassein, Marc Goerigk, Adam Kasperski, and Pawe{\l} Zieli{\'n}ski.
+  2018.
+\newblock On recoverable and two-stage robust selection problems with budgeted
+  uncertainty.
+\newblock \emph{European Journal of Operational Research}, 265(2):423--436.
+
+\bibitem[{Chen et~al.(2026)Chen, Goerigk, and Poss}]{chen2026robustselection}
+Xiaoyu Chen, Marc Goerigk, and Michael Poss. 2026.
+\newblock The robust selection problem with information discovery.
+\newblock \emph{Discrete Applied Mathematics}, 382:277--292.
+
+\bibitem[{Cheng et~al.(2026)Cheng, Dai, Ke, Chen, and
+  Qu}]{cheng2026multiexpert}
+Ming Cheng, Yusheng Dai, Qiuhong Ke, Zhaolin Chen, and Lizhen Qu. 2026.
+\newblock Multi-expert conformal risk control for pairwise {LLM} judging in
+  open-ended dialogue.
+\newblock Preprint, arXiv:2608.26529.
+
+\bibitem[{Coste et~al.(2024)Coste, Anwar, Kirk, and
+  Krueger}]{coste2024ensembles}
+Thomas Coste, Usman Anwar, Robert Kirk, and David Krueger. 2024.
+\newblock Reward model ensembles help mitigate overoptimization.
+\newblock In \emph{The Twelfth International Conference on Learning
+  Representations}. OpenReview.net.
+
+\bibitem[{Deshpande et~al.(2016)Deshpande, Hellerstein, and
+  Kletenik}]{deshpande2016submodular}
+Amol Deshpande, Lisa Hellerstein, and Devorah Kletenik. 2016.
+\newblock Approximation algorithms for stochastic submodular set cover with
+  applications to {B}oolean function evaluation and min-knapsack.
+\newblock \emph{ACM Transactions on Algorithms}, 12(3):42:1--42:28.
+
+\bibitem[{Deutsch et~al.(2023)Deutsch, Foster, and Freitag}]{deutsch2023ties}
+Daniel Deutsch, George Foster, and Markus Freitag. 2023.
+\newblock Ties matter: Meta-evaluating modern metrics with pairwise accuracy
+  and tie calibration.
+\newblock In \emph{Proceedings of the 2023 Conference on Empirical Methods in
+  Natural Language Processing}, pages 12914--12929, Singapore. Association for
+  Computational Linguistics.
+
+\bibitem[{Diwan et~al.(2026)Diwan, Hellerstein, Megow, and
+  Schl{\"o}ter}]{diwan2026matroid}
+Haya Diwan, Lisa Hellerstein, Nicole Megow, and Jens Schl{\"o}ter. 2026.
+\newblock Optimal verification of a minimum-weight basis in an uncertainty
+  matroid.
+\newblock In \emph{43rd International Symposium on Theoretical Aspects of
+  Computer Science (STACS 2026)}, volume 364 of \emph{Leibniz International
+  Proceedings in Informatics}, pages 32:1--32:20. Schloss Dagstuhl --
+  Leibniz-Zentrum f{\"u}r Informatik.
+
+\bibitem[{Eisenstein et~al.(2024)Eisenstein, Nagpal, Agarwal, Beirami, D'Amour,
+  Dvijotham, Fisch, Heller, Pfohl, Ramachandran, Shaw, and
+  Berant}]{eisenstein2024herding}
+Jacob Eisenstein, Chirag Nagpal, Alekh Agarwal, Ahmad Beirami, Alexander
+  D'Amour, DJ~Dvijotham, Adam Fisch, Katherine Heller, Stephen Pfohl, Deepak
+  Ramachandran, Peter Shaw, and Jonathan Berant. 2024.
+\newblock Helping or herding? reward model ensembles mitigate but do not
+  eliminate reward hacking.
+\newblock In \emph{First Conference on Language Modeling}. OpenReview.net.
+
+\bibitem[{Erlebach and Hoffmann(2015)}]{erlebach2015querycompetitive}
+Thomas Erlebach and Michael Hoffmann. 2015.
+\newblock Query-competitive algorithms for computing with uncertainty.
+\newblock \emph{Bulletin of the EATCS}, 116:22--39.
+
+\bibitem[{Erlebach et~al.(2021)Erlebach, Hoffmann, and {de
+  Lima}}]{erlebach2021parallel}
+Thomas Erlebach, Michael Hoffmann, and Murilo~Santos {de Lima}. 2021.
+\newblock Round-competitive algorithms for uncertainty problems with parallel
+  queries.
+\newblock In \emph{38th International Symposium on Theoretical Aspects of
+  Computer Science (STACS 2021)}, volume 187 of \emph{Leibniz International
+  Proceedings in Informatics (LIPIcs)}, pages 27:1--27:18. Schloss Dagstuhl --
+  Leibniz-Zentrum f{\"u}r Informatik.
+
+\bibitem[{Fabbri et~al.(2021)Fabbri, Kry{\'s}ci{\'n}ski, McCann, Xiong, Socher,
+  and Radev}]{fabbri2021summeval}
+Alexander~R. Fabbri, Wojciech Kry{\'s}ci{\'n}ski, Bryan McCann, Caiming Xiong,
+  Richard Socher, and Dragomir Radev. 2021.
+\newblock {SummEval}: Re-evaluating summarization evaluation.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  9:391--409.
+
+\bibitem[{Fagin et~al.(2003)Fagin, Lotem, and Naor}]{fagin2003middleware}
+Ronald Fagin, Amnon Lotem, and Moni Naor. 2003.
+\newblock Optimal aggregation algorithms for middleware.
+\newblock \emph{Journal of Computer and System Sciences}, 66(4):614--656.
+
+\bibitem[{Freitag et~al.(2024)Freitag, Mathur, Deutsch, Lo, Avramidis, Rei,
+  Thompson, Blain, Kocmi, Wang, Adelani, Buchicchio, Zerva, and
+  Lavie}]{freitag2024wmt24}
+Markus Freitag, Nitika Mathur, Daniel Deutsch, Chi-Kiu Lo, Eleftherios
+  Avramidis, Ricardo Rei, Brian Thompson, Frederic Blain, Tom Kocmi, Jiayi
+  Wang, David~Ifeoluwa Adelani, Marianna Buchicchio, Chrysoula Zerva, and Alon
+  Lavie. 2024.
+\newblock Are {LLM}s breaking {MT} metrics? results of the {WMT}24 metrics
+  shared task.
+\newblock In \emph{Proceedings of the Ninth Conference on Machine Translation},
+  pages 47--81, Miami, Florida, USA. Association for Computational Linguistics.
+
+\bibitem[{Freitag et~al.(2023)Freitag, Mathur, Lo, Avramidis, Rei, Thompson,
+  Kocmi, Blain, Deutsch, Stewart, Zerva, Castilho, Lavie, and
+  Foster}]{freitag2023wmt23}
+Markus Freitag, Nitika Mathur, Chi-kiu Lo, Eleftherios Avramidis, Ricardo Rei,
+  Brian Thompson, Tom Kocmi, Frederic Blain, Daniel Deutsch, Craig Stewart,
+  Chrysoula Zerva, Sheila Castilho, Alon Lavie, and George Foster. 2023.
+\newblock Results of {WMT}23 metrics shared task: Metrics might be guilty but
+  references are not innocent.
+\newblock In \emph{Proceedings of the Eighth Conference on Machine
+  Translation}, pages 578--628, Singapore. Association for Computational
+  Linguistics.
+
+\bibitem[{Gkenosis et~al.(2018)Gkenosis, Grammel, Hellerstein, and
+  Kletenik}]{gkenosis2018scoreclassification}
+Dimitrios Gkenosis, Nathaniel Grammel, Lisa Hellerstein, and Devorah Kletenik.
+  2018.
+\newblock The stochastic score classification problem.
+\newblock In \emph{26th Annual European Symposium on Algorithms (ESA 2018)},
+  volume 112 of \emph{Leibniz International Proceedings in Informatics
+  (LIPIcs)}, pages 36:1--36:14, Dagstuhl, Germany. Schloss Dagstuhl --
+  Leibniz-Zentrum f{\"u}r Informatik.
+
+\bibitem[{Goerigk et~al.(2015)Goerigk, Gupta, Ide, Sch{\"o}bel, and
+  Sen}]{goerigk2015knapsack}
+Marc Goerigk, Manoj Gupta, Jonas Ide, Anita Sch{\"o}bel, and Sandeep Sen. 2015.
+\newblock The robust knapsack problem with queries.
+\newblock \emph{Computers \& Operations Research}, 55:12--22.
+
+\bibitem[{Gupta and Manoj(2023)}]{gupta2023monotone}
+Meghal Gupta and Naren~Sarayu Manoj. 2023.
+\newblock An optimal algorithm for certifying monotone functions.
+\newblock In \emph{Proceedings of the 2023 Symposium on Simplicity in
+  Algorithms (SOSA)}, pages 207--212. Society for Industrial and Applied
+  Mathematics.
+
+\bibitem[{Imber and Kimelfeld(2020)}]{imber2020topk}
+Aviram Imber and Benny Kimelfeld. 2020.
+\newblock The complexity of determining the necessary and possible top-k
+  winners in partial voting profiles.
+\newblock Preprint, arXiv:2002.09212.
+
+\bibitem[{Imieli{\'n}ski and Lipski(1984)}]{imielinski1984incomplete}
+Tomasz Imieli{\'n}ski and Witold Lipski, Jr. 1984.
+\newblock Incomplete information in relational databases.
+\newblock \emph{Journal of the ACM}, 31(4):761--791.
+
+\bibitem[{Inoue(2019)}]{inoue2019adaptive}
+Hiroshi Inoue. 2019.
+\newblock Adaptive ensemble prediction for deep neural networks based on
+  confidence level.
+\newblock In \emph{Proceedings of the Twenty-Second International Conference on
+  Artificial Intelligence and Statistics}, volume~89 of \emph{Proceedings of
+  Machine Learning Research}, pages 1284--1293. PMLR.
+
+\bibitem[{Kalyanakrishnan et~al.(2012)Kalyanakrishnan, Tewari, Auer, and
+  Stone}]{kalyanakrishnan2012pac}
+Shivaram Kalyanakrishnan, Ambuj Tewari, Peter Auer, and Peter Stone. 2012.
+\newblock {PAC} subset selection in stochastic multi-armed bandits.
+\newblock In \emph{Proceedings of the 29th International Conference on Machine
+  Learning (ICML)}, pages 655--662, New York, NY, USA. Omnipress.
+
+\bibitem[{Kim(2026)}]{kim2026lottery}
+Bum~Jun Kim. 2026.
+\newblock Lottery tickets are not deployment tickets.
+\newblock Preprint, arXiv:2607.27031.
+
+\bibitem[{Li et~al.(2022)Li, Zhang, Xin, Zhang, and Lin}]{li2022pruning}
+Minghan Li, Xinyu Zhang, Ji~Xin, Hongyang Zhang, and Jimmy Lin. 2022.
+\newblock Certified error control of candidate set pruning for two-stage
+  relevance ranking.
+\newblock In \emph{Proceedings of the 2022 Conference on Empirical Methods in
+  Natural Language Processing}, pages 333--345, Abu Dhabi, United Arab
+  Emirates. Association for Computational Linguistics.
+
+\bibitem[{Lykouris and Vassilvitskii(2018)}]{lykouris2018caching}
+Thodoris Lykouris and Sergei Vassilvitskii. 2018.
+\newblock Competitive caching with machine learned advice.
+\newblock In \emph{Proceedings of the 35th International Conference on Machine
+  Learning}, volume~80 of \emph{Proceedings of Machine Learning Research},
+  pages 3296--3305. PMLR.
+
+\bibitem[{Malik et~al.(2026)Malik, Pyatkin, Land, Morrison, Smith, Hajishirzi,
+  and Lambert}]{malik2026rewardbench2}
+Saumya Malik, Valentina Pyatkin, Sander Land, Jacob Morrison, Noah~A. Smith,
+  Hannaneh Hajishirzi, and Nathan Lambert. 2026.
+\newblock {RewardBench} 2: Advancing reward model evaluation.
+\newblock In \emph{The Fourteenth International Conference on Learning
+  Representations}, Rio de Janeiro, Brazil. OpenReview.net.
+
+\bibitem[{Megow and Schl{\"o}ter(2023)}]{megow2023covering}
+Nicole Megow and Jens Schl{\"o}ter. 2023.
+\newblock Set selection under explorable stochastic uncertainty via covering
+  techniques.
+\newblock In \emph{Integer Programming and Combinatorial Optimization}, pages
+  319--333. Springer International Publishing.
+
+\bibitem[{Milani~Fard et~al.(2016)Milani~Fard, Cormier, Canini, and
+  Gupta}]{milanifard2016churn}
+Mahdi Milani~Fard, Quentin Cormier, Kevin Canini, and Maya Gupta. 2016.
+\newblock Launch and iterate: Reducing prediction churn.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~29.
+
+\bibitem[{Oettershagen(2026)}]{oettershagen2026topk}
+Lutz Oettershagen. 2026.
+\newblock Top-k on a budget: Adaptive ranking with weak and strong oracles.
+\newblock Preprint, arXiv:2601.20989.
+
+\bibitem[{Papamichalis et~al.(2026)Papamichalis, Ruane, and
+  Papamichalis}]{papamichalis2026replicable}
+Marios Papamichalis, Regina Ruane, and Theofanis Papamichalis. 2026.
+\newblock Replicable conformal prediction.
+\newblock Preprint, arXiv:2608.23638.
+
+\bibitem[{Perrella et~al.(2024)Perrella, Proietti, Huguet~Cabot, Barba, and
+  Navigli}]{perrella2024beyond}
+Stefano Perrella, Lorenzo Proietti, Pere-Llu{\'i}s Huguet~Cabot, Edoardo Barba,
+  and Roberto Navigli. 2024.
+\newblock Beyond correlation: Interpretable evaluation of machine translation
+  metrics.
+\newblock In \emph{Proceedings of the 2024 Conference on Empirical Methods in
+  Natural Language Processing}, pages 20689--20714, Miami, Florida, USA.
+  Association for Computational Linguistics.
+
+\bibitem[{Pony et~al.(2026)Pony, Goldfarb, Naparstek, Friedman, Barzelay, and
+  Schwartz}]{pony2026colbandit}
+Roi Pony, Adi~Raz Goldfarb, Oshri Naparstek, Idan Friedman, Udi Barzelay, and
+  Eli Schwartz. 2026.
+\newblock Col-bandit: Query-time top-k estimation for late-interaction
+  retrieval.
+\newblock Preprint, arXiv:2602.02827.
+
+\bibitem[{Prastalo and Jablonka(2026)}]{prastalo2026churn}
+Gordan Prastalo and Kevin~Maik Jablonka. 2026.
+\newblock Reducing cross-sample prediction churn in scientific machine
+  learning.
+\newblock Preprint, arXiv:2605.13826.
+
+\bibitem[{Purohit et~al.(2018)Purohit, Svitkina, and
+  Kumar}]{purohit2018predictions}
+Manish Purohit, Zoya Svitkina, and Ravi Kumar. 2018.
+\newblock Improving online algorithms via {ML} predictions.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~31.
+
+\bibitem[{Schl{\"o}ter(2025)}]{schloter2025knapsack}
+Jens Schl{\"o}ter. 2025.
+\newblock On the complexity of knapsack under explorable uncertainty: Hardness
+  and algorithms.
+\newblock In \emph{33rd Annual European Symposium on Algorithms (ESA 2025)},
+  volume 351 of \emph{Leibniz International Proceedings in Informatics}, pages
+  6:1--6:15. Schloss Dagstuhl -- Leibniz-Zentrum f{\"u}r Informatik.
+
+\bibitem[{Shayegh et~al.(2025)Shayegh, Peter, Vilar, Domhan, Juraska, Freitag,
+  and Mou}]{shayegh2025adequacy}
+Behzad Shayegh, Jan-Thorsten Peter, David Vilar, Tobias Domhan, Juraj Juraska,
+  Markus Freitag, and Lili Mou. 2025.
+\newblock Feeding two birds or favoring one? adequacy--fluency tradeoffs in
+  evaluation and meta-evaluation of machine translation.
+\newblock In \emph{Proceedings of the Tenth Conference on Machine Translation},
+  pages 269--285, Suzhou, China. Association for Computational Linguistics.
+
+\bibitem[{Soliman et~al.(2007)Soliman, Ilyas, and
+  Chang}]{soliman2007uncertaintopk}
+Mohamed~A. Soliman, Ihab~F. Ilyas, and Kevin Chen-Chuan Chang. 2007.
+\newblock Top-k query processing in uncertain databases.
+\newblock In \emph{Proceedings of the 23rd International Conference on Data
+  Engineering (ICDE)}, pages 896--905. IEEE.
+
+\bibitem[{Thakur et~al.(2024)Thakur, Choudhary, Ramayapally, Vaidyanathan, and
+  Hupkes}]{thakur2024judges}
+Aman~Singh Thakur, Kartik Choudhary, Venkat~Srinik Ramayapally, Sankaran
+  Vaidyanathan, and Dieuwke Hupkes. 2024.
+\newblock Judging the judges: Evaluating alignment and vulnerabilities in
+  {LLM}s-as-judges.
+\newblock Preprint, arXiv:2406.12624.
+
+\bibitem[{Wang et~al.(2024)Wang, Li, Chen, Cai, Zhu, Lin, Cao, Kong, Liu, Liu,
+  and Sui}]{wang2024fair}
+Peiyi Wang, Lei Li, Liang Chen, Zefan Cai, Dawei Zhu, Binghuai Lin, Yunbo Cao,
+  Lingpeng Kong, Qi~Liu, Tianyu Liu, and Zhifang Sui. 2024.
+\newblock Large language models are not fair evaluators.
+\newblock In \emph{Proceedings of the 62nd Annual Meeting of the Association
+  for Computational Linguistics (Volume 1: Long Papers)}, pages 9440--9450,
+  Bangkok, Thailand. Association for Computational Linguistics.
+
+\bibitem[{Watson-Daniels et~al.(2025)Watson-Daniels, du~Pin~Calmon, D'Amour,
+  Long, Parkes, and Ustun}]{watsondaniels2025churn}
+Jamelle Watson-Daniels, Flavio du~Pin~Calmon, Alexander D'Amour, Carol Long,
+  David~C. Parkes, and Berk Ustun. 2025.
+\newblock Predictive churn with the set of good models.
+\newblock Preprint, arXiv:2402.07745.
+
+\bibitem[{Wu et~al.(2022)Wu, Zhang, Guo, Chen, Fan, de~Rijke, and
+  Cheng}]{wu2022wordsub}
+Chen Wu, Ruqing Zhang, Jiafeng Guo, Wei Chen, Yixing Fan, Maarten de~Rijke, and
+  Xueqi Cheng. 2022.
+\newblock Certified robustness to word substitution ranking attack for neural
+  ranking models.
+\newblock In \emph{Proceedings of the 31st ACM International Conference on
+  Information \& Knowledge Management}, pages 2128--2137. Association for
+  Computing Machinery.
+
+\bibitem[{Yeh et~al.(2025)Yeh, Christianson, Wierman, and Yue}]{yeh2025crt}
+Christopher Yeh, Nicolas Christianson, Adam Wierman, and Yisong Yue. 2025.
+\newblock Conformal risk training: End-to-end optimization of conformal risk
+  control.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~38, pages 70056--70092. Curran Associates, Inc.
+
+\bibitem[{Zhang et~al.(2026)Zhang, Fang, Wang, Li, Dai, and
+  You}]{zhang2026bestofevidence}
+Cenwei Zhang, Teng Fang, Yuxia Wang, Derek Li, Bryan Dai, and Lei You. 2026.
+\newblock Best-of-evidence: Best-of-{N} selection under partial verification.
+\newblock Preprint, arXiv:2607.20950.
+
+\bibitem[{Zheng et~al.(2023)Zheng, Chiang, Sheng, Zhuang, Wu, Zhuang, Lin, Li,
+  Li, Xing, Zhang, Gonzalez, and Stoica}]{zheng2023judging}
+Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao
+  Zhuang, Zi~Lin, Zhuohan Li, Dacheng Li, Eric~P. Xing, Hao Zhang, Joseph~E.
+  Gonzalez, and Ion Stoica. 2023.
+\newblock Judging {LLM}-as-a-judge with {MT}-bench and chatbot arena.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~36, pages 46595--46623, New Orleans, LA, USA. Curran Associates, Inc.
+
+\end{thebibliography}

@@ -7,3 +7,8 @@
 build*.log
 *.spl
 CAIE_main_revised_src.pdf
+acl2027_revision/paper/*.aux
+acl2027_revision/paper/*.log
+acl2027_revision/paper/*.out
+acl2027_revision/paper/*.blg
+acl2027_revision/experiments/__pycache__/

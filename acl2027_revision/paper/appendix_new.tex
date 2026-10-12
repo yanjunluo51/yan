@@ -1,0 +1,372 @@
+% New appendices R-X added in the revision.  They follow the original
+% Appendices A-Q.  Counters continue the original numbering (Propositions
+% 1-12, Corollaries 1-3, Lemma 1, Tables 1-80, Algorithms 1-2).
+\documentclass[11pt]{article}
+\usepackage[review]{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\setcounter{theorem}{3}
+\setcounter{proposition}{12}
+\setcounter{corollary}{3}
+\setcounter{lemma}{1}
+\setcounter{table}{80}
+
+\newcommand{\Qj}{Q_{\mathrm{joint}}}
+\newcommand{\Qu}{Q_{\cup,\mathrm{sep}}}
+\newcommand{\Qs}{Q_{\mathrm{split}}}
+\newcommand{\Qx}{Q_{\mathrm{exact}}}
+\newcommand{\bH}{b_H}
+\newcommand{\Sz}{S_0}
+\newcommand{\ind}{\mathbf{1}}
+
+\begin{document}
+\setcounter{page}{101}
+\renewcommand{\thesection}{\Alph{section}}
+\setcounter{section}{17}
+
+\section{Alternative Churn Objectives}
+\label{app:objectives}
+The main certificates average churn uniformly over the declared replacements. This appendix treats fixed nonuniform replacement weights (R.1) and caps that every individual replacement must satisfy (R.2). Throughout, the batch, maps, cutoff, candidate family and completion model of Section 4 are unchanged.
+
+\subsection{Fixed replacement weights}
+\label{app:weights}
+Let $w_{jr}\ge0$ with $\sum_{j,r}w_{jr}=1$ be declared before candidate-test scores are seen, and write $w_{jr}=n_{jr}/W$ with integers $n_{jr}\ge0$ and $W=\sum_{j,r}n_{jr}$ (for real weights, any rational approximation from below gives a conservative certificate). For candidate score $x$ on row $i$, the weighted contribution of candidate $r$ is
+\[
+g_{ir}(x)=\sum_{j=1}^{M}n_{jr}\,\ind\big[\sigma_P(i)\neq\sigma_{P^{j\to r}(x)}(i)\big],
+\]
+where $P^{j\to r}(x)$ gives candidate $r$ score $x$ on row $i$,
+an integer in units of $1/W$, and the weighted churn is $R_w(C)=\sum_{i\in C}\sum_r g_{ir}(s_r(i))/(2kW)$. Uniform weights ($n_{jr}=1$, $W=H$) recover Equation 2. Since every indicator is monotone in $x$, a selected row has the column-dependent cap $c_{ir}=g_{ir}(0)$, and $g_{ir}(1)=0$. Write $v_{ir}=g_{ir}(s_r(i))$ for the true contribution and $b_W=\lfloor 2k\alpha W\rfloor$ for the integer budget; $R_w(C)\le\alpha$ is equivalent to $\sum_{i\in C}\sum_rv_{ir}\le b_W$.
+
+\begin{proposition}[Weighted families]
+\label{prop:weighted}
+Under fixed nonnegative rational replacement weights:
+\begin{enumerate}
+\item[(i)] With $\ell_i=\sum_{r\in O_i}v_{ir}$ and $u_i=\ell_i+\sum_{r\notin O_i}c_{ir}$, Proposition 1 holds with budget $b_W$, and both bound vectors are attained by consistent completions.
+\item[(ii)] Theorem 3 characterizes the minimum additional entry certificate after replacing the row state $(a_i,v_i)$ by $(|J|,\sum_{r\in J}v_{ir},\sum_{r\in J}(c_{ir}-v_{ir}))$, with $u_i=u_i^0-\sum_{r\in J}(c_{ir}-v_{ir})$. The outcome-count program of Proposition 4 remains exact after grouping unobserved entries of a row by the pair $(c_{ir},v_{ir})$; each row has at most $T$ groups.
+\item[(iii)] The sandwich $\Qj\le\Qu\le\Qs\le2\Qj$ holds.
+\item[(iv)] For odd-median pools, every contribution satisfies $v_{ir}\in\{0,c_{ir}\}$; hence $\Qj=\Qu=\Qs$ for every history and integer tolerance.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(i) Each $g_{ir}$ is nonincreasing on a selected row, with maximum $c_{ir}$ at $x=0$ and zero at $x=1$, so $\ell_i\le\sum_rv_{ir}\le u_i$. Without cross-entry constraints, assigning all unobserved entries zero or one realizes $u$ or $\ell$ simultaneously; the sorted-prefix and capacity arguments of Proposition 1 use only nonnegative integer costs.
+(ii) The proof of Theorem 3 (Appendix M.5) uses three facts: a query raises its row's lower cost by its contribution and lowers its upper cost by cap minus contribution; joint endpoint attainability; and Lemma 1, which holds for any nonnegative integer lower costs. With column-dependent caps the upper-cost reduction of a subset $J$ is no longer determined by $(|J|,\sum v)$, which is why the state records it. Entries with equal $(c,v)$ in a row are interchangeable, which gives the grouped program. The budget-indexed dynamic program is pseudo-polynomial in the weight scale $W$.
+(iii) The proof of Proposition 5 uses only that both bounds improve monotonically under additional observations and that a minimum joint witness is feasible for each component; neither depends on the weights.
+(iv) A boundary row has exactly $h+1$ voting members. A candidate score below $t_0$ flips the row under the replacement of every voting member and no other, so $v_{ir}=\sum_{j\ \mathrm{voting}}n_{jr}=c_{ir}$; a score at or above $t_0$ flips none. Take a minimum joint witness $X$ and its safe target. Entries with $c_{ir}=0$ affect neither bound and can be dropped. The entries with $v_{ir}=0$ certify the same upper costs and hence safety, and the entries with $v_{ir}=c_{ir}>0$ certify the same lower costs and hence exclusion. These sets are disjoint, so $\Qs\le|X|=\Qj$. This is Corollary 3 with $d^*=0$.
+\end{proof}
+Part (iv) shows that the disjointness of odd-median evidence is structural, not a consequence of uniform weights. The closed forms of Theorems 1 and 2 do not carry over: with unequal caps the separate safety minimum for a fixed row set takes the largest available caps, but choosing the row set becomes a cardinality-constrained knapsack. We compute weighted minima with the program in (ii).
+
+\paragraph{Does the factor-two separation survive nonuniform weights?} The upper bound in (iii) holds for every weight vector. The next result shows that the tight family of Proposition 9 is not an artifact of exact uniformity.
+
+\begin{proposition}[Factor-two family under nearly uniform weights]
+\label{prop:perturb}
+For even $T\ge2$ and $M=T+1$, take the realizable scores of Proposition 9 with $N=2$, $k=1$ and $\alpha_T=(T+\frac12)/(2MT)$, so that the uniform-weight flip budget is $\lfloor 2k\alpha_TH\rfloor=T$ and Proposition 9 applies. Let $\omega_{jr}=MTw_{jr}$ denote weights normalized to mean one. If $|\omega_{jr}-1|<1/(2MT)$ for every $(j,r)$, then $\Qj=T+1$ and $\Qu=\Qs=2T$.
+\end{proposition}
+\begin{proof}
+Memberships, and hence which replacements flip each row, do not depend on the weights. In units where every weight is $\omega_{jr}$, the condition $R_w(C)\le\alpha_T$ reads $\sum_{i\in C}\sum_{(j,r)\ \mathrm{flipping}}\omega_{jr}\le T+\frac12$. Under uniform weights every row-cost quantity is an integer, so its comparison with $T+\frac12$ has slack at least $\frac12$. A single row's lower or upper cost sums at most $MT$ weights, and the two-row lower-cost sum used for exclusion sums at most $T+1$ weights, so their perturbed values change by less than $\frac12$ and every one-row feasibility test and every exclusion test has the same outcome as under uniform weights. No two-row set is ever feasible: the true two-row cost sums $T+1$ weights and exceeds $(T+1)(1-\frac1{2MT})>T+\frac12$, and upper costs dominate true costs. Hence the same query subsets certify safety, exclusion and their combination, and all minima coincide with those of Proposition 9.
+\end{proof}
+The same argument gives local constancy in general: if every uniform-weight feasibility comparison of an instance is strict, all certificate minima are constant on a neighborhood of uniform weights whose radius is the smallest slack divided by the largest number of summed weights.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}rrrrrr@{}}
+\toprule
+$T$ & $M$ & $\delta/\delta^\star$ & Draws & Preserved & $\overline{\Qu/\Qj}$\\
+\midrule
+2 & 3 & 0.9 & 100 & 100 & 1.333\\
+2 & 3 & 2 & 100 & 100 & 1.333\\
+2 & 3 & 5 & 100 & 69 & 1.230\\
+2 & 3 & 10 & 100 & 27 & 1.090\\
+2 & 3 & 20 & 100 & 11 & 1.037\\
+4 & 5 & 0.9 & 100 & 100 & 1.600\\
+4 & 5 & 2 & 100 & 100 & 1.600\\
+4 & 5 & 5 & 100 & 100 & 1.600\\
+4 & 5 & 10 & 100 & 69 & 1.484\\
+4 & 5 & 20 & 100 & 23 & 1.250\\
+6 & 7 & 0.9 & 40 & 40 & 1.714\\
+6 & 7 & 2 & 40 & 40 & 1.714\\
+6 & 7 & 5 & 40 & 40 & 1.714\\
+6 & 7 & 10 & 40 & 40 & 1.714\\
+6 & 7 & 20 & 40 & 14 & 1.479\\
+\bottomrule
+\end{tabular}
+\caption{Perturbed replacement weights on the Proposition 9 construction with $\alpha_T=(T+\frac12)/(2MT)$, exact stopping. Normalized weights are drawn as $\omega_{jr}=1+\delta U_{jr}$, $U_{jr}\sim\mathrm{Unif}(-1,1)$, with $\delta^\star=1/(2MT)$ the radius of Proposition~\ref{prop:perturb}. Preserved counts draws with $\Qj=T+1$ and $\Qu=\Qs=2T$; the last column averages $\Qu/\Qj$. Uniform weights give $\Qu/\Qj=2T/(T+1)$.}
+\label{tab:perturb}
+\end{table}
+
+Table~\ref{tab:perturb} checks Proposition~\ref{prop:perturb} with exact joint, union and split programs. Inside the guaranteed radius every draw preserves the separation; the separation also survives considerably larger perturbations ($2$--$10\delta^\star$ depending on $T$) before it erodes.
+
+\paragraph{Sensitivity on a controlled panel.} Table~\ref{tab:dirichlet} draws replacement weights from a symmetric Dirichlet distribution over the $H=49$ replacements of the RB-like synthetic panel (Appendix X), mean pooling, with concentration $\kappa\in\{\infty,10,1,0.3\}$ ($\kappa=\infty$ is uniform). Concentrating the weights leaves zero-query coverage almost unchanged but shrinks minimum certificates: columns whose replacements carry little weight contribute small caps, so fewer of their entries are needed. At $\alpha=.10$ every instance permits full retention, so exclusion is automatic and joint, union and split minima coincide. At $\alpha=.02$, exclusion is required in the tight-budget instances; the table reports the resulting strict gains.
+
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{1.6pt}
+\begin{tabular}{@{}lr rrr rrr@{}}
+\toprule
+& & \multicolumn{3}{c}{$\alpha=.10$} & \multicolumn{3}{c}{$\alpha=.02$, exact}\\
+\cmidrule(lr){3-5}\cmidrule(l){6-8}
+$\kappa$ & $q$ & Zero & $\Qj$ prim. & $\Qj$ exact & Full & $\Qj$ & Gains\\
+\midrule
+$\infty$ & 0.05 & 20.1 & 443.7 & 461.0 & -- & -- & --\\
+$\infty$ & 0.30 & 75.3 & 804.7 & 891.8 & -- & -- & --\\
+10 & 0.05 & 20.1 & 439.7 & 458.0 & -- & -- & --\\
+10 & 0.30 & 75.3 & 782.1 & 871.9 & -- & -- & --\\
+1 & 0.05 & 20.1 & 421.6 & 444.8 & -- & -- & --\\
+1 & 0.30 & 75.4 & 660.0 & 747.4 & -- & -- & --\\
+0.3 & 0.05 & 20.1 & 383.6 & 411.6 & -- & -- & --\\
+0.3 & 0.30 & 75.2 & 533.4 & 616.2 & -- & -- & --\\
+\bottomrule
+\end{tabular}
+\caption{Dirichlet replacement weights on the RB-like synthetic panel (mean pooling, ten splits per row). Zero: zero-query selected coverage (\%). $\Qj$: mean minimum joint entry count. Full: splits whose full-information optimum retains every selected output. Gains: splits with $\Qj<\Qu$. All programs closed numerically.}
+\label{tab:dirichlet}
+\end{table}
+
+\subsection{Certifying every single replacement}
+\label{app:caps}
+If an operator will execute one replacement from the declared family and wants the guarantee whichever it is, the relevant constraint is a per-replacement cap
+\[
+R_{jr}(C)=\frac{|(\Sz(P)\triangle\Sz(P^{j\to r}))\cap C|}{2k}\le\alpha
+\]
+for all $(j,r)$,
+equivalently at most $c=\lfloor 2k\alpha\rfloor$ committed flips per replacement. For a selected row $i$ write $\varphi_i^{jr}(x)=\ind[\sigma_P(i)\neq\sigma_{P^{j\to r}(x)}(i)]$. Given a history, let $\bar\varphi_i^{jr}$ be the observed indicator if $(i,r)$ is observed and $\varphi_i^{jr}(0)$ otherwise, and let $\underline\varphi_i^{jr}$ be the observed indicator or zero.
+
+\begin{proposition}[Sharp verification]
+\label{prop:capverify}
+For every mask $C$ of selected and invariant rows, the maximum over consistent completions of $R_{jr}(C)$ equals $\sum_{i\in C}\bar\varphi_i^{jr}/(2k)$ for all $(j,r)$ simultaneously, attained by assigning zero to every unobserved selected-row entry; the minimum equals $\sum_{i\in C}\underline\varphi_i^{jr}/(2k)$, attained by assigning one. Hence
+\begin{align*}
+V^-_{\max}&=\max\Big\{|C|:\textstyle\sum_{i\in C}\bar\varphi_i^{jr}\le c\ \forall (j,r)\Big\},\\
+V^+_{\max}&=\max\Big\{|C|:\textstyle\sum_{i\in C}\underline\varphi_i^{jr}\le c\ \forall (j,r)\Big\}
+\end{align*}
+satisfy $V^-_{\max}\le V^*_{\max}\le V^+_{\max}$, a maximizing mask for $V^-_{\max}$ meets every per-replacement cap in every consistent completion, and $V^+_{\max}-V^-_{\max}\le\varepsilon$ certifies a count within $\varepsilon$ of the per-replacement optimum. Verifying a given mask costs $O(|C|MT)$.
+\end{proposition}
+\begin{proof}
+Each indicator is monotone in the candidate score of its own entry, and for a selected row a score of zero maximizes all $M$ indicators of that entry at once, while a score of one makes them all zero. Without cross-entry constraints the extreme assignments can be made for all unobserved entries simultaneously, so the per-replacement worst and best cases are attained jointly by one completion each. The capacity statements follow as in Proposition 1, with integer programs replacing sorting.
+\end{proof}
+
+\begin{proposition}[Per-replacement optimization is NP-hard]
+\label{prop:nphard}
+Computing the full-information optimum $V^*_{\max}$ is NP-hard, even for odd-median pools of any fixed size $M=2h+1$ and cap $c=1$.
+\end{proposition}
+\begin{proof}
+Reduce from maximum independent set \citep{garey1979computers}. Given a graph $G=(\mathcal V,\mathcal E)$, create one output per vertex. Every output receives base scores $1$ from the first $h+1$ base evaluators and $0$ from the other $h$, so with cutoff $t_0=\frac12$ fixed by construction every output is a selected boundary row whose voting members are the same $h+1$ evaluators. Create one candidate per edge $e=\{u,v\}$ with score $0$ on outputs $u,v$ and $1$ elsewhere. Replacing a voting member $j$ by candidate $e$ flips exactly outputs $u$ and $v$; replacing a nonvoting member flips nothing. Take $N=|\mathcal V|$, $q\le1/(2N)$ so that $k=1$, and $\alpha=\frac12$, so $c=1$. A mask is feasible for every replacement if and only if it contains at most one endpoint of each edge, i.e., it is an independent set. Hence $V^*_{\max}$ equals the independence number of $G$.
+\end{proof}
+The average objective is solved by sorting, so the hardness is specific to requiring every replacement to meet the budget. Exact count gaps under per-replacement caps therefore require integer programs; feasibility of a proposed mask remains cheap to certify.
+
+\begin{proposition}[Relations between objectives]
+\label{prop:relations}
+(i) A mask meeting every per-replacement cap at $\alpha$ meets the average budget $\alpha$. (ii) If $\sum_{i\in C}u_i\le c=\lfloor 2k\alpha\rfloor$, then $C$ meets every per-replacement cap in every consistent completion. Thus running the average certificate of Section 4 with budget $c$ (that is, average budget $\alpha/H$) certifies the per-replacement objective, and Theorems 1--3 apply with $\bH$ replaced by $c$. (iii) For a known single replacement $j\to r$, row costs are Boolean and only column $r$ is informative; Theorems 1 and 2 apply with one candidate, opposition budget $c$ and boundary set the rows that $j\to r$ can flip, so an exact certificate with $c\le L<m$ needs $\max(0,L-c)+c+1+(m-L-1)=m$ entries.
+\end{proposition}
+\begin{proof}
+(i) An average of quantities each at most $\alpha$ is at most $\alpha$. (ii) For each replacement, $\sum_{i\in C}\bar\varphi_i^{jr}\le\sum_{i\in C}\sum_{j',r'}\bar\varphi_i^{j'r'}=\sum_{i\in C}u_i\le c$. (iii) With one replacement, an observed entry reveals the row's single indicator and an unobserved flippable row has upper cost one; substituting $T=1$ and $b=c$ into Theorems 1 and 2 gives the count.
+\end{proof}
+
+\begin{table*}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lllrrrrrrrr@{}}
+\toprule
+& & & \multicolumn{2}{c}{Full information} & \multicolumn{3}{c}{0\% revealed} & \multicolumn{2}{c}{50\% revealed} & Avg.\ mask\\
+\cmidrule(lr){4-5}\cmidrule(lr){6-8}\cmidrule(lr){9-10}
+Panel & Pool & $q$ & Avg. & Max & Avg. & Max & $\alpha/H$ & Avg. & Max & violates (\%)\\
+\midrule
+RB-like & median & 0.05 & 100.0 & 97.7 & 95.3 & 88.6 & 59.2 & 99.5 & 92.0 & 70\\
+RB-like & median & 0.10 & 100.0 & 100.0 & 99.7 & 97.0 & 69.6 & 100.0 & 98.7 & 0\\
+RB-like & median & 0.20 & 100.0 & 100.0 & 100.0 & 100.0 & 74.0 & 100.0 & 100.0 & 0\\
+RB-like & median & 0.30 & 100.0 & 100.0 & 100.0 & 100.0 & 78.4 & 100.0 & 100.0 & 0\\
+RB-like & mean & 0.05 & 100.0 & 90.0 & 20.1 & 20.1 & 0.0 & 48.3 & 46.2 & 90\\
+RB-like & mean & 0.10 & 100.0 & 99.3 & 25.6 & 24.9 & 4.7 & 54.5 & 52.4 & 50\\
+RB-like & mean & 0.20 & 100.0 & 100.0 & 56.9 & 54.4 & 32.0 & 79.2 & 76.9 & 0\\
+RB-like & mean & 0.30 & 100.0 & 100.0 & 75.3 & 73.4 & 48.8 & 92.9 & 90.4 & 0\\
+MT-like & median & 0.05 & 99.9 & 86.1 & 82.7 & 73.3 & 46.7 & 94.2 & 78.1 & 100\\
+MT-like & median & 0.10 & 100.0 & 94.8 & 89.8 & 85.6 & 53.8 & 98.8 & 89.1 & 100\\
+MT-like & median & 0.20 & 100.0 & 98.8 & 94.8 & 91.4 & 59.8 & 100.0 & 95.4 & 60\\
+MT-like & median & 0.30 & 100.0 & 100.0 & 99.8 & 94.6 & 68.0 & 100.0 & 98.3 & 0\\
+MT-like & mean & 0.05 & 100.0 & 92.0 & 21.7 & 21.7 & 0.0 & 47.6 & 43.2 & 100\\
+MT-like & mean & 0.10 & 100.0 & 95.8 & 26.6 & 24.9 & 2.8 & 52.0 & 47.7 & 100\\
+MT-like & mean & 0.20 & 100.0 & 99.9 & 51.9 & 47.2 & 24.5 & 73.1 & 68.0 & 20\\
+MT-like & mean & 0.30 & 100.0 & 100.0 & 69.4 & 65.1 & 39.8 & 87.1 & 82.3 & 0\\
+\bottomrule
+\end{tabular}
+\caption{Average versus per-replacement (Max) objectives on the synthetic panels at $\alpha=.10$: certified selected coverage (\%), mean over ten splits. Revealed fractions use a seeded random order of active entries. $\alpha/H$ is the sortable sufficient reduction of Proposition~\ref{prop:relations}(ii). The last column reports the percentage of splits whose full-information average-optimal mask exceeds $\alpha$ for at least one single replacement. All integer programs closed.}
+\label{tab:caps}
+\end{table*}
+
+Table~\ref{tab:caps} compares the objectives on the controlled panels. The per-replacement cap costs coverage mainly at small depths, where few outputs absorb each replacement's flips (e.g., MT-like median at $q=.05$: 99.9\% versus 86.1\% under full information), and the sortable $\alpha/H$ reduction is far more conservative than the exact per-replacement certificate. Average-optimal masks violate some individual cap in 43\% of synthetic splits, consistent with the NLP diagnostic in Appendix I, where 6,985 of 15,360 average-certified masks exceed $.10$ for some replacement. Operators who need per-replacement guarantees should therefore certify that objective directly rather than reuse an average certificate.
+
+\section{Constrained Score Completions}
+\label{app:lattice}
+Section 4 lets unobserved scores range independently over $[0,1]$. Here we ask which verifiable cross-entry constraints keep the certificate computable and sharp. Fix a history $\mathcal O$ and a constraint set $\mathcal K$ that the true candidate-test matrix is known to satisfy. Let $\Omega_{\mathcal K}(\mathcal O)$ be the set of score matrices consistent with $\mathcal O$ and $\mathcal K$, ordered coordinatewise.
+
+\begin{proposition}[Lattice completions]
+\label{prop:lattice}
+Suppose $\Omega_{\mathcal K}(\mathcal O)$ has a coordinatewise greatest element $s^\uparrow$ and least element $s^\downarrow$. For selected rows define $\ell_i^{\mathcal K}=\sum_{r\in O_i}f_{ir}+\sum_{r\notin O_i}f_i(s^\uparrow_{ir})$ and $u_i^{\mathcal K}=\sum_{r\in O_i}f_{ir}+\sum_{r\notin O_i}f_i(s^\downarrow_{ir})$. Then $\ell^{\mathcal K}\le F\le u^{\mathcal K}$, both vectors are attained in $\Omega_{\mathcal K}(\mathcal O)$, and Proposition 1 holds with these bounds, which are sharp over $\Omega_{\mathcal K}(\mathcal O)$. Moreover $\ell\le\ell^{\mathcal K}$ and $u^{\mathcal K}\le u$, so every certificate under the rectangular model remains valid and minimum certificate sizes cannot increase. The same holds for weighted contributions and per-replacement indicators.
+\end{proposition}
+\begin{proof}
+On a selected row $f_i$ is nonincreasing, and $s^\downarrow\le s\le s^\uparrow$ for every $s\in\Omega_{\mathcal K}(\mathcal O)$; summing gives the bounds. The two extreme matrices belong to the set and realize them simultaneously for all rows. Capacities are monotone in costs. The rectangular set contains $\Omega_{\mathcal K}(\mathcal O)$, which gives the comparison.
+\end{proof}
+
+\begin{proposition}[Difference constraints and envelopes]
+\label{prop:envelope}
+Let $\mathcal K$ consist of score bounds $0\le s_r(i)\le1$ and difference constraints $s_r(i)-s_r(i')\le\delta_r(i',i)$ for each candidate $r$, where $\delta_r\ge0$ (possibly $+\infty$) satisfies the triangle inequality $\delta_r(a,c)\le\delta_r(a,b)+\delta_r(b,c)$ and $\delta_r(a,a)=0$. If the observations $O_r$ in column $r$ satisfy the constraints among themselves, the column's feasible set is nonempty, with greatest and least elements
+\begin{align*}
+U_r(i)&=\min\{1,\ \min_{o\in O_r}s_r(o)+\delta_r(o,i)\},\\
+\Lambda_r(i)&=\max\{0,\ \max_{o\in O_r}s_r(o)-\delta_r(i,o)\}.
+\end{align*}
+Columns are independent, so Proposition~\ref{prop:lattice} applies with $s^\uparrow=U$ and $s^\downarrow=\Lambda$. Updating one column after a query costs $O(n)$ for $n$ outputs.
+\end{proposition}
+\begin{proof}
+Feasibility of $U_r$: it lies in $[0,1]$ because scores and $\delta$ are nonnegative; at an observed output the term $o$ itself gives $U_r(o)\le s_r(o)$, and consistency of the observations gives equality. For any $i,i'$, if $U_r(i')=1$ then $U_r(i)-U_r(i')\le0\le\delta_r(i',i)$; otherwise let $o'$ attain $U_r(i')$, so $U_r(i)\le s_r(o')+\delta_r(o',i)\le s_r(o')+\delta_r(o',i')+\delta_r(i',i)=U_r(i')+\delta_r(i',i)$. Greatest: every feasible column satisfies $s_r(i)\le s_r(o)+\delta_r(o,i)$ and $s_r(i)\le1$. The argument for $\Lambda_r$ is symmetric.
+\end{proof}
+Three useful special cases are (a) \emph{Lipschitz constraints with slack}, $\delta_r(i,i')=L_rd(i,i')+\eta_r$ for a declared metric $d$ on outputs (for example, an embedding distance); (b) \emph{monotonicity} with respect to a known preorder, e.g., a candidate known to be order-consistent with a base evaluator, with $\delta_r(i',i)=0$ when $i$ must not score above $i'$ and $+\infty$ otherwise; and (c) per-entry \emph{score supports} $[a_{ir},b_{ir}]$, whose feasible set is a product of intervals. Difference constraints between candidates on the same output, such as a declared agreement band, also keep the feasible set closed under coordinatewise maxima and minima; its extreme elements are then computed by shortest paths over the joint constraint graph. Constraints that couple scores nonmonotonically, such as low-rank structure, generally do not form a lattice.
+
+Two consequences differ from the rectangular model. First, an observation now tightens other entries of its column, so Theorems 1--3 no longer give the minimum certificate; minima can only decrease, and queries on nonselected outputs can become informative. Second, validity rests on the constraint itself. A constant estimated from reference data yields only a conditional guarantee, and a constraint that holds with stated probability transfers that probability to the certificate only under simultaneous validity over the adaptive history (Appendix K.4).
+
+\paragraph{Controlled study.} We keep the ECDF-normalized base scores of the RB-like panel (Appendix X) and generate the seven candidates' normalized test scores as $g_r(z_i)+\xi_{ir}$, where $z_i\in[0,1]$ is a one-dimensional output feature, $g_r$ is a random piecewise-linear function with slope at most $L$, and $\xi_{ir}\sim\mathrm{Unif}(-\eta/2,\eta/2)$. The declared constraint $|s_r(i)-s_r(i')|\le L|z_i-z_{i'}|+\eta$ is therefore valid. A misspecified run uses $(L/2,\eta/2)$. Mean pooling, $\alpha=.10$, ten splits per setting, and largest-width acquisition that queries, in the widest row, the candidate with the widest envelope. Table~\ref{tab:lipschitz} shows that valid constraints reduce inspection substantially, most when the slack is small and the batch is deep. The misspecified constraint stops earlier still, but 14--46\% of unobserved active entries lie outside its envelopes at stopping, and 12 of 80 exact-stop certificates are invalid (realized churn above $\alpha$ or certified count above $V^*$); no valid-constraint certificate failed. These synthetic scores are smoother than real evaluator outputs; the study illustrates the mechanism, not the size of NLP savings.
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}rrr rrr rr@{}}
+\toprule
+& & & \multicolumn{3}{c}{Primary inspection (\%)} & \multicolumn{2}{c}{Invalid (exact)}\\
+\cmidrule(lr){4-6}\cmidrule(l){7-8}
+$L$ & $\eta$ & $q$ & Rect. & Valid & Missp. & Valid & Missp.\\
+\midrule
+1 & 0.05 & 0.05 & 95.9 & 31.0 & 9.7 & 0 & 2\\
+1 & 0.05 & 0.30 & 71.9 & 8.0 & 1.5 & 0 & 0\\
+1 & 0.2 & 0.05 & 95.7 & 62.5 & 22.1 & 0 & 3\\
+1 & 0.2 & 0.30 & 72.2 & 19.6 & 3.8 & 0 & 1\\
+4 & 0.05 & 0.05 & 95.9 & 40.8 & 13.8 & 0 & 3\\
+4 & 0.05 & 0.30 & 72.3 & 4.1 & 1.6 & 0 & 0\\
+4 & 0.2 & 0.05 & 95.5 & 68.1 & 27.7 & 0 & 3\\
+4 & 0.2 & 0.30 & 72.6 & 17.6 & 2.7 & 0 & 0\\
+\bottomrule
+\end{tabular}
+\caption{Lipschitz-with-slack completions on a controlled panel: mean active-entry inspection at primary stopping ($\varepsilon=\lceil.02|\Sz|\rceil$) under the rectangular model, the valid constraint $(L,\eta)$ and a misspecified one $(L/2,\eta/2)$, ten splits per row; invalid exact-stop certificates out of ten.}
+\label{tab:lipschitz}
+\end{table}
+
+\section{Acquisition Exploiting the Odd-Median Closed Forms}
+\label{app:omcf}
+Theorems 1 and 2 describe what a minimum odd-median certificate looks like: agreements inside a feasible set of $L^*$ rows, and oppositions capped at a common level $t^*$. OM-CF turns this structure into an acquisition rule. We describe it in opposition units; the implementation works in flip units, which is equivalent because every opposition contributes $h+1$ flips.
+
+\paragraph{Policy.} Let $\pi_{ir}\in[0,1]$ be a predicted opposition probability for an unqueried boundary entry; we use the reference ridge predictions of Section 6, $\pi_{ir}=\hat f_{ir}/(h+1)$ clipped to $[0,1]$. Predicted row costs are $\hat z_i=o_i+\sum_{r\in U_i}\pi_{ir}$, rounded and clipped to $[o_i,T-a_i]$. With current safe and optimistic boundary counts $v^-\le v^+$, set $\hat L=\min(v^+,\max(v^-,V_B(\hat z)))$ and choose a target $s\in[\max(v^-,\hat L-\varepsilon),\hat L]$ minimizing the predicted residual cost of Corollary 1: the agreements needed to make the $s$ rows with smallest $\hat z$ safe, plus, for $p=s+\varepsilon+1\le m$, the fewest predicted oppositions that make $\sum_i\min(o_i,t)\ge b+1+(m-p)t$ for some integer $t$ (Lemma 1). Let $A_s$ be those $s$ rows and $t$ the minimizing threshold. With deficits $D_s=\sum_{i\in A_s}u_i-b$ and $D_e=b+1+(m-p)t-\sum_i\min(o_i,t)$, the priority of an unqueried entry is
+\[
+\ind[i\in A_s]\frac{1-\pi_{ir}}{D_s}+\ind[o_i<t]\frac{\pi_{ir}}{D_e},
+\]
+omitting a term whose deficit is nonpositive or whose target is already met. Ties use the seeded row priority and candidate index; if no entry has positive priority, OM-CF falls back to largest width. Each step costs $O(mT\log(mT))$ for the target search.
+
+\begin{proposition}[Consistency]
+\label{prop:omcf}
+For odd-median pools, empty history and exact stopping, if the predictions are exact ($\pi_{ir}=y_{ir}$), OM-CF stops after exactly $\Qx$ queries.
+\end{proposition}
+\begin{proof}
+With exact predictions $\hat z=z$. Proposition 1 gives $v^-\le L^*\le v^+$ at every history, so $\hat L=L^*$ and, since $\varepsilon=0$, the target is $s=L^*$ throughout. $A_s$ is a fixed set of $L^*$ rows of smallest true cost, which is truly feasible. Agreements are queried only in $A_s$ and oppositions never change upper costs, so rows outside $A_s$ keep upper cost $T$ and $A_s$ minimizes $\sum_{i\in C}u_i$ over truly feasible $L^*$-row sets at every history; hence the safety residual of Proposition 3 equals $(\sum_{i\in A_s}u_i-b)_+$, starting at $\max(0,L^*T-b)$. The safety term gives positive priority exactly to unobserved agreements in $A_s$, each of which lowers this residual by one. The exclusion term gives positive priority only to unobserved oppositions in rows with $o_i<t$, where $t$ minimizes the exact remaining count; such a query lowers $D_e$ by one and hence that minimum by one. The minimum cannot drop by more than one per query, since otherwise a smaller certificate would exist, so the exclusion residual of Proposition 3, which starts at $B_0+(m-p)t^*$ (Theorem 2), falls by exactly one. No query with zero priority is made while a residual is positive, because a positive residual implies an unobserved useful entry: $\sum_{A_s}(T-a_i)>b\ge\sum_{A_s}z_i$ leaves an agreement, and a positive exclusion deficit with a finite count leaves an opposition below level $t$. When both residuals vanish, $V^-\ge m_0+L^*\ge V^+$ and the policy stops. The total is $\max(0,L^*T-b)+B_0+(m-p)t^*=\Qx$; for $L^*=m$ only the safety part is needed.
+\end{proof}
+Exhaustive enumeration confirms the proposition and also covers positive tolerance: on 2,262 random odd-median instances ($m\le6$, $T\le5$, caps $h+1\le3$, every budget, every tolerance $0\le\varepsilon\le m$), oracle OM-CF attains $Q_\varepsilon$ of Corollary 1 exactly. In the terminology of learning-augmented algorithms \citep{lykouris2018caching,purohit2018predictions}, OM-CF is consistent. It cannot also be robust, because Propositions 7 and 8 lower-bound every always-valid policy linearly in batch size.
+
+\paragraph{Learned predictions.} Table~\ref{tab:omcf} evaluates OM-CF with reference-ridge predictions on the synthetic median panels (Appendix X), against the original policies and oracle OM-CF, as splitwise ratios to the matching closed-form minimum. Reference priority attains ratios of 1.84--1.91, close to the NLP ratios in Section 7.3 (1.662--1.968). OM-CF with learned predictions is worse (2.10--2.19): with noisy opposition probabilities, targeted exclusion queries are often wasted, whereas reference priority's safety-first ordering is more forgiving. OM-CF beats reference priority on only 9 of 76 of the targets with positive minima. We therefore do not replace reference priority, and report OM-CF as a consistency result whose practical value depends on prediction quality. NLP-panel runs use the released code (Appendix X).
+
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{1.5pt}
+\begin{tabular}{@{}ll rrrrrr@{}}
+\toprule
+Panel & Stop & Fixed & Rand. & Width & Ref. & OM-CF & Oracle\\
+\midrule
+RB-like & exact & 2.03 & 2.32 & 2.13 & 1.91 & 2.17 & 1.00\\
+RB-like & primary & 2.08 & 2.23 & 2.13 & 1.84 & 2.19 & 1.00\\
+MT-like & primary & 2.04 & 2.17 & 2.24 & 1.85 & 2.13 & 1.00\\
+MT-like & exact & 2.07 & 2.12 & 2.18 & 1.87 & 2.10 & 1.00\\
+\bottomrule
+\end{tabular}
+\caption{Median entry acquisition on the synthetic panels, $\alpha=.10$, four depths and ten splits: mean splitwise ratio of queries to the matching closed-form minimum $Q_\varepsilon$ (Corollary 1), over targets with positive minima; primary uses $\varepsilon=\lceil.02|\Sz|\rceil$. Oracle is OM-CF with exact predictions.}
+\label{tab:omcf}
+\end{table}
+
+\section{When Does Joint Optimization Help?}
+\label{app:predict}
+Section 7.3 shows that strict gains beyond optimal deduplication are rare and confined to targets that need exclusion evidence. This appendix states which of these conditions can be checked before candidate-test scoring and evaluates a simple pre-scoring screen.
+
+\begin{proposition}[Pre-scoring conditions]
+\label{prop:prescore}
+Fix a history $\mathcal O$ and tolerance $\varepsilon$. (i) If $|\Sz|-V^-(\mathcal O)\le\varepsilon$, then $\Qj=\Qu=\Qs=0$. (ii) Call an active row a \emph{staircase row} if $f_i$ takes a value strictly between $0$ and $p_i$ on $[0,1]$; for mean pooling this holds exactly when the replacement thresholds $\tau_{ij}=Mt_0-\sum_{j'}s_{j'}(i)+s_j(i)$ take at least two distinct values in $(0,1]$. If no unobserved entry lies in a staircase row, then $\Qj=\Qu=\Qs$. Both conditions use only base scores, the cutoff, the budget and the history.
+\end{proposition}
+\begin{proof}
+(i) The empty set of additional queries certifies the gap. (ii) Every unobserved contribution is $0$ or $p_i$, so every minimum joint witness has $I(X)=\emptyset$ and $d^*=0$; Corollary 3 gives equality. For mean pooling $f_i(x)=|\{j:x<\tau_{ij}\}|$ with all $\tau_{ij}\le1$ on a selected row, which takes an intermediate value if and only if two positive thresholds differ.
+\end{proof}
+Odd medians have no staircase rows, which is another view of Theorem 2's disjointness; mean pools usually do. The decisive ex post condition is whether exclusion is needed at all. If $V^*+\varepsilon\ge|\Sz|$, all NLP targets in Appendix M.9 had an optimal witness with automatic exclusion, and full retention ($V^*=|\Sz|$) provably removes any gain. $V^*$ is unknown before scoring, but reference-fitted predictions give a plug-in screen
+\[
+\hat E=\ind\big[\hat V^*+\varepsilon<|\Sz|\big],
+\]
+where $\hat V^*=m_0+V(\hat F)$ and $\hat F_i=\sum_r\hat f_{ir}$ are
+computed from base scores and reference fits alone.
+
+\paragraph{Controlled evaluation.} On the two synthetic panel families with mean pooling, four depths, ten splits and $\alpha\in\{.02,.05,.10\}$, we compute $\Qj$ and $\Qu$ for every target (Table~\ref{tab:predict}). Of 51 targets, 30 are numerically closed and 28 of these show a strict gain; 28 of the 28 gains occur where exclusion is needed ($V^*+\varepsilon<|\Sz|$), and no full-retention target has a gain. 0 targets stop without queries. Staircase rows are present in 51 of 51 targets, so condition (ii) of Proposition~\ref{prop:prescore} rarely applies to mean pools. The plug-in screen flags 51 targets; Table~\ref{tab:predict} reports its recall and precision. Because the reference ridge overestimates costs (mean $\hat V^*$ is 25.6 against mean $V^*$ 77.6), the screen is conservative: it rarely misses a gain but flags many targets without one. It is therefore useful to decide when a minimum safety witness suffices (unflagged targets), not to predict gains.
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llrrrrr@{}}
+\toprule
+Panel & Stop & Targets & Excl. & Gains & $\hat E$ recall & $\hat E$ prec.\\
+\midrule
+RB-like & exact & 15 & 15 & 13/15 & 1.00 & 0.87\\
+RB-like & primary & 14 & 14 & 4/4 & 1.00 & 1.00\\
+MT-like & exact & 11 & 11 & 11/11 & 1.00 & 1.00\\
+MT-like & primary & 11 & 11 & 0/0 & -- & --\\
+\bottomrule
+\end{tabular}
+\caption{Pre-scoring screen for joint gains on synthetic mean panels. Excl.: targets with $V^*+\varepsilon<|\Sz|$ (exclusion needed, computed ex post). Gains: targets with $\Qj<\Qu$ among numerically closed targets. Recall: fraction of gain targets flagged by $\hat E$; precision: fraction of flagged targets with a gain.}
+\label{tab:predict}
+\end{table}
+
+\section{Choosing a Reference Mapping}
+\label{app:mapping}
+Section 7.6 and Appendix K show that switching from right to midrank ECDF can change zero-query coverage and inspection dramatically. The reason is that mapping changes the selection task itself. Appendix K shows which transformations preserve the task: a common strictly increasing map of all scores and the cutoff for odd medians, and a common positive affine map for means. Separate evaluator-wise ECDF refits are not of this form, so they change the base list (Jaccard $0.77$ on thirteen-stream WMT23) and the share of selected outputs at the cutoff (28.8\% versus 7.3\%), which in turn changes the boundary mass that certificates must handle.
+
+No mapping can make certification difficulty invariant across datasets, because difficulty depends on the test batch: its boundary mass, its budget and its true costs. Replicable calibration \citep{papamichalis2026replicable} addresses a different property: it can make the fitted cutoff stable across reference draws, which the reference bootstrap in Appendix K.2 quantifies (on thirteen-stream WMT23 median, the cutoff standard deviation is $.0115$ when only the cutoff is resampled). We therefore recommend the following protocol.
+\begin{enumerate}
+\item Treat the mapping, the reference-size rule and the tie convention as part of the selection protocol, and fix them before any candidate-test score is seen.
+\item Choose them for selection validity, e.g., to respect each metric's score resolution and tie behavior \citep{deutsch2023ties}, not to reduce certification cost, since a cheaper certificate for a different list is not an improvement for the original one.
+\item Report, from reference data only, the share of selected outputs exactly at the cutoff and on the odd-median boundary, and the bootstrap stability of the cutoff and base list (Appendix K.2).
+\item Report the initial gap $|\Sz|-V^-(0)$ and the invariant/noninvariant decomposition of zero-query retention (Appendix G.1) on the test batch, which together determine whether queries are needed.
+\end{enumerate}
+We also checked whether a reference-only boundary share could serve as a protocol-selection score. On the synthetic panels of Appendix X, across six reference protocols (full, half and quarter reference groups $\times$ right and midrank ECDF), median pooling, $q\in\{.05,.10\}$ and ten splits, its Spearman correlation with the test-batch exact minimum, zero-query coverage and reference-priority inspection was at most $0.27$ in absolute value. Because these panels have few cutoff ties, they cannot reproduce the WMT23 effect; we report this only to explain why we recommend reporting, not optimizing, such diagnostics.
+
+\section{Solver Sensitivity of the Joint Program}
+\label{app:solvers}
+The full-batch minima in Appendix M.9 were computed with HiGHS through SciPy. To test sensitivity to the solver and its settings, we export the exact-stop outcome-count program (Proposition 4, safe target $L^*$) for identical instances to five configurations: HiGHS with presolve on and off, HiGHS with random seeds 1 and 2 (one thread), and COIN-OR CBC 2.10 (one thread), plus the OR-Tools CP-SAT solver on the equivalent pure-integer model (one worker). Each configuration has a nominal 60-second limit. Instances are the synthetic panels (two families, $\alpha\in\{.02,.10\}$, $q\in\{.05,.30\}$, splits 0--2) and a constructed uniform-score grid in the spirit of Appendix M.7 (mean pooling, cutoff $.5$, $q=.30$, $\alpha=.10$, $N\in\{512,2048\}$, $M\in\{7,15\}$, $T\in\{17,33\}$). 
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Configuration & Closed & Agree & Median s & Max s\\
+\midrule
+
+\bottomrule
+\end{tabular}
+\caption{Solver sensitivity of the exact-stop joint program. Closed: instances solved to proven optimality within 60\,s. Agree: closed instances whose optimum equals the consensus value of all closing configurations. Times include unresolved attempts.}
+\label{tab:solvers}
+\end{table}
+
+\section{Synthetic Panels and Reproducibility of the Revision Experiments}
+\label{app:synthetic}
+The new experiments in Appendices R--W use controlled synthetic panels because they test mechanisms of the certificate model (weights, caps, constraints, acquisition and solvers) rather than NLP effects. Each panel draws a latent quality $q_i=g_{\mathrm{grp}(i)}+e_i$ with group effect $g\sim\mathcal N(0,0.6^2)$ and $e\sim\mathcal N(0,1)$, a shared nuisance factor $\nu_i\sim\mathcal N(0,1)$, and evaluator scores $\lambda_eq_i+\gamma_e\nu_i+\sigma_e\epsilon_{ie}$ with $\lambda_e\sim\mathrm{Unif}(.6,1)$, $\gamma_e\sim\mathcal N(0,s^2)$ and $\sigma_e\sim\mathrm{Unif}(.35,.9)$; a fraction of evaluators is rounded to half-units to create ties. \emph{RB-like}: 1,200 groups of four outputs, 14 evaluators, $s=.35$, no ties, $M=T=7$. \emph{MT-like}: 450 groups of twelve outputs, 24 evaluators, $s=.5$, 30\% rounded evaluators, $M=7$, $T=17$. Panel seeds are 101 and 202. The protocol is that of Appendix B: group splits by Python \texttt{random.Random(1000+r).shuffle} into thirds, right ECDF maps and reference-consensus cutoff fitted on the reference third, $k=\max(1,\mathrm{round}(qN))$, ridge priorities with penalty one, seeded label-blind tie order, and the same stopping rules.
+
+The code package \texttt{experiments/} contains \texttt{certlib.py} (bounds, capacities, exact joint, separate and union programs, odd-median closed forms), \texttt{acquire.py} (all acquisition policies including OM-CF), \texttt{maxcap.py}, and one script per experiment, with JSON outputs and logs. Before use, the library was checked against exhaustive query-subset enumeration on 1,205 random instances with histories, column-dependent caps and all tolerances, and on 300 odd-median instances against Corollary 1, with no mismatch. The Proposition~\ref{prop:weighted}(iv) check enumerates 8,987 weighted endpoint-only cases. All scripts also accept cached NLP score matrices in place of the synthetic generator, so the same analyses can be rerun on the panels of Section 7. Experiments ran on a four-core CPU machine with Python 3.13, NumPy 2.5, SciPy 1.18 (HiGHS), PuLP 2.9 (CBC) and OR-Tools 9.15.
+
+\bibliography{references}
+\end{document}
