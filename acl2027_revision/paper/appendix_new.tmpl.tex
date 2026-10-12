@@ -92,7 +92,7 @@ $T$ & $M$ & $\delta/\delta^\star$ & Draws & Preserved & $\overline{\Qu/\Qj}$\\
 
 Table~\ref{tab:perturb} checks Proposition~\ref{prop:perturb} with exact joint, union and split programs. Inside the guaranteed radius every draw preserves the separation; the separation also survives considerably larger perturbations ($2$--$10\delta^\star$ depending on $T$) before it erodes.
 
-\paragraph{Sensitivity on a controlled panel.} Table~\ref{tab:dirichlet} draws replacement weights from a symmetric Dirichlet distribution over the $H=49$ replacements of the RB-like synthetic panel (Appendix X), mean pooling, with concentration $\kappa\in\{\infty,10,1,0.3\}$ ($\kappa=\infty$ is uniform). Concentrating the weights leaves zero-query coverage almost unchanged but shrinks minimum certificates: columns whose replacements carry little weight contribute small caps, so fewer of their entries are needed. At $\alpha=.10$ every instance permits full retention, so exclusion is automatic and joint, union and split minima coincide. At $\alpha=.02$, exclusion is required in %%Q1C_EXCL; the table reports the resulting strict gains.
+\paragraph{Sensitivity on a controlled panel.} Table~\ref{tab:dirichlet} draws replacement weights from a symmetric Dirichlet distribution over the $H=49$ replacements of the RB-like synthetic panel (Appendix X), mean pooling, with concentration $\kappa\in\{\infty,10,1,0.3\}$ ($\kappa=\infty$ is uniform). Concentrating the weights leaves zero-query coverage almost unchanged but shrinks minimum certificates: columns whose replacements carry little weight contribute small caps, so fewer of their entries are needed. At $\alpha=.10$ every instance permits full retention, so exclusion is automatic and joint, union and split minima coincide. At $\alpha=.02$, exclusion is required in %%Q1C_EXCL. Strict gains then appear in 56 of the 62 targets whose joint and union programs closed within 60\,s, under every concentration, with a mean saving of 4.7 entries and at most 1.6\% of the best union. On this panel, nonuniform weights change certificate sizes but neither remove nor amplify the modest sharing advantage.
 
 \begin{table}[t]
 \centering\footnotesize
@@ -106,7 +106,7 @@ $\kappa$ & $q$ & Zero & $\Qj$ prim. & $\Qj$ exact & Full & $\Qj$ & Gains\\
 %%TABLE_R2
 \bottomrule
 \end{tabular}
-\caption{Dirichlet replacement weights on the RB-like synthetic panel (mean pooling, ten splits per row). Zero: zero-query selected coverage (\%). $\Qj$: mean minimum joint entry count. Full: splits whose full-information optimum retains every selected output. Gains: splits with $\Qj<\Qu$. All programs closed numerically.}
+\caption{Dirichlet replacement weights on the RB-like synthetic panel (mean pooling, ten splits per row). Zero: zero-query selected coverage (\%). $\Qj$: mean minimum joint entry count. Full: splits whose full-information optimum retains every selected output. Gains: splits with $\Qj<\Qu$ among those whose joint and union programs closed within 60\,s (denominator). All $\alpha=.10$ programs closed.}
 \label{tab:dirichlet}
 \end{table}
 

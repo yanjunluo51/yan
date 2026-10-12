@@ -49,10 +49,11 @@ for k in order:
         h = t[(t.kappa == k) & (t.q == q)] if len(t) else t
         if len(h):
             full = int((h.full_cov >= 1 - 1e-12).sum())
-            gains = int(((h.union - h.joint) > 0).sum())
+            ok = h[h.closed & np.isfinite(h.union.astype(float))]
+            gains = f"{int(((ok.union - ok.joint) > 0).sum())}/{len(ok)}"
             excl_total += len(h) - full
             n_tight += len(h)
-            line += f" & {full}/{len(h)} & {h.joint.mean():.1f} & {gains}/{len(h)}"
+            line += f" & {full}/{len(h)} & {h.joint.mean():.1f} & {gains}"
         else:
             line += " & -- & -- & --"
         rows.append(line + "\\\\")

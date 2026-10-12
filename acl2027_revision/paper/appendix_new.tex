@@ -106,7 +106,7 @@ $T$ & $M$ & $\delta/\delta^\star$ & Draws & Preserved & $\overline{\Qu/\Qj}$\\
 
 Table~\ref{tab:perturb} checks Proposition~\ref{prop:perturb} with exact joint, union and split programs. Inside the guaranteed radius every draw preserves the separation; the separation also survives considerably larger perturbations ($2$--$10\delta^\star$ depending on $T$) before it erodes.
 
-\paragraph{Sensitivity on a controlled panel.} Table~\ref{tab:dirichlet} draws replacement weights from a symmetric Dirichlet distribution over the $H=49$ replacements of the RB-like synthetic panel (Appendix X), mean pooling, with concentration $\kappa\in\{\infty,10,1,0.3\}$ ($\kappa=\infty$ is uniform). Concentrating the weights leaves zero-query coverage almost unchanged but shrinks minimum certificates: columns whose replacements carry little weight contribute small caps, so fewer of their entries are needed. At $\alpha=.10$ every instance permits full retention, so exclusion is automatic and joint, union and split minima coincide. At $\alpha=.02$, exclusion is required in the tight-budget instances; the table reports the resulting strict gains.
+\paragraph{Sensitivity on a controlled panel.} Table~\ref{tab:dirichlet} draws replacement weights from a symmetric Dirichlet distribution over the $H=49$ replacements of the RB-like synthetic panel (Appendix X), mean pooling, with concentration $\kappa\in\{\infty,10,1,0.3\}$ ($\kappa=\infty$ is uniform). Concentrating the weights leaves zero-query coverage almost unchanged but shrinks minimum certificates: columns whose replacements carry little weight contribute small caps, so fewer of their entries are needed. At $\alpha=.10$ every instance permits full retention, so exclusion is automatic and joint, union and split minima coincide. At $\alpha=.02$, exclusion is required in 80 of the 80 tight-budget instances (those whose full-information optimum cannot retain every selected output). Strict gains then appear in 56 of the 62 targets whose joint and union programs closed within 60\,s, under every concentration, with a mean saving of 4.7 entries and at most 1.6\% of the best union. On this panel, nonuniform weights change certificate sizes but neither remove nor amplify the modest sharing advantage.
 
 \begin{table}[t]
 \centering\footnotesize
@@ -117,17 +117,17 @@ Table~\ref{tab:perturb} checks Proposition~\ref{prop:perturb} with exact joint, 
 \cmidrule(lr){3-5}\cmidrule(l){6-8}
 $\kappa$ & $q$ & Zero & $\Qj$ prim. & $\Qj$ exact & Full & $\Qj$ & Gains\\
 \midrule
-$\infty$ & 0.05 & 20.1 & 443.7 & 461.0 & -- & -- & --\\
-$\infty$ & 0.30 & 75.3 & 804.7 & 891.8 & -- & -- & --\\
-10 & 0.05 & 20.1 & 439.7 & 458.0 & -- & -- & --\\
-10 & 0.30 & 75.3 & 782.1 & 871.9 & -- & -- & --\\
-1 & 0.05 & 20.1 & 421.6 & 444.8 & -- & -- & --\\
-1 & 0.30 & 75.4 & 660.0 & 747.4 & -- & -- & --\\
-0.3 & 0.05 & 20.1 & 383.6 & 411.6 & -- & -- & --\\
-0.3 & 0.30 & 75.2 & 533.4 & 616.2 & -- & -- & --\\
+$\infty$ & 0.05 & 20.1 & 443.7 & 461.0 & 0/10 & 470.0 & 8/10\\
+$\infty$ & 0.30 & 75.3 & 804.7 & 891.8 & 0/10 & 1732.2 & 5/8\\
+10 & 0.05 & 20.1 & 439.7 & 458.0 & 0/10 & 472.4 & 8/8\\
+10 & 0.30 & 75.3 & 782.1 & 871.9 & 0/10 & 1724.8 & 4/4\\
+1 & 0.05 & 20.1 & 421.6 & 444.8 & 0/10 & 463.3 & 8/9\\
+1 & 0.30 & 75.4 & 660.0 & 747.4 & 0/10 & 1691.5 & 6/6\\
+0.3 & 0.05 & 20.1 & 383.6 & 411.6 & 0/10 & 462.3 & 10/10\\
+0.3 & 0.30 & 75.2 & 533.4 & 616.2 & 0/10 & 1641.9 & 7/7\\
 \bottomrule
 \end{tabular}
-\caption{Dirichlet replacement weights on the RB-like synthetic panel (mean pooling, ten splits per row). Zero: zero-query selected coverage (\%). $\Qj$: mean minimum joint entry count. Full: splits whose full-information optimum retains every selected output. Gains: splits with $\Qj<\Qu$. All programs closed numerically.}
+\caption{Dirichlet replacement weights on the RB-like synthetic panel (mean pooling, ten splits per row). Zero: zero-query selected coverage (\%). $\Qj$: mean minimum joint entry count. Full: splits whose full-information optimum retains every selected output. Gains: splits with $\Qj<\Qu$ among those whose joint and union programs closed within 60\,s (denominator). All $\alpha=.10$ programs closed.}
 \label{tab:dirichlet}
 \end{table}
 
@@ -312,7 +312,7 @@ Odd medians have no staircase rows, which is another view of Theorem 2's disjoin
 where $\hat V^*=m_0+V(\hat F)$ and $\hat F_i=\sum_r\hat f_{ir}$ are
 computed from base scores and reference fits alone.
 
-\paragraph{Controlled evaluation.} On the two synthetic panel families with mean pooling, four depths, ten splits and $\alpha\in\{.02,.05,.10\}$, we compute $\Qj$ and $\Qu$ for every target (Table~\ref{tab:predict}). Of 70 targets, 41 are numerically closed and 39 of these show a strict gain; 39 of the 39 gains occur where exclusion is needed ($V^*+\varepsilon<|\Sz|$), and no full-retention target has a gain. 0 targets stop without queries. Staircase rows are present in 70 of 70 targets, so condition (ii) of Proposition~\ref{prop:prescore} rarely applies to mean pools. The plug-in screen flags 70 targets; Table~\ref{tab:predict} reports its recall and precision. Because the reference ridge overestimates costs (mean $\hat V^*$ is 35.2 against mean $V^*$ 95.5), the screen is conservative: it rarely misses a gain but flags many targets without one. It is therefore useful to decide when a minimum safety witness suffices (unflagged targets), not to predict gains.
+\paragraph{Controlled evaluation.} On the two synthetic panel families with mean pooling, four depths, ten splits and $\alpha\in\{.02,.05,.10\}$, we compute $\Qj$ and $\Qu$ for every target (Table~\ref{tab:predict}). Of 144 targets, 78 are numerically closed and 67 of these show a strict gain; 67 of the 67 gains occur where exclusion is needed ($V^*+\varepsilon<|\Sz|$), and no full-retention target has a gain. 0 targets stop without queries. Staircase rows are present in 144 of 144 targets, so condition (ii) of Proposition~\ref{prop:prescore} rarely applies to mean pools. The plug-in screen flags 144 targets; Table~\ref{tab:predict} reports its recall and precision. Because the reference ridge overestimates costs (mean $\hat V^*$ is 134.1 against mean $V^*$ 215.0), the screen is conservative: it rarely misses a gain but flags many targets without one. It is therefore useful to decide when a minimum safety witness suffices (unflagged targets), not to predict gains.
 
 \begin{table}[t]
 \centering\small
@@ -321,10 +321,10 @@ computed from base scores and reference fits alone.
 \toprule
 Panel & Stop & Targets & Excl. & Gains & $\hat E$ recall & $\hat E$ prec.\\
 \midrule
-RB-like & exact & 21 & 21 & 19/21 & 1.00 & 0.90\\
-RB-like & primary & 20 & 20 & 5/5 & 1.00 & 1.00\\
-MT-like & exact & 15 & 15 & 15/15 & 1.00 & 1.00\\
-MT-like & primary & 14 & 14 & 0/0 & -- & --\\
+RB-like & exact & 40 & 40 & 34/40 & 1.00 & 0.85\\
+RB-like & primary & 39 & 39 & 5/5 & 1.00 & 1.00\\
+MT-like & exact & 33 & 33 & 28/33 & 1.00 & 0.85\\
+MT-like & primary & 32 & 32 & 0/0 & -- & --\\
 \bottomrule
 \end{tabular}
 \caption{Pre-scoring screen for joint gains on synthetic mean panels. Excl.: targets with $V^*+\varepsilon<|\Sz|$ (exclusion needed, computed ex post). Gains: targets with $\Qj<\Qu$ among numerically closed targets. Recall: fraction of gain targets flagged by $\hat E$; precision: fraction of flagged targets with a gain.}
