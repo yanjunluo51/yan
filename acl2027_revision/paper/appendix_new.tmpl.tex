@@ -309,7 +309,7 @@ Configuration & Closed & Agree & Median s & Max s\\
 %%TABLE_W1
 \bottomrule
 \end{tabular}
-\caption{Solver sensitivity of the exact-stop joint program. Closed: instances solved to proven optimality within 60\,s. Agree: closed instances whose optimum equals the consensus value of all closing configurations. Times include unresolved attempts.}
+\caption{Solver sensitivity of the exact-stop joint program. Closed: instances solved to proven optimality within 60\,s. Agree: closed instances whose optimum equals the consensus value of all closing configurations. CBC runs are counted as closed only if they finish before the limit, because PuLP labels time-limited incumbents as optimal. Times include unresolved attempts.}
 \label{tab:solvers}
 \end{table}
 

@@ -156,9 +156,12 @@ if w:
         rows.append(f"{name} & {sum(cl)}/{len(w)} & {ag}/{sum(cl)} & {np.median(secs):.1f} & {np.max(secs):.1f}\\\\")
     none_closed = sum(1 for cv in consensus if cv is None)
     w3_text = (f"Across {len(w)} instances, every configuration that closes an instance returns the same optimum "
-               f"({'no' if disagree == 0 else disagree} disagreements); {none_closed} instances close under no configuration. "
-               f"Closure and run time vary much more than optima (Table~\\ref{{tab:solvers}}): on the constructed grid, HiGHS can "
-               f"exhaust the limit under one setting and close under another seed, while CBC closes some of these instances in seconds. "
+               f"({'no' if disagree == 0 else disagree} disagreements). One constructed instance ($N=2048$, $M=7$, $T=33$) closes under no "
+               f"configuration, and there the final incumbents differ by up to 27 entries (23,679--23,706), so unresolved values must be "
+               f"reported as intervals, as Appendix M.9 does. "
+               f"Closure and run time vary much more than optima (Table~\\ref{{tab:solvers}}): on the constructed grid, one instance "
+               f"exhausts the limit under three HiGHS settings but closes in 16.8\\,s with seed 2 and in 1.8\\,s with CBC, and presolve alone "
+               f"changes another closure time from 18.6\\,s to 41.4\\,s. "
                f"CP-SAT is markedly slower on this big-$M$ formulation. Reported numerical minima are therefore insensitive to the backend, "
                f"whereas closure counts under a time budget should be reported with the backend and its settings.")
 fill["TABLE_W1"] = "\n".join(rows)

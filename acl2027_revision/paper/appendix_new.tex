@@ -312,7 +312,7 @@ Odd medians have no staircase rows, which is another view of Theorem 2's disjoin
 where $\hat V^*=m_0+V(\hat F)$ and $\hat F_i=\sum_r\hat f_{ir}$ are
 computed from base scores and reference fits alone.
 
-\paragraph{Controlled evaluation.} On the two synthetic panel families with mean pooling, four depths, ten splits and $\alpha\in\{.02,.05,.10\}$, we compute $\Qj$ and $\Qu$ for every target (Table~\ref{tab:predict}). Of 51 targets, 30 are numerically closed and 28 of these show a strict gain; 28 of the 28 gains occur where exclusion is needed ($V^*+\varepsilon<|\Sz|$), and no full-retention target has a gain. 0 targets stop without queries. Staircase rows are present in 51 of 51 targets, so condition (ii) of Proposition~\ref{prop:prescore} rarely applies to mean pools. The plug-in screen flags 51 targets; Table~\ref{tab:predict} reports its recall and precision. Because the reference ridge overestimates costs (mean $\hat V^*$ is 25.6 against mean $V^*$ 77.6), the screen is conservative: it rarely misses a gain but flags many targets without one. It is therefore useful to decide when a minimum safety witness suffices (unflagged targets), not to predict gains.
+\paragraph{Controlled evaluation.} On the two synthetic panel families with mean pooling, four depths, ten splits and $\alpha\in\{.02,.05,.10\}$, we compute $\Qj$ and $\Qu$ for every target (Table~\ref{tab:predict}). Of 70 targets, 41 are numerically closed and 39 of these show a strict gain; 39 of the 39 gains occur where exclusion is needed ($V^*+\varepsilon<|\Sz|$), and no full-retention target has a gain. 0 targets stop without queries. Staircase rows are present in 70 of 70 targets, so condition (ii) of Proposition~\ref{prop:prescore} rarely applies to mean pools. The plug-in screen flags 70 targets; Table~\ref{tab:predict} reports its recall and precision. Because the reference ridge overestimates costs (mean $\hat V^*$ is 35.2 against mean $V^*$ 95.5), the screen is conservative: it rarely misses a gain but flags many targets without one. It is therefore useful to decide when a minimum safety witness suffices (unflagged targets), not to predict gains.
 
 \begin{table}[t]
 \centering\small
@@ -321,10 +321,10 @@ computed from base scores and reference fits alone.
 \toprule
 Panel & Stop & Targets & Excl. & Gains & $\hat E$ recall & $\hat E$ prec.\\
 \midrule
-RB-like & exact & 15 & 15 & 13/15 & 1.00 & 0.87\\
-RB-like & primary & 14 & 14 & 4/4 & 1.00 & 1.00\\
-MT-like & exact & 11 & 11 & 11/11 & 1.00 & 1.00\\
-MT-like & primary & 11 & 11 & 0/0 & -- & --\\
+RB-like & exact & 21 & 21 & 19/21 & 1.00 & 0.90\\
+RB-like & primary & 20 & 20 & 5/5 & 1.00 & 1.00\\
+MT-like & exact & 15 & 15 & 15/15 & 1.00 & 1.00\\
+MT-like & primary & 14 & 14 & 0/0 & -- & --\\
 \bottomrule
 \end{tabular}
 \caption{Pre-scoring screen for joint gains on synthetic mean panels. Excl.: targets with $V^*+\varepsilon<|\Sz|$ (exclusion needed, computed ex post). Gains: targets with $\Qj<\Qu$ among numerically closed targets. Recall: fraction of gain targets flagged by $\hat E$; precision: fraction of flagged targets with a gain.}
@@ -346,7 +346,7 @@ We also checked whether a reference-only boundary share could serve as a protoco
 
 \section{Solver Sensitivity of the Joint Program}
 \label{app:solvers}
-The full-batch minima in Appendix M.9 were computed with HiGHS through SciPy. To test sensitivity to the solver and its settings, we export the exact-stop outcome-count program (Proposition 4, safe target $L^*$) for identical instances to five configurations: HiGHS with presolve on and off, HiGHS with random seeds 1 and 2 (one thread), and COIN-OR CBC 2.10 (one thread), plus the OR-Tools CP-SAT solver on the equivalent pure-integer model (one worker). Each configuration has a nominal 60-second limit. Instances are the synthetic panels (two families, $\alpha\in\{.02,.10\}$, $q\in\{.05,.30\}$, splits 0--2) and a constructed uniform-score grid in the spirit of Appendix M.7 (mean pooling, cutoff $.5$, $q=.30$, $\alpha=.10$, $N\in\{512,2048\}$, $M\in\{7,15\}$, $T\in\{17,33\}$). 
+The full-batch minima in Appendix M.9 were computed with HiGHS through SciPy. To test sensitivity to the solver and its settings, we export the exact-stop outcome-count program (Proposition 4, safe target $L^*$) for identical instances to five configurations: HiGHS with presolve on and off, HiGHS with random seeds 1 and 2 (one thread), and COIN-OR CBC 2.10 (one thread), plus the OR-Tools CP-SAT solver on the equivalent pure-integer model (one worker). Each configuration has a nominal 60-second limit. Instances are the synthetic panels (two families, $\alpha\in\{.02,.10\}$, $q\in\{.05,.30\}$, splits 0--2) and a constructed uniform-score grid in the spirit of Appendix M.7 (mean pooling, cutoff $.5$, $q=.30$, $\alpha=.10$, $N\in\{512,2048\}$, $M\in\{7,15\}$, $T\in\{17,33\}$). Across 32 instances, every configuration that closes an instance returns the same optimum (no disagreements). One constructed instance ($N=2048$, $M=7$, $T=33$) closes under no configuration, and there the final incumbents differ by up to 27 entries (23,679--23,706), so unresolved values must be reported as intervals, as Appendix M.9 does. Closure and run time vary much more than optima (Table~\ref{tab:solvers}): on the constructed grid, one instance exhausts the limit under three HiGHS settings but closes in 16.8\,s with seed 2 and in 1.8\,s with CBC, and presolve alone changes another closure time from 18.6\,s to 41.4\,s. CP-SAT is markedly slower on this big-$M$ formulation. Reported numerical minima are therefore insensitive to the backend, whereas closure counts under a time budget should be reported with the backend and its settings.
 
 \begin{table}[t]
 \centering\small
@@ -355,10 +355,15 @@ The full-batch minima in Appendix M.9 were computed with HiGHS through SciPy. To
 \toprule
 Configuration & Closed & Agree & Median s & Max s\\
 \midrule
-
+HiGHS, presolve on & 30/32 & 30/30 & 0.3 & 60.2\\
+HiGHS, presolve off & 30/32 & 30/30 & 0.2 & 60.1\\
+HiGHS, seed 1 & 30/32 & 30/30 & 0.2 & 60.0\\
+HiGHS, seed 2 & 31/32 & 31/31 & 0.2 & 60.4\\
+CBC & 30/32 & 30/30 & 0.5 & 61.9\\
+CP-SAT & 18/32 & 18/18 & 3.2 & 60.0\\
 \bottomrule
 \end{tabular}
-\caption{Solver sensitivity of the exact-stop joint program. Closed: instances solved to proven optimality within 60\,s. Agree: closed instances whose optimum equals the consensus value of all closing configurations. Times include unresolved attempts.}
+\caption{Solver sensitivity of the exact-stop joint program. Closed: instances solved to proven optimality within 60\,s. Agree: closed instances whose optimum equals the consensus value of all closing configurations. CBC runs are counted as closed only if they finish before the limit, because PuLP labels time-limited incumbents as optimal. Times include unresolved attempts.}
 \label{tab:solvers}
 \end{table}
 
