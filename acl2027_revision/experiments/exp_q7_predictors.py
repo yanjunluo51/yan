@@ -25,12 +25,13 @@ from suite import PANELS, DEPTHS, SPLITS, get_panel
 
 OUT = sys.argv[1] if len(sys.argv) > 1 else "../results/q7_predictors.json"
 ONLY = sys.argv[2] if len(sys.argv) > 2 else None
+ALPHAS = [float(a) for a in sys.argv[3].split(",")] if len(sys.argv) > 3 else [0.02, 0.05, 0.10]
 rows = []
 for name, spec in PANELS.items():
     if ONLY and name != ONLY:
         continue
     pan = get_panel(name)
-    for alpha in (0.02, 0.05, 0.10):
+    for alpha in ALPHAS:
         for q in DEPTHS:
             for split in SPLITS:
                 task = build_task(pan, 1000 + split, q, alpha, "mean", M=spec["M"], T=spec["T"])

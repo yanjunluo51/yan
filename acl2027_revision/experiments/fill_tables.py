@@ -94,7 +94,12 @@ wins = int((pos.omcf < pos.reference).sum())
 fill["OMCF_WINS"] = f"{wins} of {len(pos)}"
 
 # ---------------- Table U1: predictors ----------------
-u = pd.DataFrame(load("q7_rb.json") + load("q7_mt.json"))
+def loadlog(name):
+    p = R + name
+    return [json.loads(l) for l in open(p)] if os.path.exists(p) else []
+
+
+u = pd.DataFrame(load("q7_rb.json") + loadlog("q7_mt_a02.log") + loadlog("q7_mt_a05.log") + loadlog("q7_mt_a10.log"))
 rows = []
 q7_text = ""
 if len(u):
@@ -114,15 +119,23 @@ if len(u):
     stair_free = int((u.stair_rows == 0).sum())
     plug = u[u.plug_excl]
     zero = int(u.zero_stop.sum())
-    q7_text = (f"Of {len(u)} targets, {len(gc)} are numerically closed and {len(gain)} of these show a strict gain; "
-               f"{n_gain_excl} of the {len(gain)} gains occur where exclusion is needed ($V^*+\\varepsilon<|\\Sz|$), "
-               f"and no full-retention target has a gain. {zero} targets stop without queries. "
+    rec_all = gain.plug_excl.mean()
+    fl = gc[gc.plug_excl]
+    prec_all = fl.gain_pos.mean()
+    unfl = gc[~gc.plug_excl]
+    zero_txt = "No target stops" if zero == 0 else f"{zero} targets stop"
+    q7_text = (f"Of {len(u)} targets, {len(gc)} are numerically closed and {len(gain)} of these show a strict gain. "
+               f"All {n_gain_excl if n_gain_excl == len(gain) else str(n_gain_excl) + ' of the ' + str(len(gain))} gains occur where exclusion is needed ($V^*+\\varepsilon<|\\Sz|$), "
+               f"and no full-retention target has a gain. {zero_txt} without queries. "
                f"Staircase rows are present in {len(u) - stair_free} of {len(u)} targets, so condition (ii) of "
-               f"Proposition~\\ref{{prop:prescore}} rarely applies to mean pools. The plug-in screen flags {len(plug)} targets; "
-               f"Table~\\ref{{tab:predict}} reports its recall and precision. Because the reference ridge overestimates costs "
-               f"(mean $\\hat V^*$ is {u.Vhat.mean():.1f} against mean $V^*$ {u.Vstar.mean():.1f}), the screen is conservative: it rarely "
-               f"misses a gain but flags many targets without one. It is therefore useful to decide when a minimum safety witness "
-               f"suffices (unflagged targets), not to predict gains.")
+               f"Proposition~\\ref{{prop:prescore}} essentially never applies to mean pools; for odd medians it holds always and recovers the disjointness behind Theorem 2. "
+               f"The plug-in screen $\\hat E$ flags {len(plug)} of {len(u)} targets. On closed targets it misses "
+               f"{int((~gain.plug_excl).sum())} of {len(gain)} gains (recall {rec_all:.2f}), and {prec_all:.2f} of the flagged closed targets have a gain; "
+               f"none of the {len(unfl)} unflagged closed targets has one. The reference ridge overestimates costs "
+               f"(mean $\\hat V^*$ is {u.Vhat.mean():.1f} against mean $V^*$ {u.Vstar.mean():.1f}), so the screen is conservative. "
+               f"It is useful to decide when a minimum safety witness suffices (unflagged targets), not to predict gains precisely. "
+               f"Gains are far more frequent here than on the NLP grid because the tight budgets $\\alpha\\in\\{{.02,.05\\}}$ make exclusion necessary; "
+               f"at $\\alpha=.10$, as on the NLP grid, most instances permit full retention.")
 fill["TABLE_U1"] = "\n".join(rows)
 fill["Q7_TEXT"] = q7_text
 
