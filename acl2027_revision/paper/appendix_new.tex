@@ -312,7 +312,7 @@ Odd medians have no staircase rows, which is another view of Theorem 2's disjoin
 where $\hat V^*=m_0+V(\hat F)$ and $\hat F_i=\sum_r\hat f_{ir}$ are
 computed from base scores and reference fits alone.
 
-\paragraph{Controlled evaluation.} On the two synthetic panel families with mean pooling, four depths, ten splits and $\alpha\in\{.02,.05,.10\}$, we compute $\Qj$ and $\Qu$ for every target (Table~\ref{tab:predict}). Of 398 targets, 321 are numerically closed and 99 of these show a strict gain. All 99 gains occur where exclusion is needed ($V^*+\varepsilon<|\Sz|$), and no full-retention target has a gain. No target stops without queries. Staircase rows are present in 398 of 398 targets, so condition (ii) of Proposition~\ref{prop:prescore} essentially never applies to mean pools; for odd medians it holds always and recovers the disjointness behind Theorem 2. The plug-in screen $\hat E$ flags 226 of 398 targets. On closed targets it misses 0 of 99 gains (recall 1.00), and 0.66 of the flagged closed targets have a gain; none of the 172 unflagged closed targets has one. The reference ridge overestimates costs (mean $\hat V^*$ is 212.7 against mean $V^*$ 251.7), so the screen is conservative. It is useful to decide when a minimum safety witness suffices (unflagged targets), not to predict gains precisely. Gains are far more frequent here than on the NLP grid because the tight budgets $\alpha\in\{.02,.05\}$ make exclusion necessary; at $\alpha=.10$, as on the NLP grid, most instances permit full retention.
+\paragraph{Controlled evaluation.} On the two synthetic panel families with mean pooling, four depths, ten splits and $\alpha\in\{.02,.05,.10\}$, we compute $\Qj$ and $\Qu$ for every target (Table~\ref{tab:predict}). Of 480 targets, 396 are numerically closed and 130 of these show a strict gain. All 130 gains occur where exclusion is needed ($V^*+\varepsilon<|\Sz|$), and no full-retention target has a gain. No target stops without queries. Staircase rows are present in 480 of 480 targets, so condition (ii) of Proposition~\ref{prop:prescore} essentially never applies to mean pools; for odd medians it holds always and recovers the disjointness behind Theorem 2. The plug-in screen $\hat E$ flags 301 of 480 targets. On closed targets it misses 0 of 130 gains (recall 1.00), and 0.60 of the flagged closed targets have a gain; none of the 179 unflagged closed targets has one. The reference ridge overestimates costs (mean $\hat V^*$ is 223.5 against mean $V^*$ 262.5), so the screen is conservative. It is useful to decide when a minimum safety witness suffices (unflagged targets), not to predict gains precisely. Gains are far more frequent here than on the NLP grid because the tight budgets $\alpha\in\{.02,.05\}$ make exclusion necessary; at $\alpha=.10$ every synthetic instance permits full retention and no gain occurs, as in 903 of the 960 NLP instances.
 
 \begin{table}[t]
 \centering\small
@@ -323,8 +323,8 @@ Panel & Stop & Targets & Excl. & Gains & $\hat E$ recall & $\hat E$ prec.\\
 \midrule
 RB-like & exact & 120 & 54 & 48/120 & 1.00 & 0.67\\
 RB-like & primary & 120 & 51 & 14/83 & 1.00 & 0.44\\
-MT-like & exact & 80 & 43 & 35/80 & 1.00 & 0.81\\
-MT-like & primary & 78 & 42 & 2/38 & 1.00 & 1.00\\
+MT-like & exact & 120 & 66 & 57/119 & 1.00 & 0.72\\
+MT-like & primary & 120 & 56 & 11/74 & 1.00 & 0.32\\
 \bottomrule
 \end{tabular}
 \caption{Pre-scoring screen for joint gains on synthetic mean panels. Excl.: targets with $V^*+\varepsilon<|\Sz|$ (exclusion needed, computed ex post). Gains: targets with $\Qj<\Qu$ among numerically closed targets. Recall: fraction of gain targets flagged by $\hat E$; precision: fraction of flagged targets with a gain.}

@@ -135,7 +135,7 @@ if len(u):
                f"(mean $\\hat V^*$ is {u.Vhat.mean():.1f} against mean $V^*$ {u.Vstar.mean():.1f}), so the screen is conservative. "
                f"It is useful to decide when a minimum safety witness suffices (unflagged targets), not to predict gains precisely. "
                f"Gains are far more frequent here than on the NLP grid because the tight budgets $\\alpha\\in\\{{.02,.05\\}}$ make exclusion necessary; "
-               f"at $\\alpha=.10$, as on the NLP grid, most instances permit full retention.")
+               f"at $\\alpha=.10$ every synthetic instance permits full retention and no gain occurs, as in 903 of the 960 NLP instances.")
 fill["TABLE_U1"] = "\n".join(rows)
 fill["Q7_TEXT"] = q7_text
 

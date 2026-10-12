@@ -1,8 +1,10 @@
 # Author Response
 
+> Note to the authors (delete before submission): if you run the NLP-panel versions listed in Section 4 of 审稿意见分析与修改方案.md before the response period, replace the synthetic numbers in W3, Q1, Q4 and Q7 with the NLP results.
+
 We thank the reviewer for a careful and constructive review and for recommending acceptance. We agree with most suggestions and have revised the paper accordingly. All new results are stated as propositions with proofs (new Appendices R–U) and are checked by exhaustive enumeration and controlled experiments. Below we answer each point and list where the changes are. Section numbers refer to the revised version.
 
-**Scope of the new experiments.** The new experiments in Appendices R–W use controlled synthetic panels shaped like RewardBench 2 and WMT23, together with exhaustive checks of the new propositions. They test mechanisms of the certificate model (weights, per-replacement caps, cross-entry constraints, acquisition, solvers), not NLP effect sizes, and the paper says so. The released code accepts cached score matrices, so the same analyses run unchanged on the NLP panels. *[If you complete the NLP-panel runs listed in Section 4 of the Chinese analysis before the response period, replace this paragraph with the NLP results.]*
+**Scope of the new experiments.** The new experiments in Appendices R–W use controlled synthetic panels shaped like RewardBench 2 and WMT23, together with exhaustive checks of the new propositions. They test mechanisms of the certificate model (weights, per-replacement caps, cross-entry constraints, acquisition, solvers), not NLP effect sizes, and the paper says so. The released code accepts cached score matrices, so the same analyses run unchanged on the NLP panels.
 
 ---
 
@@ -44,7 +46,7 @@ We thank the reviewer for a careful and constructive review and for recommending
 
 **Q6. Exploiting the odd-median closed forms in acquisition.** Worst-case improvements are impossible for any policy (Propositions 7–8). The new OM-CF policy pursues agreements in the predicted safe set and capped oppositions at the Theorem 2 level. With exact predictions it stops after exactly Q_exact queries (Proposition 20); exhaustive enumeration on 2,262 instances also confirms Q_ε at positive tolerance. So the closed forms yield consistency, though not robustness. With learned reference-ridge predictions, OM-CF did not improve on reference priority in our controlled study (mean ratio to the minimum 2.10–2.19 vs. 1.84–1.91). We report this negative result and keep reference priority as the main policy.
 
-**Q7. Predictors of joint gains; pre-scoring diagnosis.** Proposition 21 gives two sufficient conditions for no gain that are checkable before scoring: a zero initial gap, and the absence of "staircase" rows, i.e., rows whose replacement thresholds take a single value in (0,1]. Odd medians always satisfy the second. The decisive ex post condition is whether exclusion evidence is needed (V* + ε < |S0|). We evaluate a reference-predicted plug-in version, V̂* + ε < |S0|, on controlled panels and report its recall and precision (Table U1). *[fill in after final numbers: see Table U1]*
+**Q7. Predictors of joint gains; pre-scoring diagnosis.** Proposition 21 gives two sufficient conditions for no gain that are checkable before scoring: a zero initial gap, and the absence of "staircase" rows, i.e., rows whose replacement thresholds take a single value in (0,1]. Odd medians always satisfy the second. The decisive ex post condition is whether exclusion evidence is needed (V* + ε < |S0|). We evaluate a reference-predicted plug-in version, V̂* + ε < |S0|, on 480 controlled targets (Table U1). All 130 observed gains occur where exclusion is needed, and none at full retention. The screen flagged every target with a gain (recall 1.00), and none of the 179 unflagged closed targets had a gain; 60% of flagged targets had one. Because the ridge overestimates costs, the screen is conservative. It reliably identifies when a minimum safety witness suffices, but it does not predict gains precisely.
 
 ---
 
